@@ -9,204 +9,69 @@ export const grammarModules = [
     examQuestionIds: [46, 49, 55],
     examSentences: [
       {
-        text: 'I usually eat lunch at 1 p.m.',
-        source: 'Habit',
-        function: 'Habit or routine: usually shows how often the action happens.'
+        text: 'Social media, magazines, and shop windows bombard people daily with things to buy.',
+        source: 'Q46',
+        function: 'General truth: describes a recurring reality in everyday life.'
       },
       {
-        text: 'Elena lives in London.',
-        source: 'State',
-        function: 'Permanent state: describes a stable or long-term situation.'
+        text: 'In Britain, the average person spends more than GBP1,000 on new clothes a year.',
+        source: 'Q48',
+        function: 'Statistic or fact: presents general information with a third-person singular verb.'
       },
       {
-        text: 'Water boils at 100 degrees Celsius.',
-        source: 'Fact',
-        function: 'General truth: expresses a scientific or universal fact.'
+        text: 'Buy Nothing groups organize the exchange and repair of items they already own.',
+        source: 'Q55',
+        function: 'Routine: explains what a group does regularly.'
       },
       {
-        text: 'Her train leaves at 11:30 a.m.',
-        source: 'Schedule',
-        function: 'Scheduled event: uses an official timetable to refer to the future.'
+        text: 'People organize various types of protests.',
+        source: 'Q55',
+        function: 'Habit or repeated action: describes a recurring activity.'
       },
       {
-        text: 'Smith scores a goal and the stadium goes wild!',
-        source: 'Story',
-        function: 'Storytelling or commentary: makes a narrated action feel immediate.'
+        text: 'He wants his students to follow the process writing approach.',
+        source: 'Q39',
+        function: 'State or intention: uses a stative verb in the third person.'
       }
     ],
-    methodology: {
-      functions: [
-        {
-          id: 'habit',
-          label: 'Habits and routines',
-          cue: 'Regular or repeated actions',
-          example: 'Elena usually drinks black coffee.',
-          icon: 'repeat'
-        },
-        {
-          id: 'state',
-          label: 'Permanent states',
-          cue: 'Stable, long-term situations',
-          example: 'She lives in London.',
-          icon: 'home'
-        },
-        {
-          id: 'truth',
-          label: 'General truths',
-          cue: 'Facts, laws of nature and universal truths',
-          example: 'Water boils at 100 degrees Celsius.',
-          icon: 'globe'
-        },
-        {
-          id: 'schedule',
-          label: 'Scheduled events',
-          cue: 'Official timetables and itineraries',
-          example: 'Her train leaves at 11:30 a.m.',
-          icon: 'calendar'
-        },
-        {
-          id: 'story',
-          label: 'Storytelling',
-          cue: 'Live commentary, jokes and dynamic narratives',
-          example: 'Smith scores a goal!',
-          icon: 'mic'
-        }
-      ],
-      frequencyAdverbs: [
-        { expression: 'always', meaning: '100% of the time', example: 'I always check the timetable.' },
-        { expression: 'usually', meaning: 'most of the time', example: 'She usually drinks coffee.' },
-        { expression: 'often', meaning: 'many times', example: 'We often watch football.' },
-        { expression: 'sometimes', meaning: 'on some occasions', example: 'They sometimes travel by train.' },
-        { expression: 'never', meaning: '0% of the time', example: 'He never arrives late.' }
-      ],
-      frequencyPhrases: [
-        'every day',
-        'every week',
-        'once a week',
-        'twice a month',
-        'three times a year',
-        'on Saturdays'
-      ],
-      forms: [
-        {
-          label: 'Affirmative',
-          pattern: 'Subject + base verb (+ s/es)',
-          example: 'Elena drinks coffee every Saturday.'
-        },
-        {
-          label: 'Negative',
-          pattern: 'Subject + do/does not + base verb',
-          example: 'Elena does not arrive late.'
-        },
-        {
-          label: 'Yes / No question',
-          pattern: 'Do/Does + subject + base verb?',
-          example: 'Does Elena live in London?'
-        }
-      ],
-      thirdPersonRules: [
-        'Most verbs: add -s (drink -> drinks)',
-        'Verbs ending in -sh, -ch, -ss, -x, -o: add -es (watch -> watches)',
-        'Consonant + y: change y to -ies (study -> studies)',
-        'After does or does not, use the base verb (Does she live...?)'
-      ],
-      whQuestions: [
-        { word: 'Where', purpose: 'place', question: 'Where does Elena live?' },
-        { word: 'When', purpose: 'time or date', question: 'When does the train leave?' },
-        { word: 'Why', purpose: 'reason', question: 'Why does she love match day?' },
-        { word: 'Who...with', purpose: 'people', question: 'Who does she watch football with?' },
-        { word: 'What', purpose: 'general information', question: 'What does she do every Saturday?' }
-      ],
-      story: {
-        title: 'The Match Day Rush',
-        paragraphs: [
-          'Every Saturday, Elena wakes up early and drinks a cup of black coffee. This habit keeps her energized for the busy day ahead. She lives in London, a permanent state that she enjoys because of her love for football.',
-          'Today is a special day because her favorite team is playing in the finals. Water boils at 100 degrees Celsius, but Elena feels like her blood is boiling with excitement. She checks her itinerary: her train leaves at 11:30 a.m., so she cannot afford to be late.',
-          'At the stadium, the atmosphere is electric. The commentator shouts: "The midfielder passes the ball, Smith scores a goal, and the stadium goes wild!" Elena cheers, happy to be part of the action.'
-        ]
-      },
-      recognition: [
-        {
-          sentence: 'Elena wakes up early every Saturday.',
-          answer: 'habit',
-          explanation: 'Every Saturday marks a repeated routine.'
-        },
-        {
-          sentence: 'She lives in London.',
-          answer: 'state',
-          explanation: 'Living in a city is presented as a stable situation.'
-        },
-        {
-          sentence: 'Water boils at 100 degrees Celsius.',
-          answer: 'truth',
-          explanation: 'This is a scientific fact.'
-        },
-        {
-          sentence: 'Her train leaves at 11:30 a.m.',
-          answer: 'schedule',
-          explanation: 'The departure comes from an official timetable.'
-        },
-        {
-          sentence: 'Smith scores a goal!',
-          answer: 'story',
-          explanation: 'Live commentary uses present simple for immediate action.'
-        }
-      ]
-    },
     formulation: {
-      rule: 'Affirmative: subject + base verb. Add -s/-es with he, she, it. Questions: wh-word + do/does + subject + base verb?',
+      rule: 'Affirmative: subject + base verb. Add -s/-es with he, she, or it. Question: do/does + subject + base verb?',
       examples: [
         {
-          statement: 'Elena lives in London.',
-          question: 'Where does Elena live?'
+          statement: 'The average person spends money on clothes.',
+          question: 'Does the average person spend money on clothes?'
         },
         {
-          statement: 'Her train leaves at 11:30 a.m.',
-          question: 'When does her train leave?'
-        },
-        {
-          statement: 'Elena drinks black coffee.',
-          question: 'What does Elena drink?'
+          statement: 'Buy Nothing groups organize exchanges.',
+          question: 'Do Buy Nothing groups organize exchanges?'
         }
       ]
     },
     cloze: [
       {
-        prompt: 'Elena usually _________ black coffee before a match. (drink)',
-        answer: 'drinks',
-        explanation: 'Elena is third person singular, so drink takes -s.'
+        prompt: 'Social media, magazines, and shop windows _________ people daily with things to buy.',
+        answer: 'bombard',
+        explanation: 'The compound subject is plural, so use the base form bombard.'
       },
       {
-        prompt: 'Water _________ at 100 degrees Celsius. (boil)',
-        answer: 'boils',
-        explanation: 'A general truth uses present simple; water is third person singular.'
+        prompt: 'The average person _________ more than GBP1,000 a year.',
+        answer: 'spends',
+        explanation: 'The average person is third person singular, so spend becomes spends.'
       },
       {
-        prompt: 'Her train _________ at 11:30 a.m. (leave)',
-        answer: 'leaves',
-        explanation: 'An official schedule uses present simple and train takes -s.'
-      },
-      {
-        prompt: 'Where _________ Elena live?',
-        answer: 'does',
-        explanation: 'Present simple questions with she use does + base verb.'
-      },
-      {
-        prompt: 'Smith _________ a goal and the crowd goes wild! (score)',
-        answer: 'scores',
-        explanation: 'Live sports commentary can use present simple for dramatic action.'
+        prompt: 'Buy Nothing groups _________ exchanges throughout the year.',
+        answer: 'organize',
+        explanation: 'Groups is plural, so use the base form organize.'
       }
     ],
     composition: {
-      prompt: 'Write a short paragraph (70-100 words) about your routine and your world. Include a habit, a permanent state, a general truth and a scheduled event.',
+      prompt: 'Write 4 or 5 lines introducing yourself as a teacher or learner. Use the Present Simple for routines, facts, and preferences.',
       support: [
-        'I live in...',
-        'Every morning, I...',
-        'I usually / often / never...',
-        'Classes start at...',
-        'A fact I know is...'
-      ],
-      model: 'I live in a quiet town near the mountains, and every morning I wake up at 6:00 a.m. to watch the sunrise.'
+        'I teach / I study...',
+        'I usually...',
+        'My students need...',
+        'I want to improve...'
+      ]
     }
   },
   {

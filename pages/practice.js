@@ -43,45 +43,6 @@ const defaultLessonSteps = [
   }
 ];
 
-const presentSimpleLessonSteps = [
-  {
-    id: 'functions',
-    title: 'Communicative functions',
-    shortTitle: 'Functions',
-    description: 'Review the five meanings that the Present Simple can communicate.'
-  },
-  {
-    id: 'time-expressions',
-    title: 'Time and frequency expressions',
-    shortTitle: 'Frequency',
-    description: 'Use words and phrases that show how often an action happens.'
-  },
-  {
-    id: 'structure',
-    title: 'Structure and question forms',
-    shortTitle: 'Structure',
-    description: 'Build statements, negatives, and questions with do, does, and wh-words.'
-  },
-  {
-    id: 'context',
-    title: 'Present Simple in context',
-    shortTitle: 'Context',
-    description: 'Read a short story and classify each use by its function.'
-  },
-  {
-    id: 'cloze',
-    title: 'Exam-focused language practice',
-    shortTitle: 'Practice',
-    description: 'Complete each verb form and receive immediate feedback.'
-  },
-  {
-    id: 'composition',
-    title: 'Exam-focused writing',
-    shortTitle: 'Writing',
-    description: 'Apply the target structure in an original paragraph.'
-  }
-];
-
 const Modules = () => {
   const router = useRouter();
   const { progress, resetPractice, setPracticeAnswer } = useExamProgress();
@@ -165,7 +126,7 @@ const Modules = () => {
 
   const currentQuestion = questions[currentQuestionIndex];
   const selectedAnswer = progress.practice[currentQuestion?.id];
-  const activeLessonSteps = activeModule?.methodology ? presentSimpleLessonSteps : defaultLessonSteps;
+  const activeLessonSteps = defaultLessonSteps;
   const currentStep = activeLessonSteps[stepIndex] || activeLessonSteps[0];
   const moduleProgress = Math.round(((stepIndex + 1) / activeLessonSteps.length) * 100);
   const compositionKey = activeModule?.id;
