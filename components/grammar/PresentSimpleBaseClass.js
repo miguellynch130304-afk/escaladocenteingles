@@ -217,34 +217,45 @@ const ArrowMatchingBoard = ({ mode = 'automatic', examples, markerId }) => {
 
         <div className="ps-match-column ps-sentence-column">
           <span className="ps-column-label">EXAMPLES</span>
-          {examples.map((item, index) => (
-            <button
-              type="button"
-              key={item.id}
-              className={[
-                'ps-match-item ps-sentence-item',
-                selectedSource === item.id ? 'is-selected' : '',
-                connections[item.id] ? 'is-connected' : ''
-              ].filter(Boolean).join(' ')}
-              onClick={() => {
-                if (mode === 'interactive') {
-                  setSelectedSource(item.id);
-                  setChecked(false);
-                }
-              }}
-              disabled={mode === 'automatic'}
-              style={{ '--item-delay': `${index * 0.12}s` }}
-            >
-              <span className="ps-example-number">{index + 1}</span>
-              <span>{item.sentence}</span>
-              <span
-                className="ps-connection-dot is-source"
-                ref={(element) => {
-                  sourceRefs.current[item.id] = element;
+          {examples.map((item, index) => {
+            const assignedTarget = connections[item.id];
+            return (
+              <button
+                type="button"
+                key={item.id}
+                className={[
+                  'ps-match-item ps-sentence-item',
+                  selectedSource === item.id ? 'is-selected' : '',
+                  assignedTarget ? 'is-connected' : ''
+                ].filter(Boolean).join(' ')}
+                onClick={() => {
+                  if (mode === 'interactive') {
+                    setSelectedSource(item.id);
+                    setChecked(false);
+                  }
                 }}
-              />
-            </button>
-          ))}
+                disabled={mode === 'automatic'}
+                aria-label={`${item.sentence}${assignedTarget ? ` Connected to ${functionLabels[assignedTarget]}.` : ''}`}
+                style={{ '--item-delay': `${index * 0.12}s` }}
+              >
+                <span className="ps-example-number">{index + 1}</span>
+                <span className="ps-example-copy">
+                  <span>{item.sentence}</span>
+                  {assignedTarget ? (
+                    <small className="ps-linked-function">
+                      <i className="fe fe-link-2" /> {functionLabels[assignedTarget]}
+                    </small>
+                  ) : null}
+                </span>
+                <span
+                  className="ps-connection-dot is-source"
+                  ref={(element) => {
+                    sourceRefs.current[item.id] = element;
+                  }}
+                />
+              </button>
+            );
+          })}
         </div>
 
         <div className="ps-function-panel">
@@ -255,10 +266,12 @@ const ArrowMatchingBoard = ({ mode = 'automatic', examples, markerId }) => {
               key={id}
               className={[
                 'ps-match-item ps-function-item',
-                selectedSource ? 'is-available' : ''
+                selectedSource ? 'is-available' : '',
+                Object.values(connections).includes(id) ? 'is-used' : ''
               ].filter(Boolean).join(' ')}
               onClick={() => connectTarget(id)}
               disabled={mode === 'automatic'}
+              aria-label={`${functionLabels[id]}${selectedSource ? '. Select this function for the active sentence.' : ''}`}
               style={{ '--item-delay': `${0.25 + index * 0.12}s` }}
             >
               <span
@@ -277,11 +290,14 @@ const ArrowMatchingBoard = ({ mode = 'automatic', examples, markerId }) => {
         <div className="ps-match-controls">
           <div className="ps-match-instruction">
             <i className="fe fe-mouse-pointer" />
-            <span>
-              {selectedSource
-                ? 'Now select the matching function on the right.'
-                : 'Select a sentence point, then select its function.'}
-            </span>
+            <div>
+              <strong>{completedCount}/{examples.length} connections made</strong>
+              <span>
+                {selectedSource
+                  ? 'Now choose the matching function.'
+                  : 'Choose an example first, then choose its function.'}
+              </span>
+            </div>
           </div>
           <div className="d-flex flex-wrap gap-2">
             <Button variant="light" onClick={resetConnections}>Reset arrows</Button>
@@ -344,7 +360,7 @@ const PresentSimpleBaseClass = ({ onComplete, onBack }) => {
   const slideProgress = Math.round(((activeSlide + 1) / slides.length) * 100);
   const selectedCorrect = selectedReading.filter((id) => correctReadingChoices.includes(id)).length;
   const selectedWrong = selectedReading.filter((id) => !correctReadingChoices.includes(id)).length;
-  const readingScore = Math.max(0, selectedCorrect - selectedWrong);
+  const readingScore = selectedCorrect;
   const wordCount = writingDraft.trim() ? writingDraft.trim().split(/\s+/).length : 0;
 
   const toggleReadingChoice = (id) => {
@@ -485,9 +501,14 @@ const PresentSimpleBaseClass = ({ onComplete, onBack }) => {
           <div className="ps-reading-instruction">
             <i className="fe fe-search" />
             <div>
-              <strong>Find five key Present Simple examples.</strong>
-              <span>Click the verb groups that represent the five functions from this lesson.</span>
+              <strong>Exercise 5: Find exactly five Present Simple examples.</strong>
+              <span>Select one verb group for each function learned in this lesson.</span>
             </div>
+          </div>
+          <div className="ps-reading-steps" aria-label="Exercise instructions">
+            <span><b>1</b> Read the complete story</span>
+            <span><b>2</b> Select exactly 5 phrases</span>
+            <span><b>3</b> Check your choices</span>
           </div>
           <article className="ps-reading-paper">
             <p>
@@ -504,10 +525,13 @@ const PresentSimpleBaseClass = ({ onComplete, onBack }) => {
             </p>
           </article>
           <div className="ps-reading-actions">
-            <span>{selectedReading.length} phrase{selectedReading.length === 1 ? '' : 's'} selected</span>
+            <span>
+              <strong>{selectedReading.length}/5</strong> target phrases selected
+              {selectedReading.length > 5 ? ' — remove extra choices' : ''}
+            </span>
             <Button
               variant="primary"
-              disabled={!selectedReading.length}
+              disabled={selectedReading.length !== 5}
               onClick={() => setReadingChecked(true)}
             >
               Check my choices
@@ -515,11 +539,11 @@ const PresentSimpleBaseClass = ({ onComplete, onBack }) => {
           </div>
           {readingChecked ? (
             <div className={`ps-reading-result ${readingScore === 5 ? 'is-perfect' : ''}`}>
-              <strong>{readingScore}/5 key examples identified.</strong>
+              <strong>{readingScore}/5 correct Present Simple examples.</strong>
               <span>
                 {readingScore === 5
                   ? 'Excellent reading. Continue to the answer key.'
-                  : 'Green phrases are correct. Yellow phrases are key examples you still need to select.'}
+                  : `${selectedWrong} selected phrase${selectedWrong === 1 ? ' is' : 's are'} not one of the five functions. Green choices are correct; yellow choices show what you missed.`}
               </span>
             </div>
           ) : null}
@@ -575,17 +599,18 @@ const PresentSimpleBaseClass = ({ onComplete, onBack }) => {
           </div>
           <aside className="ps-writing-guide">
             <span>YOUR CHALLENGE</span>
-            <h3>Write 70–100 words about your routine and your world.</h3>
-            <p>Include:</p>
+            <h3>Write one paragraph of 70–100 words.</h3>
+            <p>Describe your routine and your world. Your paragraph must include:</p>
             <ul>
-              <li><i className="fe fe-check-circle" /> one habit or routine</li>
-              <li><i className="fe fe-check-circle" /> one permanent state</li>
-              <li><i className="fe fe-check-circle" /> one general truth</li>
-              <li><i className="fe fe-check-circle" /> one scheduled event</li>
-              <li><i className="fe fe-check-circle" /> a frequency expression</li>
+              <li><i className="fe fe-check-circle" /> a habit or routine <small>(I study every night.)</small></li>
+              <li><i className="fe fe-check-circle" /> a permanent state <small>(I live in Lima.)</small></li>
+              <li><i className="fe fe-check-circle" /> a general truth <small>(Practice improves skills.)</small></li>
+              <li><i className="fe fe-check-circle" /> a scheduled event <small>(My class starts at 8.)</small></li>
+              <li><i className="fe fe-check-circle" /> a frequency word <small>(always, usually, often…)</small></li>
             </ul>
             <div className={wordCount >= 70 ? 'is-ready' : ''}>
-              {wordCount >= 70 ? 'Your paragraph is ready to review.' : `${Math.max(0, 70 - wordCount)} more words to reach the target.`}
+              <strong>{wordCount}/70 minimum words</strong>
+              <span>{wordCount >= 70 ? 'Your paragraph is ready to review.' : `${Math.max(0, 70 - wordCount)} more words to reach the minimum.`}</span>
             </div>
           </aside>
         </div>
@@ -596,6 +621,7 @@ const PresentSimpleBaseClass = ({ onComplete, onBack }) => {
     selectedReading,
     readingChecked,
     readingScore,
+    selectedWrong,
     writingDraft,
     wordCount
   ]);

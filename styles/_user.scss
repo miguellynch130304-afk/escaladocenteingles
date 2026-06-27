@@ -1429,11 +1429,13 @@
   }
 
   h2 {
+    color: #fff;
     display: inline-block;
     font-size: clamp(1.55rem, 3vw, 2.4rem);
     font-weight: 800;
     margin: 0.45rem 0 0;
     position: relative;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.22);
     z-index: 1;
 
     &::after {
@@ -1585,6 +1587,28 @@
     border-color: #624bff;
     box-shadow: 0 0 0 3px rgba(98, 75, 255, 0.12);
   }
+
+  &.is-connected {
+    background: #fff;
+    border-color: #79a0e8;
+  }
+}
+
+.ps-example-copy {
+  display: grid;
+  gap: 0.25rem;
+  min-width: 0;
+}
+
+.ps-linked-function {
+  align-items: center;
+  color: #2457b5;
+  display: none;
+  font-size: 0.68rem;
+  font-style: normal;
+  font-weight: 900;
+  gap: 0.3rem;
+  letter-spacing: 0.035em;
 }
 
 .ps-example-number {
@@ -1623,6 +1647,11 @@
     animation: ps-target-pulse 1.2s ease infinite;
     background: rgba(255, 255, 255, 0.52);
     border-color: rgba(53, 103, 200, 0.28);
+    opacity: 1;
+  }
+
+  &.is-used {
+    background: rgba(255, 255, 255, 0.68);
   }
 }
 
@@ -1663,6 +1692,20 @@
 
   i {
     color: #624bff;
+  }
+
+  > div {
+    display: grid;
+    gap: 0.1rem;
+  }
+
+  strong {
+    color: #26374e;
+    font-size: 0.78rem;
+  }
+
+  span {
+    display: block;
   }
 }
 
@@ -1990,6 +2033,38 @@
   }
 }
 
+.ps-reading-steps {
+  display: grid;
+  gap: 0.6rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-bottom: 1rem;
+
+  span {
+    align-items: center;
+    background: #f8fafc;
+    border: 1px solid #dfe6ef;
+    border-radius: 9px;
+    color: #42536a;
+    display: flex;
+    font-size: 0.78rem;
+    font-weight: 700;
+    gap: 0.5rem;
+    padding: 0.55rem;
+  }
+
+  b {
+    align-items: center;
+    background: #3567c8;
+    border-radius: 50%;
+    color: #fff;
+    display: inline-flex;
+    flex: 0 0 auto;
+    height: 1.45rem;
+    justify-content: center;
+    width: 1.45rem;
+  }
+}
+
 .ps-reading-choice {
   background: transparent;
   border: 0;
@@ -2036,6 +2111,11 @@
     color: #637381;
     font-size: 0.82rem;
     font-weight: 700;
+  }
+
+  span strong {
+    color: #2457b5;
+    font-size: 0.95rem;
   }
 }
 
@@ -2164,6 +2244,7 @@
   }
 
   h3 {
+    color: #fff;
     font-size: 1.05rem;
     font-weight: 800;
     line-height: 1.5;
@@ -2188,6 +2269,13 @@
     font-size: 0.84rem;
   }
 
+  li small {
+    color: #bcd2ea;
+    display: block;
+    font-size: 0.72rem;
+    margin: 0.18rem 0 0 1.45rem;
+  }
+
   li i {
     color: #8de3aa;
     margin-right: 0.4rem;
@@ -2200,6 +2288,16 @@
     font-size: 0.78rem;
     margin-top: 1rem;
     padding: 0.7rem;
+
+    strong,
+    span {
+      display: block;
+    }
+
+    strong {
+      color: #fff;
+      margin-bottom: 0.15rem;
+    }
 
     &.is-ready {
       background: rgba(42, 183, 104, 0.2);
@@ -2403,6 +2501,36 @@
   }
 }
 
+@media (max-width: 991px) {
+  .ps-arrow-board {
+    gap: 1rem;
+    grid-template-columns: 1fr;
+    padding: 1rem;
+  }
+
+  .ps-arrow-layer,
+  .ps-connection-dot {
+    display: none;
+  }
+
+  .ps-match-item {
+    opacity: 1;
+  }
+
+  .ps-linked-function {
+    display: inline-flex;
+  }
+
+  .ps-function-panel {
+    margin-top: 0;
+  }
+
+  .ps-question-layout,
+  .ps-writing-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 767px) {
   .prep-hero {
     min-height: 360px;
@@ -2484,31 +2612,16 @@
   }
 
   .ps-arrow-board {
-    gap: 2.5rem;
-    grid-template-columns: 1fr;
+    gap: 1rem;
     padding: 0.9rem;
   }
 
-  .ps-arrow-layer {
-    display: none;
-  }
-
-  .ps-connection-dot {
-    display: none;
-  }
-
-  .ps-match-item {
-    opacity: 1;
-  }
-
-  .ps-function-panel {
-    margin-top: 0;
-  }
-
   .ps-explanation-grid,
-  .ps-question-layout,
-  .ps-writing-layout,
   .grammar-course-phases {
+    grid-template-columns: 1fr;
+  }
+
+  .ps-reading-steps {
     grid-template-columns: 1fr;
   }
 
