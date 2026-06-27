@@ -1,0 +1,59 @@
+/*
+=========================================================
+* Dash UI - Bootstrap 5 Admin & Dashboard Theme
+=========================================================
+* Product Page: https://codescandy.com/dashui/index.html
+* Copyright 2023 Codescandy (https://codescandy.com/)
+* Designed and coded by https://codescandy.com
+========================================================= */
+
+// Feathers CSS for Before Icon
+@import url("/fonts/feather-icons/feather.css");
+
+// Bootstrap functions
+@import "~bootstrap/scss/functions";
+
+// User Variables
+@import "user-variables";
+
+// theme variables
+@import "theme/variables";
+
+//utilities
+@import "theme/utilities";
+
+// Bootstrap
+@import "~bootstrap/scss/bootstrap";
+
+// Theme
+@import "theme/theme";
+
+// User
+@import "user";
+
+.heading-permalink{
+    color: transparent;
+    margin-left: -2rem;
+    &:hover{
+        color: transparent;
+
+
+    }
+
+
+
+&::before {
+    color: rgba(82,95,127,0);
+    content: "#";
+
+
+
+}
+&:hover:before{
+    color: $primary;
+
+
+
+}
+
+}

@@ -1,0 +1,30 @@
+
+> dashui-free-nextjs-admin-template@0.1.0 dev
+> next dev -p 3000
+
+[32mready[39m - started server on 0.0.0.0:3000, url: http://localhost:3000
+Browserslist: caniuse-lite is outdated. Please run:
+  npx browserslist@latest --update-db
+  Why you should do it regularly: https://github.com/browserslist/browserslist#browsers-data-updating
+Watchpack Error (initial scan): Error: EINVAL: invalid argument, lstat 'C:\DumpStack.log.tmp'
+Watchpack Error (initial scan): Error: EINVAL: invalid argument, lstat 'C:\PageFile.sys'
+Watchpack Error (initial scan): Error: EINVAL: invalid argument, lstat 'C:\swapfile.sys'
+Watchpack Error (initial scan): Error: EINVAL: invalid argument, lstat 'C:\hiberfil.sys'
+Watchpack Error (initial scan): Error: EINVAL: invalid argument, lstat 'C:\DumpStack.log.tmp'
+Watchpack Error (initial scan): Error: EINVAL: invalid argument, lstat 'C:\PageFile.sys'
+Watchpack Error (initial scan): Error: EINVAL: invalid argument, lstat 'C:\hiberfil.sys'
+Watchpack Error (initial scan): Error: EINVAL: invalid argument, lstat 'C:\swapfile.sys'
+[35mevent[39m - compiled client and server successfully in 20.8s (1464 modules)
+[36mwait[39m  - compiling / (client and server)...
+[36mwait[39m  - compiling /practice (client and server)...
+[35mevent[39m - compiled client and server successfully in 14.1s (3480 modules)
+[36mwait[39m  - compiling /exam...
+[36mwait[39m  - compiling /review...
+[35mevent[39m - compiled client and server successfully in 1166 ms (3486 modules)
+[36mwait[39m  - compiling...
+[35mevent[39m - compiled client and server successfully in 324 ms (1473 modules)
+[36mwait[39m  - compiling...
+[35mevent[39m - compiled successfully in 14.1s (1402 modules)
+[36mwait[39m  - compiling...
+[35mevent[39m - compiled client and server successfully in 174 ms (1473 modules)
+[?25h
