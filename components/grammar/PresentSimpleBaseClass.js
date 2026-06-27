@@ -164,7 +164,15 @@ const ArrowMatchingBoard = ({ mode = 'automatic', examples, markerId }) => {
       return;
     }
 
-    setConnections((current) => ({ ...current, [selectedSource]: targetId }));
+    setConnections((current) => {
+      const uniqueConnections = Object.fromEntries(
+        Object.entries(current).filter(
+          ([sourceId, assignedTarget]) => sourceId === selectedSource || assignedTarget !== targetId
+        )
+      );
+
+      return { ...uniqueConnections, [selectedSource]: targetId };
+    });
     setSelectedSource('');
     setChecked(false);
   };
@@ -294,8 +302,8 @@ const ArrowMatchingBoard = ({ mode = 'automatic', examples, markerId }) => {
               <strong>{completedCount}/{examples.length} connections made</strong>
               <span>
                 {selectedSource
-                  ? 'Now choose the matching function.'
-                  : 'Choose an example first, then choose its function.'}
+                  ? 'Now choose its function. Each function can only be used once.'
+                  : 'Choose an example first, then choose its function. Each function can only be used once.'}
               </span>
             </div>
           </div>
@@ -398,7 +406,7 @@ const PresentSimpleBaseClass = ({ onComplete, onBack }) => {
         <div className="ps-slide-content">
           <div className="ps-slide-lead">
             <span>YOUR TURN</span>
-            <p>Build the five connections yourself. Click one point on the left and one on the right.</p>
+            <p>Match every example with a different function. Each function can be used only once.</p>
           </div>
           <ArrowMatchingBoard
             mode="interactive"
