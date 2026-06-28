@@ -564,19 +564,18 @@ const PresentSimpleBaseClass = ({ onComplete, onBack }) => {
         <div className="ps-slide-content">
           <div className="ps-breakdown-list">
             {[
-              ['Habit', 'Elena wakes up early and drinks black coffee.', 'Daily routine'],
-              ['Permanent State', 'She lives in London.', 'Long-term situation'],
-              ['General Truth', 'Water boils at 100 degrees Celsius.', 'Scientific fact'],
-              ['Scheduled Event', 'Her train leaves at 11:30 a.m.', 'Official timetable'],
-              ['Storytelling / Commentary', 'Smith scores, and the stadium goes wild!', 'Live action narrative']
-            ].map(([label, example, note], index) => (
+              ['Habit', 'Elena wakes up early and drinks black coffee.'],
+              ['Permanent State', 'She lives in London.'],
+              ['General Truth', 'Water boils at 100 degrees Celsius.'],
+              ['Scheduled Event', 'Her train leaves at 11:30 a.m.'],
+              ['Storytelling / Commentary', 'Smith scores, and the stadium goes wild!']
+            ].map(([label, example], index) => (
               <div className="ps-breakdown-row" key={label} style={{ '--item-delay': `${index * 0.12}s` }}>
                 <span className="ps-breakdown-check"><i className="fe fe-check" /></span>
                 <div>
                   <h3>{label}</h3>
                   <p>“{example}”</p>
                 </div>
-                <small>{note}</small>
               </div>
             ))}
           </div>
@@ -612,9 +611,9 @@ const PresentSimpleBaseClass = ({ onComplete, onBack }) => {
             <ul>
               <li><i className="fe fe-check-circle" /> a habit or routine <small>(I study every night.)</small></li>
               <li><i className="fe fe-check-circle" /> a permanent state <small>(I live in Lima.)</small></li>
-              <li><i className="fe fe-check-circle" /> a general truth <small>(Practice improves skills.)</small></li>
+              <li><i className="fe fe-check-circle" /> a fact <small>(Practice improves skills.)</small></li>
               <li><i className="fe fe-check-circle" /> a scheduled event <small>(My class starts at 8.)</small></li>
-              <li><i className="fe fe-check-circle" /> a frequency word <small>(always, usually, often…)</small></li>
+              <li><i className="fe fe-check-circle" /> storytelling <small>(The player shoots and scores!)</small></li>
             </ul>
             <div className={wordCount >= 70 ? 'is-ready' : ''}>
               <strong>{wordCount}/70 minimum words</strong>

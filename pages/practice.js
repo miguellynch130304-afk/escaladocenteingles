@@ -45,6 +45,26 @@ const defaultLessonSteps = [
   }
 ];
 
+const lessonStepOverrides = {
+  'present-simple': {
+    examples: {
+      title: 'Exam-related sentences',
+      shortTitle: 'Sentences',
+      description: 'Five examples with their Present Simple functions.'
+    },
+    cloze: {
+      title: 'Cloze',
+      description: 'Fill the spaces with the verb in the correct form.'
+    }
+  },
+  'past-simple': {
+    cloze: {
+      title: 'Cloze',
+      description: 'Fill the blanks with the verb in the correct form.'
+    }
+  }
+};
+
 const courseModuleIds = ['present-simple', 'present-continuous', 'past-simple'];
 
 const Modules = () => {
@@ -134,7 +154,13 @@ const Modules = () => {
 
   const currentQuestion = questions[currentQuestionIndex];
   const selectedAnswer = progress.practice[currentQuestion?.id];
-  const activeLessonSteps = defaultLessonSteps;
+  const activeLessonSteps = useMemo(() => {
+    const overrides = lessonStepOverrides[activeModuleId] || {};
+    return defaultLessonSteps.map((step) => ({
+      ...step,
+      ...(overrides[step.id] || {})
+    }));
+  }, [activeModuleId]);
   const currentStep = activeLessonSteps[stepIndex] || activeLessonSteps[0];
   const moduleProgress = Math.round(((stepIndex + 1) / activeLessonSteps.length) * 100);
   const compositionKey = activeModule?.id;
@@ -497,35 +523,43 @@ const Modules = () => {
   );
 
   const renderClozeStep = () => (
-    <div className="grammar-cloze-list">
-      {activeModule.cloze.map((item, index) => {
-        const key = getClozeKey(index);
-        const answer = clozeAnswers[key] || '';
-        const isChecked = Boolean(checkedCloze[key]);
-        const isCorrect = normalizeAnswer(answer) === normalizeAnswer(item.answer);
+    <>
+      {activeModule.clozeOptions ? (
+        <div className="grammar-cloze-word-bank" aria-label="Available base verbs">
+          <span>OPTIONS</span>
+          {activeModule.clozeOptions.map((option) => <strong key={option}>{option}</strong>)}
+        </div>
+      ) : null}
+      <div className="grammar-cloze-list">
+        {activeModule.cloze.map((item, index) => {
+          const key = getClozeKey(index);
+          const answer = clozeAnswers[key] || '';
+          const isChecked = Boolean(checkedCloze[key]);
+          const isCorrect = normalizeAnswer(answer) === normalizeAnswer(item.answer);
 
-        return (
-          <div className="grammar-cloze-item" key={key}>
-            <p className="mb-3">{item.prompt}</p>
-            <div className="grammar-cloze-controls">
-              <Form.Control
-                value={answer}
-                placeholder="Type the correct form"
-                onChange={(event) => updateClozeAnswer(index, event.target.value)}
-              />
-              <Button variant="light" onClick={() => checkCloze(index)}>
-                Check
-              </Button>
+          return (
+            <div className="grammar-cloze-item" key={key}>
+              <p className="mb-3">{item.prompt}</p>
+              <div className="grammar-cloze-controls">
+                <Form.Control
+                  value={answer}
+                  placeholder="Type the correct form"
+                  onChange={(event) => updateClozeAnswer(index, event.target.value)}
+                />
+                <Button variant="light" onClick={() => checkCloze(index)}>
+                  Check
+                </Button>
+              </div>
+              {isChecked ? (
+                <Alert variant={isCorrect ? 'success' : 'warning'} className="mt-3 mb-0 py-2">
+                  <strong>{isCorrect ? 'Correct.' : `Suggested answer: ${item.answer}.`}</strong> {item.explanation}
+                </Alert>
+              ) : null}
             </div>
-            {isChecked ? (
-              <Alert variant={isCorrect ? 'success' : 'warning'} className="mt-3 mb-0 py-2">
-                <strong>{isCorrect ? 'Correct.' : `Suggested answer: ${item.answer}.`}</strong> {item.explanation}
-              </Alert>
-            ) : null}
-          </div>
-        );
-      })}
-    </div>
+          );
+        })}
+      </div>
+    </>
   );
 
   const renderCompositionStep = () => (

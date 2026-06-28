@@ -11,27 +11,27 @@ const grammarModuleLibrary = [
       {
         text: 'Social media, magazines, and shop windows bombard people daily with things to buy.',
         source: 'Q46',
-        function: 'General truth: describes a recurring reality in everyday life.'
+        function: 'Facts'
       },
       {
         text: 'In Britain, the average person spends more than GBP1,000 on new clothes a year.',
         source: 'Q48',
-        function: 'Statistic or fact: presents general information with a third-person singular verb.'
+        function: 'Facts'
       },
       {
-        text: 'Buy Nothing groups organize the exchange and repair of items they already own.',
-        source: 'Q55',
-        function: 'Routine: explains what a group does regularly.'
+        text: 'Some YouTube stars now advise their viewers not to buy anything for long periods.',
+        source: 'Q57',
+        function: 'Habits / routines'
       },
       {
         text: 'People organize various types of protests.',
         source: 'Q55',
-        function: 'Habit or repeated action: describes a recurring activity.'
+        function: 'Habits / routines'
       },
       {
         text: 'He wants his students to follow the process writing approach.',
         source: 'Q39',
-        function: 'State or intention: uses a stative verb in the third person.'
+        function: 'Permanent states'
       }
     ],
     formulation: {
@@ -42,11 +42,12 @@ const grammarModuleLibrary = [
           question: 'Does the average person spend money on clothes?'
         },
         {
-          statement: 'Buy Nothing groups organize exchanges.',
-          question: 'Do Buy Nothing groups organize exchanges?'
+          statement: 'People organize various types of protests.',
+          question: 'Do people organize various types of protests?'
         }
       ]
     },
+    clozeOptions: ['bombard', 'make'],
     cloze: [
       {
         prompt: 'Social media, magazines, and shop windows _________ people daily with things to buy.',
@@ -54,14 +55,9 @@ const grammarModuleLibrary = [
         explanation: 'The compound subject is plural, so use the base form bombard.'
       },
       {
-        prompt: 'The average person _________ more than GBP1,000 a year.',
-        answer: 'spends',
-        explanation: 'The average person is third person singular, so spend becomes spends.'
-      },
-      {
-        prompt: 'Buy Nothing groups _________ exchanges throughout the year.',
-        answer: 'organize',
-        explanation: 'Groups is plural, so use the base form organize.'
+        prompt: 'Bees _________ honey.',
+        answer: 'make',
+        explanation: 'The plural subject bees takes the base form make.'
       }
     ],
     composition: {
@@ -80,7 +76,7 @@ const grammarModuleLibrary = [
     title: 'Present Continuous',
     level: 'Base plus',
     focus: 'Actions in progress, temporary situations and classroom monitoring.',
-    examQuestionIds: [40, 41, 44],
+    examQuestionIds: [38, 45, 46],
     examSentences: [
       {
         text: "Fernanda's students are having a conversation.",
@@ -121,21 +117,22 @@ const grammarModuleLibrary = [
         }
       ]
     },
+    clozeOptions: ['have', 'read', 'buy'],
     cloze: [
       {
-        prompt: "Fernanda's students _________ having a conversation.",
-        answer: 'are',
-        explanation: 'Plural subject students uses are.'
+        prompt: "Fernanda's students _________ a conversation.",
+        answer: 'are having',
+        explanation: 'Use are having with the plural subject students.'
       },
       {
-        prompt: 'The teacher is _________ the students texts.',
-        answer: 'correcting',
-        explanation: 'Present continuous needs verb-ing after is.'
+        prompt: "The teacher _________ the students' texts.",
+        answer: 'is reading',
+        explanation: 'Use is reading with the singular subject teacher.'
       },
       {
-        prompt: 'British consumers are _________ more clothes.',
-        answer: 'buying',
-        explanation: 'A changing current trend is expressed with are + verb-ing.'
+        prompt: 'British consumers _________ more clothes.',
+        answer: 'are buying',
+        explanation: 'Use are buying for a changing current trend.'
       }
     ],
     composition: {
@@ -185,11 +182,20 @@ const grammarModuleLibrary = [
           question: 'Did the idea originate in Canada?'
         },
         {
+          statement: 'The idea originated in Canada.',
+          question: 'Where did the idea originate?'
+        },
+        {
           statement: 'They spent a year buying only food.',
           question: 'Did they spend a year buying only food?'
+        },
+        {
+          statement: 'They spent a year buying only food.',
+          question: 'How long did they spend buying only food?'
         }
       ]
     },
+    clozeOptions: ['originate', 'spend', 'write'],
     cloze: [
       {
         prompt: 'The idea _________ in Canada in the early 1990s.',
@@ -202,9 +208,9 @@ const grammarModuleLibrary = [
         explanation: 'Spend is irregular: spend, spent, spent.'
       },
       {
-        prompt: 'I _________ a new e-mail account.',
-        answer: 'opened',
-        explanation: 'Open is regular, so add -ed.'
+        prompt: 'I _________ a new e-mail.',
+        answer: 'wrote',
+        explanation: 'Write is irregular: write, wrote, written.'
       }
     ],
     composition: {
@@ -1118,7 +1124,7 @@ const teachingSkillsModule = {
   title: 'Teaching Skills',
   level: 'Teacher Development',
   focus: 'Instructions, monitoring, feedback and reflective classroom practice.',
-  examQuestionIds: [11, 19, 33],
+  examQuestionIds: [40, 41, 44],
   examSentences: [
     {
       text: 'The teacher gives clear instructions before the activity begins.',

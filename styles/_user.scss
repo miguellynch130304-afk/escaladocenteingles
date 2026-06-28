@@ -4188,3 +4188,37 @@
     flex-basis: 100%;
   }
 }
+
+// Corrections shared only by the three completed grammar courses.
+.ps-base-class .ps-breakdown-row {
+  grid-template-columns: 2.2rem minmax(0, 1fr);
+}
+
+.grammar-cloze-word-bank {
+  align-items: center;
+  background: linear-gradient(135deg, #eef5ff, #f7f4ff);
+  border: 1px solid #bfd1ec;
+  border-radius: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin-bottom: 1rem;
+  padding: 0.8rem 1rem;
+
+  span {
+    color: #3567c8;
+    font-size: 0.7rem;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    margin-right: 0.3rem;
+  }
+
+  strong {
+    background: #fff;
+    border: 1px solid #cbd9ed;
+    border-radius: 999px;
+    color: #243653;
+    font-size: 0.82rem;
+    padding: 0.4rem 0.75rem;
+  }
+}

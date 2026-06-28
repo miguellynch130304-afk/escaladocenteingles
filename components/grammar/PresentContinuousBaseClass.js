@@ -58,7 +58,7 @@ const tenseChoiceItems = [
     function: 'General truth'
   },
   {
-    sentence: 'Choose the correct description.',
+    sentence: 'Choose the correct answer.',
     options: [
       'That woman looks at you. I am believing she is wanting to talk.',
       'That woman is looking at you. I believe she wants to talk.'
@@ -67,7 +67,7 @@ const tenseChoiceItems = [
     function: 'Now action + stative verbs'
   },
   {
-    sentence: 'Choose the live commentary.',
+    sentence: 'Choose the storytelling.',
     options: [
       'Stevenson takes the ball and passes it to McFerry.',
       'Stevenson is taking the ball and is passing it to McFerry.'
@@ -91,13 +91,13 @@ const tenseChoiceItems = [
     function: 'Habit'
   },
   {
-    sentence: 'Choose the arranged future plan.',
+    sentence: 'Choose the future plan.',
     options: ['Kathy is meeting Maria tomorrow afternoon.', 'Kathy meets Maria tomorrow afternoon.'],
     answer: 0,
     function: 'Future arrangement'
   },
   {
-    sentence: 'Hurry up!',
+    sentence: 'Choose the correct answer.',
     options: ['The bus leaves!', 'The bus is leaving!'],
     answer: 1,
     function: 'Action happening now'
@@ -545,7 +545,7 @@ const PresentContinuousBaseClass = ({ onComplete, onBack }) => {
         ['WHEN', 'When is he governing?', 'time'],
         ['WHY', 'Why is he governing?', 'reason'],
         ['WHO · WITH', 'Who is he governing with?', 'people'],
-        ['WHAT', 'What is he doing?', 'activity']
+        ['GENERAL QUESTION', 'What is he doing?', 'What + the verb do']
       ];
 
       return (
@@ -673,7 +673,6 @@ const PresentContinuousBaseClass = ({ onComplete, onBack }) => {
                 <li><i className="fe fe-check-circle" /> one temporary situation</li>
                 <li><i className="fe fe-check-circle" /> one future arrangement</li>
                 <li><i className="fe fe-check-circle" /> one changing situation</li>
-                <li><i className="fe fe-check-circle" /> two time expressions</li>
               </ul>
               <div className={wordCount >= 70 ? 'is-ready' : ''}>
                 <strong>{wordCount}/70 minimum words</strong>
