@@ -22,7 +22,7 @@ export const DashboardMenu = [
     id: uuid(),
     title: 'Full mock exam',
     icon: 'clock',
-    badge: '180m',
+    badge: '360m',
     badgecolor: 'primary',
     link: '/exam'
   },
@@ -39,7 +39,7 @@ export const DashboardMenu = [
   },
   {
     id: uuid(),
-    title: '2025 exam booklet',
+    title: 'Official exam bank',
     icon: 'file-text',
     link: '/review?mode=practice'
   },

@@ -158,7 +158,7 @@ const Exam = () => {
           <div className="d-flex flex-wrap gap-3 text-muted">
             <span><i className="fe fe-clock me-1"></i>{formatTime(remainingSeconds)}</span>
             <span><i className="fe fe-check-circle me-1"></i>{answered}/{examQuestions.length}</span>
-            <span><i className="fe fe-target me-1"></i>meta base 36</span>
+            <span><i className="fe fe-target me-1"></i>meta base 72</span>
           </div>
         </Col>
         <Col xl={4} lg={5} className="text-lg-end mt-4 mt-lg-0">

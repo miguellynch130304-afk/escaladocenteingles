@@ -14,7 +14,7 @@ function MyApp({ Component, pageProps }) {
   const router = useRouter();
   const pageURL = `${process.env.baseURL || 'http://localhost:3000'}${router.pathname}`;
   const title = "Advanced EBA English Preparation";
-  const description = "Grammar modules and a full mock exam for the Advanced EBA English assessment A54-EBAA-11.";
+  const description = "Grammar modules and an integrated full mock exam for Advanced EBA English preparation.";
   const keywords = "Advanced EBA English, promotion exam, grammar modules, mock exam, teacher preparation"
 
   // Identify the layout, which will be applied conditionally

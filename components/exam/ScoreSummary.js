@@ -19,7 +19,7 @@ const ScoreSummary = ({
         <div className="d-flex justify-content-between align-items-start mb-4">
           <div>
             <h4 className="mb-1">{title}</h4>
-            <p className="text-muted mb-0">Basado en la clave oficial del PDF.</p>
+            <p className="text-muted mb-0">Basado en las claves del material oficial integrado.</p>
           </div>
           <Badge bg={bestScale ? 'success' : 'warning'} className="rounded-pill">
             {bestScale ? bestScale.scale : 'En progreso'}

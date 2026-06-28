@@ -1,4 +1,6 @@
 // Grammar course built from the provided exam material. Keep this file ASCII-only.
+import { moduleExamSupplements } from 'data/moduleExamSupplements';
+
 const grammarModuleLibrary = [
   {
     id: 'present-simple',
@@ -1188,11 +1190,25 @@ const teachingSkillsModule = {
   }
 };
 
-export const grammarModules = [
+const baseGrammarModules = [
   ...grammarModuleLibrary.filter((module) => module.order <= 11),
   questionFormsModule,
   teachingSkillsModule
 ];
+
+export const grammarModules = baseGrammarModules.map((module) => {
+  const supplement = moduleExamSupplements[module.id];
+
+  if (!supplement) {
+    return module;
+  }
+
+  return {
+    ...module,
+    examQuestionIds: [...new Set([...module.examQuestionIds, ...supplement.questionIds])],
+    examSentences: [...module.examSentences, ...supplement.examSentences]
+  };
+});
 
 export const getGrammarModule = (moduleId) => {
   return grammarModules.find((module) => module.id === moduleId) || grammarModules[0];

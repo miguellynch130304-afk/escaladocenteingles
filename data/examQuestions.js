@@ -1,41 +1,43 @@
 // Generated from the provided exam PDFs. Keep this file ASCII-only for portability.
+import { supplementalExamQuestions } from 'data/supplementalExamQuestions';
+
 export const examMetadata = {
-  "title": "EBA Avanzado Ingles - Concurso de Ascenso 2025",
-  "examCode": "A54-EBAA-11",
-  "totalQuestions": 60,
-  "durationMinutes": 180,
-  "sourcePdf": "11764967263A54-EBAA-11.pdf",
-  "answerKeyPdf": "11764967264A54-EBAA-11_C.pdf"
+  "title": "Simulacro integral de Ingles EBA Avanzado",
+  "examCode": "Banco oficial integrado",
+  "totalQuestions": 120,
+  "durationMinutes": 360,
+  "sourcePdf": "Official exam bank",
+  "answerKeyPdf": "Official answer key"
 };
 
 export const passingThresholds = [
   {
     "scale": "Segunda escala",
-    "minimum": 36
+    "minimum": 72
   },
   {
     "scale": "Tercera escala",
-    "minimum": 38
+    "minimum": 76
   },
   {
     "scale": "Cuarta escala",
-    "minimum": 40
+    "minimum": 80
   },
   {
     "scale": "Quinta escala",
-    "minimum": 42
+    "minimum": 84
   },
   {
     "scale": "Sexta escala",
-    "minimum": 44
+    "minimum": 88
   },
   {
     "scale": "Septima escala",
-    "minimum": 46
+    "minimum": 92
   },
   {
     "scale": "Octava escala",
-    "minimum": 46
+    "minimum": 92
   }
 ];
 
@@ -150,7 +152,7 @@ export const prepModules = [
   }
 ];
 
-export const examQuestions = [
+const primaryExamQuestions = [
   {
     "id": 1,
     "module": "inclusion",
@@ -163,7 +165,7 @@ export const examQuestions = [
       "C": "\"The school should promote that the students with disabilities receive both specialized treatment and pedagogical attention.\""
     },
     "answer": "B",
-    "source": "11764967263A54-EBAA-11.pdf",
+    "source": "Official exam bank",
     "explanation": "La opcion B expresa equidad de oportunidades: todos los estudiantes deben acceder al aprendizaje. A se centra en igualar desempenos y C separa por tratamiento especializado, por eso no recoge mejor el valor inclusivo."
   },
   {
@@ -178,7 +180,7 @@ export const examQuestions = [
       "C": "Provide multiple means of action and expression."
     },
     "answer": "B",
-    "source": "11764967263A54-EBAA-11.pdf",
+    "source": "Official exam bank",
     "explanation": "El recurso se adapta mediante textos, graficos o materiales audiovisuales. Eso corresponde a multiples medios de representacion, porque cambia la forma en que se presenta la informacion."
   },
   {
@@ -193,7 +195,7 @@ export const examQuestions = [
       "C": "\"I believe the proposal aims to create favorable conditions for students with physical disabilities. This will help those students, as well as their peers, decide when to move around the school facilities.\""
     },
     "answer": "C",
-    "source": "11764967263A54-EBAA-11.pdf",
+    "source": "Official exam bank",
     "explanation": "La opcion C apunta a accesibilidad y autonomia: las adaptaciones permiten que todos decidan y se desplacen en mejores condiciones. A se centra en ayuda de pares y B solo en seguridad."
   },
   {
@@ -208,7 +210,7 @@ export const examQuestions = [
       "C": "The teacher pairs up the students and provides them with an envelope containing strips of paper with written sentences taken from a paragraph. He asks the students to put the strips in the correct order so that the paragraph segments are logically connected. Then the teacher checks the correct order with the whole class."
     },
     "answer": "C",
-    "source": "11764967263A54-EBAA-11.pdf",
+    "source": "Official exam bank",
     "explanation": "La coherencia trata de la relacion logica entre ideas. Ordenar tiras de un parrafo obliga a reconocer continuidad, progresion y conexion entre oraciones."
   },
   {
@@ -223,7 +225,7 @@ export const examQuestions = [
       "C": "Expressing degrees of certainty."
     },
     "answer": "A",
-    "source": "11764967263A54-EBAA-11.pdf",
+    "source": "Official exam bank",
     "explanation": "Expresiones como \"What is more\" y \"Not to mention that\" agregan razones o argumentos a una idea previa; no introducen punto de vista ni grados de certeza."
   },
   {
@@ -238,7 +240,7 @@ export const examQuestions = [
       "C": "- Did they have a good day? - How did they feel doing the activities? - Did they feel tired at the end of the day? Why?"
     },
     "answer": "B",
-    "source": "11764967263A54-EBAA-11.pdf",
+    "source": "Official exam bank",
     "explanation": "Scanning consiste en ubicar datos especificos rapidamente. Preguntar lugar, autor y actividades pide informacion puntual del texto, no interpretaciones generales."
   },
   {
@@ -253,7 +255,7 @@ export const examQuestions = [
       "C": "The teacher gives the students a worksheet about the intensifiers \"such\" and \"so.\" In the worksheet, there are two examples of each intensifier and sentences with blanks in them. The students analyze the examples provided and then fill in the blanks with the correct intensifier. Finally, the students check their answers in pairs."
     },
     "answer": "A",
-    "source": "11764967263A54-EBAA-11.pdf",
+    "source": "Official exam bank",
     "explanation": "El enfoque inductivo parte de ejemplos reales y lleva a los estudiantes a inferir la regla. En A analizan oraciones del texto antes de formular sus propios ejemplos."
   },
   {
@@ -268,7 +270,7 @@ export const examQuestions = [
       "C": "The teacher asks the students to read the text and answer the following questions: Have you ever tried this dish? Would you like to try it? Why/Why not? Is there a similar dish in your country? How similar or different is it? Next, the students discuss the questions in pairs. Finally, some students share their answers aloud."
     },
     "answer": "C",
-    "source": "11764967263A54-EBAA-11.pdf",
+    "source": "Official exam bank",
     "explanation": "Para hacer el texto significativo conviene conectar el contenido con la experiencia y cultura de los estudiantes. C les pide relacionar el plato con su realidad y opinar sobre el texto."
   },
   {
@@ -283,7 +285,7 @@ export const examQuestions = [
       "C": "The teacher approaches the students who have made mistakes and kindly explains to them how to use the target language correctly. After that, she gives the students some minutes to write, in their notebooks, some sentences using the target language correctly. Next, the students read their sentences aloud. Finally, the students go back to the task and continue with the group work."
     },
     "answer": "A",
-    "source": "11764967263A54-EBAA-11.pdf",
+    "source": "Official exam bank",
     "explanation": "A corrige el error desde el uso del present perfect y las expresiones de tiempo mediante una linea de tiempo. Asi los estudiantes comprenden por que \"last Saturday\" y \"last year\" no encajan con esa forma."
   },
   {
@@ -298,7 +300,7 @@ export const examQuestions = [
       "C": "Rejecting an offer."
     },
     "answer": "C",
-    "source": "11764967263A54-EBAA-11.pdf",
+    "source": "Official exam bank",
     "explanation": "Las expresiones propuestas sirven para rechazar una invitacion u oferta de manera cortes. No son principalmente desacuerdo ni simple preferencia."
   },
   {
@@ -313,7 +315,7 @@ export const examQuestions = [
       "C": "Task - Based Learning."
     },
     "answer": "A",
-    "source": "11764967263A54-EBAA-11.pdf",
+    "source": "Official exam bank",
     "explanation": "La secuencia no sigue Presentation-Practice-Production porque no presenta una estructura para practicarla de forma controlada y luego producirla. Si incluye analisis de problema y discusion comunicativa."
   },
   {
@@ -328,7 +330,7 @@ export const examQuestions = [
       "C": "Interacting with different speakers effectively."
     },
     "answer": "B",
-    "source": "11764967263A54-EBAA-11.pdf",
+    "source": "Official exam bank",
     "explanation": "La actividad promueve intercambio de ideas e interaccion oral, pero no trabaja de manera explicita gestos, postura, entonacion o volumen; por eso lo menos promovido es lo no verbal y paraverbal."
   },
   {
@@ -343,7 +345,7 @@ export const examQuestions = [
       "C": "Familiarize the students with language related to the topic."
     },
     "answer": "B",
-    "source": "11764967263A54-EBAA-11.pdf",
+    "source": "Official exam bank",
     "explanation": "La situacion de la cuenta hackeada busca que los estudiantes analicen decisiones y propongan acciones. No es solo ambientar el tema ni presentar vocabulario."
   },
   {
@@ -358,7 +360,7 @@ export const examQuestions = [
       "C": "Expressing opinions."
     },
     "answer": "C",
-    "source": "11764967263A54-EBAA-11.pdf",
+    "source": "Official exam bank",
     "explanation": "Las frases \"It seems to me\", \"To my mind\" y similares introducen opiniones personales. Por eso la funcion es expresar opiniones."
   },
   {
@@ -373,7 +375,7 @@ export const examQuestions = [
       "C": "Ask the students to think of another experience of e-mail hacking they have heard or read about recently. Invite some of the students to share the experience with the rest of the class."
     },
     "answer": "A",
-    "source": "11764967263A54-EBAA-11.pdf",
+    "source": "Official exam bank",
     "explanation": "Un cierre debe recuperar aprendizajes y conectar con lo trabajado. A pide mencionar lo aprendido y comparar soluciones, lo que sintetiza la sesion."
   },
   {
@@ -388,7 +390,7 @@ export const examQuestions = [
       "C": "Instruction checking questions."
     },
     "answer": "B",
-    "source": "11764967263A54-EBAA-11.pdf",
+    "source": "Official exam bank",
     "explanation": "Las preguntas verifican conceptos del genero discursivo: formalidad, marcadores y recursos para conectar con la audiencia. No comprueban instrucciones de una tarea."
   },
   {
@@ -403,7 +405,7 @@ export const examQuestions = [
       "C": "The teacher asks the students to mention whether they agree or disagree with the speakers' arguments for and against the use of cell phones in school. The students have to support their ideas and react to what their classmates have said."
     },
     "answer": "A",
-    "source": "11764967263A54-EBAA-11.pdf",
+    "source": "Official exam bank",
     "explanation": "Reconocer sentimientos con palabras clave es comprension literal o inferencial basica. Desarrolla menos pensamiento critico que evaluar argumentos, relacionarlos con la realidad o tomar postura."
   },
   {
@@ -418,7 +420,7 @@ export const examQuestions = [
       "C": "Tell the students to avoid using fillers as they make them sound less fluent when speaking or talking to others. Also, give the students more time for them to practice as many times as necessary until they know their speeches well enough."
     },
     "answer": "B",
-    "source": "11764967263A54-EBAA-11.pdf",
+    "source": "Official exam bank",
     "explanation": "B ofrece fillers naturales en ingles para mantener la fluidez cuando olvidan una idea. Prohibir fillers o corregir solo casos aislados no ayuda tanto a sonar natural."
   },
   {
@@ -433,7 +435,7 @@ export const examQuestions = [
       "C": "Expressing lack of understanding / interrupting someone."
     },
     "answer": "C",
-    "source": "11764967263A54-EBAA-11.pdf",
+    "source": "Official exam bank",
     "explanation": "\"I do not quite see what you mean\" expresa falta de comprension y \"Sorry to butt in\" o \"Can I add something here?\" sirven para interrumpir o tomar turno."
   },
   {
@@ -448,7 +450,7 @@ export const examQuestions = [
       "C": "The students ask five peers what their favorite dish is, why they like it and what ingredients it is made of. Then they compare and analyze the answers they got in order to find out similarities and differences. Finally, the students share their findings with the class."
     },
     "answer": "C",
-    "source": "11764967263A54-EBAA-11.pdf",
+    "source": "Official exam bank",
     "explanation": "C genera comunicacion real: los estudiantes preguntan a varios companeros, comparan respuestas y reportan hallazgos. Las otras opciones son mas monologicas o escritas."
   },
   {
@@ -463,7 +465,7 @@ export const examQuestions = [
       "C": "Tell the student what a phrasal verb is and explain the meaning of \"back up\" in English. If the student doesn't understand the meaning of that phrasal verb, translate it into Spanish. Finally, ask the student if he has problems with the meaning of other words in the text."
     },
     "answer": "A",
-    "source": "11764967263A54-EBAA-11.pdf",
+    "source": "Official exam bank",
     "explanation": "Durante una primera lectura conviene preservar el objetivo global. A posterga el vocabulario para no interrumpir la comprension general del texto."
   },
   {
@@ -478,7 +480,7 @@ export const examQuestions = [
       "C": "The teacher pairs up the students and asks them to answer the following questions: \"What's a movie review?\" and \"What elements does it have?\" Then the teacher elicits the answers from the students and clarifies doubts if necessary."
     },
     "answer": "A",
-    "source": "11764967263A54-EBAA-11.pdf",
+    "source": "Official exam bank",
     "explanation": "Para familiarizarse con una resena, los estudiantes deben observar modelos y reconocer sus elementos. A usa muestras reales y una tabla de componentes del genero."
   },
   {
@@ -493,7 +495,7 @@ export const examQuestions = [
       "C": "Imperatives."
     },
     "answer": "C",
-    "source": "11764967263A54-EBAA-11.pdf",
+    "source": "Official exam bank",
     "explanation": "El poema repite ordenes como \"Climb\", \"hold\", \"Pick\" y \"take\". Esas formas son imperativos."
   },
   {
@@ -508,7 +510,7 @@ export const examQuestions = [
       "C": "Have the students practice contrastive stress."
     },
     "answer": "B",
-    "source": "11764967263A54-EBAA-11.pdf",
+    "source": "Official exam bank",
     "explanation": "Las dificultades descritas son de contraste entre sonidos. Trabajar minimal pairs ayuda a distinguir y producir fonemas parecidos como b/v o m/n."
   },
   {
@@ -523,14 +525,14 @@ export const examQuestions = [
       "C": "Range."
     },
     "answer": "C",
-    "source": "11764967263A54-EBAA-11.pdf",
+    "source": "Official exam bank",
     "explanation": "El comentario valora el texto, pero senala que faltaron mas expresiones para dar consejos. Eso se relaciona con rango o variedad de recursos linguisticos."
   },
   {
     "id": 26,
     "module": "reading-writing",
     "topic": "Reading, writing and post-reading tasks",
-    "stimulus": "Read the following situation and answer questions 26, 27, 28 and 29. Romina wants to help her students develop their reading skills using the following text: Weekends at grandma's Ben loved spending his weekends at his grandma's house. Every Saturday morning, Ben's parents would take him to spend all the weekend with grandma. Her place was a cozy house with different plants and trees. Every Saturday, as soon as Ben arrived, he would run outside to look at the plants. He loved picking fruit such as strawberries, grapes and apples, as well as playing with grandma's cat inside the house. In the afternoon, grandma would cook with Ben's help. He always helped her prepare lunch. Grandma was an excellent and renowned cook in town, so every dish was awesome. During the evening, they would spend their time drawing pictures, playing games, and going for walks. Later, on Saturday night, Ben and grandma would make a delicious dinner and watch old movies together before going to bed. On Sunday, grandma would take Ben to the nearby park to feed the doves together. Then they would have some street food before Ben's parents pick him again. All in all, Ben cherished these wonderful memories with grandma and she loved sharing her passion for food with someone she loved so dearly. Adapted from ESLFast.com.(n.d.).Weekends at Grandma's. Retrieved July 10, 2025, from https://n9.cl/3pkuw2",
+    "stimulus": "Read the following situation and answer questions 26, 27, 28 and 29. Romina wants to help her students develop their reading skills using the following text: Weekends at grandma's Ben loved spending his weekends at his grandma's house. Every Saturday morning, Ben's parents would take him to spend all the weekend with grandma. Her place was a cozy house with different plants and trees. Every Saturday, as soon as Ben arrived, he would run outside to look at the plants. He loved picking fruit such as strawberries, grapes and apples, as well as playing with grandma's cat inside the house. In the afternoon, grandma would cook with Ben's help. He always helped her prepare lunch. Grandma was an excellent and renowned cook in town, so every dish was awesome. During the evening, they would spend their time drawing pictures, playing games, and going for walks. Later, on Saturday night, Ben and grandma would make a delicious dinner and watch old movies together before going to bed. On Sunday, grandma would take Ben to the nearby park to feed the doves together. Then they would have some street food before Ben's parents pick him again. All in all, Ben cherished these wonderful memories with grandma and she loved sharing her passion for food with someone she loved so dearly. Adapted from ESLFast.com.(n.d.).Weekends at Grandma's. Retrieved from https://n9.cl/3pkuw2",
     "prompt": "Romina has thought of three different strategies to have her students work on the text. Which of the following strategies she has thought of belongs to the top-down processing?",
     "options": {
       "A": "Group the students and provide each group with a set of cards. Each set of cards has some expressions from the text, as well as some pictures that depict those expressions. Ask the groups to match each expression with a picture. Next, provide each student with a copy of the text, ask them to read it and highlight the expressions they have seen some minutes ago.",
@@ -538,14 +540,14 @@ export const examQuestions = [
       "C": "Write on the board a list of adjectives extracted from the text. Provide each student with a copy of the text with gaps in it to be filled with adjectives from the board. Next, pair up the students and ask them to fill in the gaps. Finally, ask some volunteers to share their answers with the whole class."
     },
     "answer": "B",
-    "source": "11764967263A54-EBAA-11.pdf",
+    "source": "Official exam bank",
     "explanation": "Top-down usa conocimientos previos, imagenes y predicciones antes de leer. B activa anticipaciones sobre la historia y luego las contrasta con el texto."
   },
   {
     "id": 27,
     "module": "reading-writing",
     "topic": "Reading, writing and post-reading tasks",
-    "stimulus": "Read the following situation and answer questions 26, 27, 28 and 29. Romina wants to help her students develop their reading skills using the following text: Weekends at grandma's Ben loved spending his weekends at his grandma's house. Every Saturday morning, Ben's parents would take him to spend all the weekend with grandma. Her place was a cozy house with different plants and trees. Every Saturday, as soon as Ben arrived, he would run outside to look at the plants. He loved picking fruit such as strawberries, grapes and apples, as well as playing with grandma's cat inside the house. In the afternoon, grandma would cook with Ben's help. He always helped her prepare lunch. Grandma was an excellent and renowned cook in town, so every dish was awesome. During the evening, they would spend their time drawing pictures, playing games, and going for walks. Later, on Saturday night, Ben and grandma would make a delicious dinner and watch old movies together before going to bed. On Sunday, grandma would take Ben to the nearby park to feed the doves together. Then they would have some street food before Ben's parents pick him again. All in all, Ben cherished these wonderful memories with grandma and she loved sharing her passion for food with someone she loved so dearly. Adapted from ESLFast.com.(n.d.).Weekends at Grandma's. Retrieved July 10, 2025, from https://n9.cl/3pkuw2",
+    "stimulus": "Read the following situation and answer questions 26, 27, 28 and 29. Romina wants to help her students develop their reading skills using the following text: Weekends at grandma's Ben loved spending his weekends at his grandma's house. Every Saturday morning, Ben's parents would take him to spend all the weekend with grandma. Her place was a cozy house with different plants and trees. Every Saturday, as soon as Ben arrived, he would run outside to look at the plants. He loved picking fruit such as strawberries, grapes and apples, as well as playing with grandma's cat inside the house. In the afternoon, grandma would cook with Ben's help. He always helped her prepare lunch. Grandma was an excellent and renowned cook in town, so every dish was awesome. During the evening, they would spend their time drawing pictures, playing games, and going for walks. Later, on Saturday night, Ben and grandma would make a delicious dinner and watch old movies together before going to bed. On Sunday, grandma would take Ben to the nearby park to feed the doves together. Then they would have some street food before Ben's parents pick him again. All in all, Ben cherished these wonderful memories with grandma and she loved sharing her passion for food with someone she loved so dearly. Adapted from ESLFast.com.(n.d.).Weekends at Grandma's. Retrieved from https://n9.cl/3pkuw2",
     "prompt": "After the students have read the text, Romina wants them to understand the use of the transitions included in it. Which of the following strategies is more appropriate to carry out?",
     "options": {
       "A": "The teacher writes, on the board, five incomplete sentences and under each sentence three possible transitions to complete that sentence. Next, in pairs, the students have some minutes to choose the correct answer for each sentence. Finally, some volunteers say their answers aloud, and the teacher corrects if necessary.",
@@ -553,14 +555,14 @@ export const examQuestions = [
       "C": "The teacher asks the students to circle all the transitions they see in the text. Then she pairs up the students and asks them to discuss what the purpose of each transition within sentences is. Finally, some students share their answers with the whole class, and the teacher clarifies doubts if needed."
     },
     "answer": "C",
-    "source": "11764967263A54-EBAA-11.pdf",
+    "source": "Official exam bank",
     "explanation": "Para entender transiciones, no basta elegirlas o sustituirlas. C pide identificarlas en el texto y discutir su funcion dentro de las oraciones."
   },
   {
     "id": 28,
     "module": "reading-writing",
     "topic": "Reading, writing and post-reading tasks",
-    "stimulus": "Read the following situation and answer questions 26, 27, 28 and 29. Romina wants to help her students develop their reading skills using the following text: Weekends at grandma's Ben loved spending his weekends at his grandma's house. Every Saturday morning, Ben's parents would take him to spend all the weekend with grandma. Her place was a cozy house with different plants and trees. Every Saturday, as soon as Ben arrived, he would run outside to look at the plants. He loved picking fruit such as strawberries, grapes and apples, as well as playing with grandma's cat inside the house. In the afternoon, grandma would cook with Ben's help. He always helped her prepare lunch. Grandma was an excellent and renowned cook in town, so every dish was awesome. During the evening, they would spend their time drawing pictures, playing games, and going for walks. Later, on Saturday night, Ben and grandma would make a delicious dinner and watch old movies together before going to bed. On Sunday, grandma would take Ben to the nearby park to feed the doves together. Then they would have some street food before Ben's parents pick him again. All in all, Ben cherished these wonderful memories with grandma and she loved sharing her passion for food with someone she loved so dearly. Adapted from ESLFast.com.(n.d.).Weekends at Grandma's. Retrieved July 10, 2025, from https://n9.cl/3pkuw2",
+    "stimulus": "Read the following situation and answer questions 26, 27, 28 and 29. Romina wants to help her students develop their reading skills using the following text: Weekends at grandma's Ben loved spending his weekends at his grandma's house. Every Saturday morning, Ben's parents would take him to spend all the weekend with grandma. Her place was a cozy house with different plants and trees. Every Saturday, as soon as Ben arrived, he would run outside to look at the plants. He loved picking fruit such as strawberries, grapes and apples, as well as playing with grandma's cat inside the house. In the afternoon, grandma would cook with Ben's help. He always helped her prepare lunch. Grandma was an excellent and renowned cook in town, so every dish was awesome. During the evening, they would spend their time drawing pictures, playing games, and going for walks. Later, on Saturday night, Ben and grandma would make a delicious dinner and watch old movies together before going to bed. On Sunday, grandma would take Ben to the nearby park to feed the doves together. Then they would have some street food before Ben's parents pick him again. All in all, Ben cherished these wonderful memories with grandma and she loved sharing her passion for food with someone she loved so dearly. Adapted from ESLFast.com.(n.d.).Weekends at Grandma's. Retrieved from https://n9.cl/3pkuw2",
     "prompt": "Once the students have practiced different reading skills, Romina wants her students to work on a post-reading task. Which of the following activities is appropriate to achieve her purpose?",
     "options": {
       "A": "Ask the students to think of some questions to know more information about the characters. Next, group the students and ask them to work together to come up with the possible answers for those questions. Finally, tell the students to share their questions and answers with the class.",
@@ -568,14 +570,14 @@ export const examQuestions = [
       "C": "Write, on the board, some comprehension questions to be answered with information from the text. Ask the students to answer the questions individually. Group the students and tell them to compare their answers; then call some volunteers to read their answers to the whole class."
     },
     "answer": "A",
-    "source": "11764967263A54-EBAA-11.pdf",
+    "source": "Official exam bank",
     "explanation": "Una tarea post-reading debe ir mas alla de comprobar datos. A invita a generar preguntas y posibles respuestas sobre los personajes, extendiendo la comprension del texto."
   },
   {
     "id": 29,
     "module": "reading-writing",
     "topic": "Reading, writing and post-reading tasks",
-    "stimulus": "Read the following situation and answer questions 26, 27, 28 and 29. Romina wants to help her students develop their reading skills using the following text: Weekends at grandma's Ben loved spending his weekends at his grandma's house. Every Saturday morning, Ben's parents would take him to spend all the weekend with grandma. Her place was a cozy house with different plants and trees. Every Saturday, as soon as Ben arrived, he would run outside to look at the plants. He loved picking fruit such as strawberries, grapes and apples, as well as playing with grandma's cat inside the house. In the afternoon, grandma would cook with Ben's help. He always helped her prepare lunch. Grandma was an excellent and renowned cook in town, so every dish was awesome. During the evening, they would spend their time drawing pictures, playing games, and going for walks. Later, on Saturday night, Ben and grandma would make a delicious dinner and watch old movies together before going to bed. On Sunday, grandma would take Ben to the nearby park to feed the doves together. Then they would have some street food before Ben's parents pick him again. All in all, Ben cherished these wonderful memories with grandma and she loved sharing her passion for food with someone she loved so dearly. Adapted from ESLFast.com.(n.d.).Weekends at Grandma's. Retrieved July 10, 2025, from https://n9.cl/3pkuw2",
+    "stimulus": "Read the following situation and answer questions 26, 27, 28 and 29. Romina wants to help her students develop their reading skills using the following text: Weekends at grandma's Ben loved spending his weekends at his grandma's house. Every Saturday morning, Ben's parents would take him to spend all the weekend with grandma. Her place was a cozy house with different plants and trees. Every Saturday, as soon as Ben arrived, he would run outside to look at the plants. He loved picking fruit such as strawberries, grapes and apples, as well as playing with grandma's cat inside the house. In the afternoon, grandma would cook with Ben's help. He always helped her prepare lunch. Grandma was an excellent and renowned cook in town, so every dish was awesome. During the evening, they would spend their time drawing pictures, playing games, and going for walks. Later, on Saturday night, Ben and grandma would make a delicious dinner and watch old movies together before going to bed. On Sunday, grandma would take Ben to the nearby park to feed the doves together. Then they would have some street food before Ben's parents pick him again. All in all, Ben cherished these wonderful memories with grandma and she loved sharing her passion for food with someone she loved so dearly. Adapted from ESLFast.com.(n.d.).Weekends at Grandma's. Retrieved from https://n9.cl/3pkuw2",
     "prompt": "Finally, Romina wants her students to work on an extensive task as homework. Which of the following tasks is appropriate to assign?",
     "options": {
       "A": "The teacher asks the students to write a similar text, but using their own information. Also, she mentions that they have to include five or six linking words to connect their ideas. Finally, they will read their texts to the whole class during the following session.",
@@ -583,7 +585,7 @@ export const examQuestions = [
       "C": "The teacher encourages the students to read a brief text related to the topic. She points out that they can choose the text they prefer. In the following session, the students will say if they liked the text they read or not and explain why."
     },
     "answer": "C",
-    "source": "11764967263A54-EBAA-11.pdf",
+    "source": "Official exam bank",
     "explanation": "La lectura extensiva implica leer mas por interes y autonomia. C permite elegir un texto relacionado y luego comentar si les gusto y por que."
   },
   {
@@ -598,7 +600,7 @@ export const examQuestions = [
       "C": "Ask the students to choose the moment from the story they liked or didn't like the most. Encourage the students to support their ideas."
     },
     "answer": "A",
-    "source": "11764967263A54-EBAA-11.pdf",
+    "source": "Official exam bank",
     "explanation": "Inferir requiere deducir informacion no dicha explicitamente. A usa expresiones de los personajes para deducir si se conocen y justificar la respuesta."
   },
   {
@@ -613,7 +615,7 @@ export const examQuestions = [
       "C": "Lucia says: \"Jen is very disappointed with this product. It's big, awful, and very heavy so she can't carry it. It's also very difficult to use. It is definitely not worth the money and it's poor value. Also, it was nearly two weeks late. Her advice is don't buy it.\""
     },
     "answer": "B",
-    "source": "11764967263A54-EBAA-11.pdf",
+    "source": "Official exam bank",
     "explanation": "Parafrasear es mantener el sentido usando otras palabras. B reformula ideas del texto sin agregar opiniones personales y sin copiar tanto como C."
   },
   {
@@ -628,7 +630,7 @@ export const examQuestions = [
       "C": "The teacher tells the students to think about the products they have at home. He asks them to choose one of those products. Next, they write a review of it."
     },
     "answer": "C",
-    "source": "11764967263A54-EBAA-11.pdf",
+    "source": "Official exam bank",
     "explanation": "Una extension significativa debe conectar la tarea con la vida del estudiante. C les pide elegir un producto real de casa y escribir una resena propia."
   },
   {
@@ -643,7 +645,7 @@ export const examQuestions = [
       "C": "Sequencing events."
     },
     "answer": "A",
-    "source": "11764967263A54-EBAA-11.pdf",
+    "source": "Official exam bank",
     "explanation": "Las expresiones buscan resaltar la importancia de datos, figuras o tendencias. Por eso la funcion principal es destacar informacion."
   },
   {
@@ -658,7 +660,7 @@ export const examQuestions = [
       "C": "Write the title \"Pan American and Parapan American Games 2019\" on the board. Provide the students with prompts such as: \"I think that...,\" \"Some sports played at this event are...,\" etc. Ask the students to stand up, find a peer and start a dialogue about the games using the prompts provided."
     },
     "answer": "C",
-    "source": "11764967263A54-EBAA-11.pdf",
+    "source": "Official exam bank",
     "explanation": "C activa conocimientos previos de forma comunicativa porque los estudiantes dialogan sobre el tema antes de escuchar. A y B son ejercicios mas mecanicos."
   },
   {
@@ -673,7 +675,7 @@ export const examQuestions = [
       "C": "Listening for details."
     },
     "answer": "A",
-    "source": "11764967263A54-EBAA-11.pdf",
+    "source": "Official exam bank",
     "explanation": "Pedir una frase sobre de que trata el audio apunta a captar la idea general. Eso es listening for gist."
   },
   {
@@ -688,7 +690,7 @@ export const examQuestions = [
       "C": "Listening for specific information."
     },
     "answer": "C",
-    "source": "11764967263A54-EBAA-11.pdf",
+    "source": "Official exam bank",
     "explanation": "Anotar los deportes mencionados exige localizar datos concretos en el audio. Esa habilidad es listening for specific information."
   },
   {
@@ -703,7 +705,7 @@ export const examQuestions = [
       "C": "Give each student a worksheet that contains the radio spot with some blanks in it. Ask the students to listen carefully and fill in the blanks with the appropriate words. Pair up the students and ask them to compare their answers for some minutes."
     },
     "answer": "A",
-    "source": "11764967263A54-EBAA-11.pdf",
+    "source": "Official exam bank",
     "explanation": "Como post-listening orientado al speaking, A transforma el input en una produccion oral: crear y grabar un nuevo spot. B es mas de escritura y C sigue siendo escucha controlada."
   },
   {
@@ -718,7 +720,7 @@ export const examQuestions = [
       "C": "Making promises."
     },
     "answer": "C",
-    "source": "11764967263A54-EBAA-11.pdf",
+    "source": "Official exam bank",
     "explanation": "Las expresiones incluyen pedir explicaciones y disculparse. No desarrollan realmente hacer promesas, aunque aparezca \"I swear\" como enfasis de disculpa."
   },
   {
@@ -733,7 +735,7 @@ export const examQuestions = [
       "C": "Revising."
     },
     "answer": "C",
-    "source": "11764967263A54-EBAA-11.pdf",
+    "source": "Official exam bank",
     "explanation": "La secuencia enfatiza intercambio de borradores, revision de claridad, errores y mejoras. Ese trabajo corresponde a revising."
   },
   {
@@ -748,7 +750,7 @@ export const examQuestions = [
       "C": "The teacher shouldn't have recycled vocabulary related to the topic and reminded the structures used to talk about recent past events."
     },
     "answer": "A",
-    "source": "11764967263A54-EBAA-11.pdf",
+    "source": "Official exam bank",
     "explanation": "Si el objetivo es fluidez oral libre, corregir en el momento interrumpe la comunicacion. La retroalimentacion diferida es mas adecuada para no cortar el flujo."
   },
   {
@@ -763,7 +765,7 @@ export const examQuestions = [
       "C": "Setting up the context of the activity."
     },
     "answer": "B",
-    "source": "11764967263A54-EBAA-11.pdf",
+    "source": "Official exam bank",
     "explanation": "Ver un video, listar lugares y describirlos familiariza a los estudiantes con el tema y el vocabulario antes de la tarea principal."
   },
   {
@@ -778,7 +780,7 @@ export const examQuestions = [
       "C": "Have the students work in pairs and create a flyer about their town. Ask them to include information about what their towns have or don't have. When they finish, tell them to exchange their flyers with another pair in order to give each other suggestions on how to improve their flyers."
     },
     "answer": "C",
-    "source": "11764967263A54-EBAA-11.pdf",
+    "source": "Official exam bank",
     "explanation": "En task-based learning, el while-task debe centrarse en cumplir una tarea comunicativa. Crear un flyer en parejas con intercambio de sugerencias cumple ese proposito."
   },
   {
@@ -793,7 +795,7 @@ export const examQuestions = [
       "C": "Show the list of correction codes to the students and explain what they mean. Then mark all the grammar, vocabulary and spelling mistakes using these codes and ask the students to rewrite their texts following the corrections made."
     },
     "answer": "A",
-    "source": "11764967263A54-EBAA-11.pdf",
+    "source": "Official exam bank",
     "explanation": "La retroalimentacion reflexiva guia al estudiante a pensar y mejorar. A usa comentarios y preguntas orientadoras, no solo marcas o elogios generales."
   },
   {
@@ -808,7 +810,7 @@ export const examQuestions = [
       "C": "The teacher sticks, on the walls, six pictures that depict vocabulary to understand the text. Then she gives each student some post-it notes for them to describe the pictures using words or phrases. Next, the students stick the post-it notes next to each picture. Finally, the whole class, with the help of the teacher, defines the content of the pictures shown."
     },
     "answer": "C",
-    "source": "11764967263A54-EBAA-11.pdf",
+    "source": "Official exam bank",
     "explanation": "C presenta el vocabulario mediante imagenes, descripciones y construccion colectiva de significado. Es mas contextual y activa que copiar definiciones o completar letras."
   },
   {
@@ -823,7 +825,7 @@ export const examQuestions = [
       "C": "Summarizing information."
     },
     "answer": "B",
-    "source": "11764967263A54-EBAA-11.pdf",
+    "source": "Official exam bank",
     "explanation": "Las expresiones del dialogo comprueban y precisan lo entendido: \"If I got it right\", \"Does it mean\" y \"Not exactly\". Su funcion es clarificar informacion."
   },
   {
@@ -838,7 +840,7 @@ export const examQuestions = [
       "C": "bombard"
     },
     "answer": "C",
-    "source": "11764967263A54-EBAA-11.pdf",
+    "source": "Official exam bank",
     "explanation": "La colocacion natural es \"bombard people with things to buy\": significa exponerlos intensamente a muchos anuncios o estimulos de compra."
   },
   {
@@ -853,7 +855,7 @@ export const examQuestions = [
       "C": "enough"
     },
     "answer": "B",
-    "source": "11764967263A54-EBAA-11.pdf",
+    "source": "Official exam bank",
     "explanation": "La estructura correcta es \"such cheap clothes that...\". \"Such\" acompana un sintagma nominal con adjetivo; \"so\" iria con adjetivo/adverbio sin nombre."
   },
   {
@@ -868,7 +870,7 @@ export const examQuestions = [
       "C": "around"
     },
     "answer": "B",
-    "source": "11764967263A54-EBAA-11.pdf",
+    "source": "Official exam bank",
     "explanation": "Con el verbo \"spend\" para dinero se usa \"spend money on something\". Por eso corresponde \"on new clothes\"."
   },
   {
@@ -883,7 +885,7 @@ export const examQuestions = [
       "C": "extinguishes"
     },
     "answer": "A",
-    "source": "11764967263A54-EBAA-11.pdf",
+    "source": "Official exam bank",
     "explanation": "La frase indica que la cifra oculta dos tendencias mas preocupantes. \"Hides\" encaja semanticamente; las otras opciones no expresan esa idea."
   },
   {
@@ -898,7 +900,7 @@ export const examQuestions = [
       "C": "although"
     },
     "answer": "B",
-    "source": "11764967263A54-EBAA-11.pdf",
+    "source": "Official exam bank",
     "explanation": "La estructura es \"not only..., but...\" para anadir una segunda idea. Aqui contrasta y suma que usan dinero que no tienen para comprar cosas innecesarias."
   },
   {
@@ -913,7 +915,7 @@ export const examQuestions = [
       "C": "since"
     },
     "answer": "C",
-    "source": "11764967263A54-EBAA-11.pdf",
+    "source": "Official exam bank",
     "explanation": "La oracion necesita una conjuncion causal seguida de sujeto y verbo: \"since they donate\". \"Because of\" y \"due to\" requieren un sustantivo o frase nominal."
   },
   {
@@ -928,7 +930,7 @@ export const examQuestions = [
       "C": "result in"
     },
     "answer": "A",
-    "source": "11764967263A54-EBAA-11.pdf",
+    "source": "Official exam bank",
     "explanation": "La expresion correcta es \"end up being thrown away\", que significa terminar siendo desechadas. Las otras no forman esa estructura."
   },
   {
@@ -943,7 +945,7 @@ export const examQuestions = [
       "C": "consumerism"
     },
     "answer": "C",
-    "source": "11764967263A54-EBAA-11.pdf",
+    "source": "Official exam bank",
     "explanation": "El movimiento se opone al fenomeno social de consumir en exceso: \"consumerism\". \"Consuming\" es gerundio y \"consumption\" no nombra la ideologia o tendencia."
   },
   {
@@ -958,7 +960,7 @@ export const examQuestions = [
       "C": "contradiction"
     },
     "answer": "B",
-    "source": "11764967263A54-EBAA-11.pdf",
+    "source": "Official exam bank",
     "explanation": "El dia surge como rechazo al gasto excesivo de Black Friday y Cyber Monday. \"Rejection\" expresa oposicion directa."
   },
   {
@@ -973,7 +975,7 @@ export const examQuestions = [
       "C": "cut off"
     },
     "answer": "B",
-    "source": "11764967263A54-EBAA-11.pdf",
+    "source": "Official exam bank",
     "explanation": "La colocacion es \"cut up their credit cards\", es decir, cortarlas en pedazos como protesta. \"Cut off\" y \"cut in\" tienen otros usos."
   },
   {
@@ -988,7 +990,7 @@ export const examQuestions = [
       "C": "has reached"
     },
     "answer": "C",
-    "source": "11764967263A54-EBAA-11.pdf",
+    "source": "Official exam bank",
     "explanation": "El texto habla de una tendencia que hasta ahora ha alcanzado a influencers. \"Has reached\" conecta pasado y presente."
   },
   {
@@ -1003,7 +1005,7 @@ export const examQuestions = [
       "C": "drive"
     },
     "answer": "A",
-    "source": "11764967263A54-EBAA-11.pdf",
+    "source": "Official exam bank",
     "explanation": "La idea es que algunas estrellas de YouTube animan a sus seguidores a no comprar. \"Encourage\" encaja con persuadir de manera positiva."
   },
   {
@@ -1018,7 +1020,7 @@ export const examQuestions = [
       "C": "have been saving"
     },
     "answer": "A",
-    "source": "11764967263A54-EBAA-11.pdf",
+    "source": "Official exam bank",
     "explanation": "La accion de ahorrar ocurrio antes del cierre del periodo narrado \"In one year\". \"Had saved\" funciona como resultado anterior en ese relato."
   },
   {
@@ -1033,7 +1035,7 @@ export const examQuestions = [
       "C": "would"
     },
     "answer": "C",
-    "source": "11764967263A54-EBAA-11.pdf",
+    "source": "Official exam bank",
     "explanation": "La oracion es hipotetica: \"If everyone followed..., the results would be impressive\". Con pasado hipotetico se usa \"would\"."
   },
   {
@@ -1048,9 +1050,19 @@ export const examQuestions = [
       "C": "reluctant"
     },
     "answer": "B",
-    "source": "11764967263A54-EBAA-11.pdf",
+    "source": "Official exam bank",
     "explanation": "La expresion natural es \"willing to accept\". El mensaje es que las personas ya no estan dispuestas a aceptar el costo humano y ambiental del sobreconsumo."
   }
+];
+
+const normalizeQuestionSource = (question) => ({
+  ...question,
+  source: 'Official exam bank'
+});
+
+export const examQuestions = [
+  ...primaryExamQuestions.map(normalizeQuestionSource),
+  ...supplementalExamQuestions.map(normalizeQuestionSource)
 ];
 
 export const answerKey = examQuestions.reduce((acc, question) => {

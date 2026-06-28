@@ -17,7 +17,7 @@ const defaultLessonSteps = [
     id: 'examples',
     title: 'Oraciones del examen',
     shortTitle: 'Oraciones',
-    description: 'Cinco ejemplos reales y la funcion que cumple la estructura.'
+    description: 'Ejemplos del banco integrado y la funcion que cumple cada estructura.'
   },
   {
     id: 'formulation',
@@ -50,7 +50,7 @@ const lessonStepOverrides = {
     examples: {
       title: 'Exam-related sentences',
       shortTitle: 'Sentences',
-      description: 'Five examples with their Present Simple functions.'
+      description: 'Examples from the integrated exam bank with their Present Simple functions.'
     },
     cloze: {
       title: 'Cloze',
@@ -807,7 +807,7 @@ const Modules = () => {
           </div>
           <h1 className="mb-2">{activeModule.title} Module Test</h1>
           <p className="text-muted mb-0">
-            Apply what you learned in three official-style exam questions.
+            Apply what you learned with questions from the integrated official exam bank.
           </p>
         </Col>
       </Row>

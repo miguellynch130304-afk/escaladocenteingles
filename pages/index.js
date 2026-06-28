@@ -56,7 +56,7 @@ const Home = () => {
     {
       id: 4,
       title: 'Meta base',
-      value: '36',
+      value: '72',
       icon: <Bullseye size={18} />,
       statInfo: '<span className="text-dark me-2">60%</span> segunda escala'
     }
