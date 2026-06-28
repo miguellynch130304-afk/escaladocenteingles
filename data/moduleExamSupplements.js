@@ -35,12 +35,12 @@ export const moduleExamSupplements = {
       {
         text: 'I saw the movie yesterday, and I loved it.',
         source: 'Supplement Q24',
-        function: 'Completed actions anchored to a specific past time.'
+        function: 'Specific Time in the Past.'
       },
       {
         text: 'The soundtrack and the special effects impressed me.',
         source: 'Supplement Q24',
-        function: 'Finished reaction in a past narrative.'
+        function: 'Storytelling / Sequence.'
       }
     ]
   },

@@ -153,27 +153,27 @@ const grammarModuleLibrary = [
       {
         text: 'The idea originated in Canada in the early 1990s.',
         source: 'Q54',
-        function: 'Finished event: happened at a specific time in the past.'
+        function: 'Specific Time in the Past.'
       },
       {
         text: 'The idea moved to the US.',
         source: 'Q54',
-        function: 'Past sequence: narrates the next event.'
+        function: 'Storytelling / Sequence.'
       },
       {
         text: 'Two friends in Canada spent a year working towards buying only food.',
         source: 'Q58',
-        function: 'Completed period: describes a finished experience.'
+        function: 'Past Habits / Routines.'
       },
       {
         text: 'I opened a new e-mail account with a different password.',
         source: 'Q13',
-        function: 'Personal narrative: tells a completed action.'
+        function: 'Storytelling / Sequence.'
       },
       {
         text: 'The changes they made meant two fewer cars on the roads.',
         source: 'Q59',
-        function: 'Result in the past: reports a completed outcome.'
+        function: 'Historical Facts.'
       }
     ],
     formulation: {
