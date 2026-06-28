@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Alert, Badge, Button, ButtonGroup, Card, Col, Container, Form, ProgressBar, Row } from 'react-bootstrap';
 import QuestionCard from 'components/exam/QuestionCard';
+import PastSimpleBaseClass from 'components/grammar/PastSimpleBaseClass';
 import PresentSimpleBaseClass from 'components/grammar/PresentSimpleBaseClass';
 import PresentContinuousBaseClass from 'components/grammar/PresentContinuousBaseClass';
 import useExamProgress from 'hooks/useExamProgress';
@@ -44,7 +45,7 @@ const defaultLessonSteps = [
   }
 ];
 
-const courseModuleIds = ['present-simple', 'present-continuous'];
+const courseModuleIds = ['present-simple', 'present-continuous', 'past-simple'];
 
 const Modules = () => {
   const router = useRouter();
@@ -108,7 +109,8 @@ const Modules = () => {
   const activeModule = grammarModules.find((module) => module.id === activeModuleId);
   const isPresentSimple = activeModule?.id === 'present-simple';
   const isPresentContinuous = activeModule?.id === 'present-continuous';
-  const hasCoursePhases = isPresentSimple || isPresentContinuous;
+  const isPastSimple = activeModule?.id === 'past-simple';
+  const hasCoursePhases = isPresentSimple || isPresentContinuous || isPastSimple;
 
   const moduleStats = useMemo(() => {
     return grammarModules.map((module) => {
@@ -742,8 +744,13 @@ const Modules = () => {
           onBack={backToCatalog}
           onComplete={() => openCoursePhase('specialized', true)}
         />
-      ) : (
+      ) : isPresentContinuous ? (
         <PresentContinuousBaseClass
+          onBack={backToCatalog}
+          onComplete={() => openCoursePhase('specialized', true)}
+        />
+      ) : (
+        <PastSimpleBaseClass
           onBack={backToCatalog}
           onComplete={() => openCoursePhase('specialized', true)}
         />

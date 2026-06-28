@@ -1,5 +1,5 @@
 // Grammar course built from the provided exam material. Keep this file ASCII-only.
-export const grammarModules = [
+const grammarModuleLibrary = [
   {
     id: 'present-simple',
     order: 1,
@@ -76,7 +76,7 @@ export const grammarModules = [
   },
   {
     id: 'present-continuous',
-    order: 3,
+    order: 2,
     title: 'Present Continuous',
     level: 'Base plus',
     focus: 'Actions in progress, temporary situations and classroom monitoring.',
@@ -145,7 +145,7 @@ export const grammarModules = [
   },
   {
     id: 'past-simple',
-    order: 4,
+    order: 3,
     title: 'Past Simple',
     level: 'Narrative',
     focus: 'Finished actions, events and past time markers.',
@@ -214,7 +214,7 @@ export const grammarModules = [
   },
   {
     id: 'past-continuous',
-    order: 5,
+    order: 4,
     title: 'Past Continuous',
     level: 'Narrative',
     focus: 'Background actions and scenes in a past story.',
@@ -283,7 +283,7 @@ export const grammarModules = [
   },
   {
     id: 'present-perfect',
-    order: 6,
+    order: 5,
     title: 'Present Perfect',
     level: 'Bridge',
     focus: 'Past experiences connected to the present and recent results.',
@@ -352,7 +352,7 @@ export const grammarModules = [
   },
   {
     id: 'perfect-sequencing',
-    order: 7,
+    order: 6,
     title: 'Perfect Tenses and Sequencing',
     level: 'Bridge',
     focus: 'Present perfect continuous, past perfect and sequence markers.',
@@ -421,7 +421,7 @@ export const grammarModules = [
   },
   {
     id: 'future-forms',
-    order: 8,
+    order: 7,
     title: 'Future Forms',
     level: 'Development',
     focus: 'Will, be going to, be about to and scheduled future events.',
@@ -490,7 +490,7 @@ export const grammarModules = [
   },
   {
     id: 'modals',
-    order: 9,
+    order: 8,
     title: 'Modals',
     level: 'Development',
     focus: 'Advice, ability, obligation, possibility and criticism.',
@@ -559,7 +559,7 @@ export const grammarModules = [
   },
   {
     id: 'imperatives',
-    order: 10,
+    order: 9,
     title: 'Imperatives',
     level: 'Development',
     focus: 'Instructions, classroom commands and promotional language.',
@@ -628,7 +628,7 @@ export const grammarModules = [
   },
   {
     id: 'gerunds-infinitives',
-    order: 11,
+    order: 10,
     title: 'Gerunds and Infinitives',
     level: 'Development',
     focus: 'Verb patterns after prepositions, purpose and repeated exam collocations.',
@@ -697,7 +697,7 @@ export const grammarModules = [
   },
   {
     id: 'determiners',
-    order: 12,
+    order: 11,
     title: 'Determiners and Quantifiers',
     level: 'Development',
     focus: 'Articles, demonstratives, all/some/more and noun groups.',
@@ -1040,6 +1040,152 @@ export const grammarModules = [
       support: ['However,...', 'Not only..., but...', 'This...', 'where/which...']
     }
   }
+];
+
+const questionFormsModule = {
+  id: 'question-forms',
+  order: 12,
+  title: 'Question Forms',
+  level: 'Base',
+  focus: 'Yes/no questions, wh-questions and auxiliary order.',
+  examQuestionIds: [38, 39, 45],
+  examSentences: [
+    {
+      text: 'How often do the interviewees work out?',
+      source: 'Q39',
+      function: 'Wh-question with do: asks about frequency.'
+    },
+    {
+      text: 'What are the advantages and disadvantages of working out?',
+      source: 'Q39',
+      function: 'Wh-question with be: asks for information about a topic.'
+    },
+    {
+      text: 'Did you miss the bus or something?',
+      source: 'Q38',
+      function: 'Past yes/no question with did + base verb.'
+    },
+    {
+      text: 'Does it mean we have to include all the information?',
+      source: 'Q45',
+      function: 'Clarifying question with does + subject + base verb.'
+    },
+    {
+      text: 'What are some challenges the next generation will face?',
+      source: 'Q5',
+      function: 'Wh-question that asks for ideas or predictions.'
+    }
+  ],
+  formulation: {
+    rule: 'Use auxiliary + subject + main verb. Present simple uses do/does; past simple uses did; be goes before the subject.',
+    examples: [
+      {
+        statement: 'The interviewees work out often.',
+        question: 'How often do the interviewees work out?'
+      },
+      {
+        statement: 'It means we have to include relevant information.',
+        question: 'Does it mean we have to include relevant information?'
+      }
+    ]
+  },
+  cloze: [
+    {
+      prompt: 'How often _________ the interviewees work out?',
+      answer: 'do',
+      explanation: 'Plural subjects in the present simple use do.'
+    },
+    {
+      prompt: '_________ you miss the bus yesterday?',
+      answer: 'did',
+      explanation: 'Past simple questions use did + base verb.'
+    },
+    {
+      prompt: '_________ it mean we have to include all the information?',
+      answer: 'does',
+      explanation: 'The singular subject it uses does.'
+    }
+  ],
+  composition: {
+    prompt: 'Write five interview questions for a classmate about routines, study habits and recent experiences.',
+    support: ['How often do you...?', 'Do you usually...?', 'Did you ever...?', 'What do you...?']
+  }
+};
+
+const teachingSkillsModule = {
+  id: 'teaching-skills',
+  order: 13,
+  title: 'Teaching Skills',
+  level: 'Teacher Development',
+  focus: 'Instructions, monitoring, feedback and reflective classroom practice.',
+  examQuestionIds: [11, 19, 33],
+  examSentences: [
+    {
+      text: 'The teacher gives clear instructions before the activity begins.',
+      source: 'Teaching practice',
+      function: 'Clear staging helps learners understand the task.'
+    },
+    {
+      text: 'Students work in pairs while the teacher monitors their progress.',
+      source: 'Teaching practice',
+      function: 'Monitoring provides evidence without interrupting fluency.'
+    },
+    {
+      text: 'The teacher asks concept-checking questions.',
+      source: 'Teaching practice',
+      function: 'Checking questions reveal whether meaning is understood.'
+    },
+    {
+      text: 'Feedback focuses on both successful language and areas to improve.',
+      source: 'Teaching practice',
+      function: 'Balanced feedback supports confidence and accuracy.'
+    },
+    {
+      text: 'After the lesson, the teacher reflects on the learning evidence.',
+      source: 'Teaching practice',
+      function: 'Reflection guides the next instructional decision.'
+    }
+  ],
+  formulation: {
+    rule: 'Plan each teaching move around a clear objective, observable learner action and useful evidence of learning.',
+    examples: [
+      {
+        statement: 'Students compare two answers in pairs.',
+        question: 'What evidence will show that students understand the difference?'
+      },
+      {
+        statement: 'The teacher monitors a speaking task.',
+        question: 'When should the teacher intervene and when should the teacher wait?'
+      }
+    ]
+  },
+  cloze: [
+    {
+      prompt: 'Give concise _________ before students begin the task.',
+      answer: 'instructions',
+      explanation: 'Instructions should clarify the action, timing and expected outcome.'
+    },
+    {
+      prompt: 'Use questions to _________ understanding.',
+      answer: 'check',
+      explanation: 'Checking understanding is more reliable than asking only “Do you understand?”'
+    },
+    {
+      prompt: 'Record evidence while you _________ pair work.',
+      answer: 'monitor',
+      explanation: 'Monitoring helps the teacher plan focused feedback.'
+    }
+  ],
+  composition: {
+    prompt: 'Write a short lesson reflection describing what learners achieved and what you would adjust next time.',
+    support: ['Learners were able to...', 'The evidence was...', 'Next time I will...', 'I would check...']
+  }
+};
+
+export const grammarModules = [
+  ...grammarModuleLibrary.filter((module) => module.order <= 11),
+  questionFormsModule,
+  teachingSkillsModule
 ];
 
 export const getGrammarModule = (moduleId) => {
