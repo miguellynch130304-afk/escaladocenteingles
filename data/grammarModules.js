@@ -229,29 +229,19 @@ const grammarModuleLibrary = [
     examQuestionIds: [6, 26, 27],
     examSentences: [
       {
-        text: 'Our first day was so busy!',
-        source: 'Q6',
-        function: 'Past background: sets the scene.'
-      },
-      {
         text: 'People were sailing boats and water skiing.',
         source: 'Q6',
-        function: 'Background action: shows activities in progress.'
+        function: 'Background.'
       },
       {
         text: 'We were watching some jet skiers.',
         source: 'Q6',
-        function: 'Action in progress before another event.'
+        function: 'In-progress action.'
       },
       {
         text: 'They were swimming next to us.',
         source: 'Q6',
-        function: 'Ongoing past action in a narrative.'
-      },
-      {
-        text: 'I was so excited!',
-        source: 'Q6',
-        function: 'Past state or feeling in the story.'
+        function: 'In-progress action.'
       }
     ],
     formulation: {
@@ -267,21 +257,22 @@ const grammarModuleLibrary = [
         }
       ]
     },
+    clozeOptions: ['sail', 'watch', 'swim'],
     cloze: [
       {
-        prompt: 'People _________ sailing boats.',
-        answer: 'were',
-        explanation: 'Plural subject people uses were.'
+        prompt: 'People _________ boats.',
+        answer: 'were sailing',
+        explanation: 'Use were + sailing with the plural subject people.'
       },
       {
-        prompt: 'We were _________ some jet skiers.',
-        answer: 'watching',
-        explanation: 'Past continuous uses was/were + verb-ing.'
+        prompt: 'We _________ some jet skiers.',
+        answer: 'were watching',
+        explanation: 'Use were + watching to describe an action in progress in the past.'
       },
       {
-        prompt: 'They were _________ next to us.',
-        answer: 'swimming',
-        explanation: 'The -ing form describes the ongoing action.'
+        prompt: 'They _________ next to us.',
+        answer: 'were swimming',
+        explanation: 'Use were + swimming to describe an ongoing past action.'
       }
     ],
     composition: {

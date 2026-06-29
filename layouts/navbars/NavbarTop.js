@@ -22,8 +22,8 @@ const NavbarTop = (props) => {
 						<Menu size="18px" />
 					</button>
 					<div className="ms-lg-3 d-none d-md-none d-lg-block">
-						<Badge bg="light" text="dark" className="rounded-pill">Banco integrado</Badge>
-						<span className="text-muted ms-2 small">120 preguntas oficiales</span>
+						<Badge bg="light" text="dark" className="rounded-pill">Integrated bank</Badge>
+						<span className="text-muted ms-2 small">120 official questions</span>
 					</div>
 				</div>
 				{/* Quick Menu */}

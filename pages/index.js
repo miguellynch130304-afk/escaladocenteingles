@@ -34,36 +34,36 @@ const Home = () => {
   const dashboardCards = [
     {
       id: 1,
-      title: 'Banco oficial',
+      title: 'Official bank',
       value: examMetadata.totalQuestions,
       icon: <Book size={18} />,
-      statInfo: `<span className="text-dark me-2">${grammarModules.length}</span> modulos`
+      statInfo: `<span className="text-dark me-2">${grammarModules.length}</span> modules`
     },
     {
       id: 2,
-      title: 'Modulos',
+      title: 'Modules',
       value: `${stats.practiceAnswered}/${examMetadata.totalQuestions}`,
       icon: <CheckCircle size={18} />,
-      statInfo: `<span className="text-dark me-2">${stats.practiceScore}</span> aciertos guardados`
+      statInfo: `<span className="text-dark me-2">${stats.practiceScore}</span> saved correct answers`
     },
     {
       id: 3,
-      title: 'Simulacro',
+      title: 'Mock exam',
       value: `${stats.examAnswered}/${examMetadata.totalQuestions}`,
       icon: <ClockHistory size={18} />,
-      statInfo: `<span className="text-dark me-2">${examMetadata.durationMinutes}</span> minutos`
+      statInfo: `<span className="text-dark me-2">${examMetadata.durationMinutes}</span> minutes`
     },
     {
       id: 4,
-      title: 'Meta base',
+      title: 'Baseline target',
       value: '72',
       icon: <Bullseye size={18} />,
-      statInfo: '<span className="text-dark me-2">60%</span> segunda escala'
+      statInfo: '<span className="text-dark me-2">60%</span> second scale'
     }
   ];
 
   const chartOptions = {
-    labels: ['Modulos', 'Simulacro'],
+    labels: ['Modules', 'Mock exam'],
     colors: ['#624bff', '#0ea5e9'],
     dataLabels: { enabled: false },
     legend: { show: false },
@@ -92,16 +92,16 @@ const Home = () => {
           <Row className="align-items-center">
             <Col xl={7} lg={8}>
               <Badge bg="light" text="dark" className="mb-3 rounded-pill">{examMetadata.examCode}</Badge>
-              <h1 className="text-white mb-3">Preparacion EBA Avanzado Ingles</h1>
+              <h1 className="text-white mb-3">Advanced EBA English Preparation</h1>
               <p className="text-white-75 mb-4 prep-hero-copy">
-                Modulos gramaticales, cloze guiado, composition y simulacro final de {examMetadata.totalQuestions} preguntas con clave oficial.
+                Grammar modules, guided cloze practice, composition, and a {examMetadata.totalQuestions}-question full mock exam with an official answer key.
               </p>
               <div className="d-flex flex-wrap gap-2">
                 <Button as={Link} href="/practice" variant="white">
-                  Abrir modulos
+                  Open modules
                 </Button>
                 <Button as={Link} href="/exam" variant="outline-white">
-                  Simulacro final
+                  Full mock exam
                 </Button>
               </div>
             </Col>
@@ -123,20 +123,20 @@ const Home = () => {
             <Card className="h-100">
               <Card.Header className="bg-white py-4 d-flex justify-content-between align-items-center">
                 <div>
-                  <h4 className="mb-1">Modulos gramaticales</h4>
-                  <p className="text-muted mb-0">Progreso guardado en este navegador.</p>
+                  <h4 className="mb-1">Grammar modules</h4>
+                  <p className="text-muted mb-0">Progress saved in this browser.</p>
                 </div>
                 <Button as={Link} href="/practice" variant="primary" size="sm">
-                  Abrir
+                  Open
                 </Button>
               </Card.Header>
               <Table responsive className="mb-0 align-middle">
                 <thead className="table-light">
                   <tr>
-                    <th>Modulo</th>
-                    <th>Nivel</th>
-                    <th>Aciertos</th>
-                    <th>Progreso</th>
+                    <th>Module</th>
+                    <th>Level</th>
+                    <th>Correct</th>
+                    <th>Progress</th>
                     <th></th>
                   </tr>
                 </thead>
@@ -157,7 +157,7 @@ const Home = () => {
                       </td>
                       <td className="text-end">
                         <Button as={Link} href={`/practice?module=${module.id}`} variant="light" size="sm">
-                          Ir
+                          Open
                         </Button>
                       </td>
                     </tr>
@@ -172,8 +172,8 @@ const Home = () => {
               <Card.Body>
                 <div className="d-flex align-items-center justify-content-between mb-3">
                   <div>
-                    <h4 className="mb-1">Pulso de avance</h4>
-                    <p className="text-muted mb-0">Modulos vs simulacro</p>
+                    <h4 className="mb-1">Progress overview</h4>
+                    <p className="text-muted mb-0">Modules vs mock exam</p>
                   </div>
                   <i className="fe fe-activity text-primary fs-3"></i>
                 </div>
@@ -181,18 +181,18 @@ const Home = () => {
                 <div className="d-flex justify-content-around text-center">
                   <div>
                     <div className="fw-bold text-dark">{stats.practiceScore}</div>
-                    <div className="small text-muted">Modulos</div>
+                    <div className="small text-muted">Modules</div>
                   </div>
                   <div>
                     <div className="fw-bold text-dark">{stats.examScore}</div>
-                    <div className="small text-muted">Simulacro</div>
+                    <div className="small text-muted">Mock exam</div>
                   </div>
                 </div>
               </Card.Body>
             </Card>
 
             <ScoreSummary
-              title="Ultimo estado"
+              title="Latest status"
               score={stats.examScore || stats.practiceScore}
               answered={stats.examAnswered || stats.practiceAnswered}
               total={examMetadata.totalQuestions}

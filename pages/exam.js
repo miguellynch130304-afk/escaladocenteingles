@@ -66,17 +66,17 @@ const Exam = () => {
           <Col xl={8} lg={10}>
             <Card className="prep-start-card">
               <Card.Body className="p-6">
-                <Badge bg="primary" className="mb-3 rounded-pill">Simulacro final</Badge>
+                <Badge bg="primary" className="mb-3 rounded-pill">Full mock exam</Badge>
                 <h1 className="mb-3">{examMetadata.title}</h1>
                 <p className="text-muted mb-4">
-                  {examMetadata.totalQuestions} preguntas, {examMetadata.durationMinutes} minutos y correccion con la clave oficial.
+                  {examMetadata.totalQuestions} questions, {examMetadata.durationMinutes} minutes, and scoring with the official answer key.
                 </p>
                 <div className="d-flex flex-wrap gap-2">
                   <Button variant="primary" onClick={startExam}>
-                    Iniciar simulacro
+                    Start mock exam
                   </Button>
                   <Button as={Link} href="/practice" variant="light">
-                    Modulos
+                    Modules
                   </Button>
                 </div>
               </Card.Body>
@@ -92,14 +92,14 @@ const Exam = () => {
       <Container fluid className="px-6 py-6">
         <Row className="mb-6 align-items-center">
           <Col lg={8}>
-            <Badge bg="success" className="mb-3 rounded-pill">Simulacro cerrado</Badge>
-            <h1 className="mb-2">Resultado final</h1>
-            <p className="text-muted mb-0">Respuestas guardadas para revision.</p>
+            <Badge bg="success" className="mb-3 rounded-pill">Mock exam completed</Badge>
+            <h1 className="mb-2">Final result</h1>
+            <p className="text-muted mb-0">Your answers have been saved for review.</p>
           </Col>
           <Col lg={4} className="text-lg-end mt-4 mt-lg-0">
             <ButtonGroup>
-              <Button variant="light" onClick={resetExam}>Nuevo intento</Button>
-              <Button as={Link} href="/review?mode=exam" variant="primary">Revision</Button>
+              <Button variant="light" onClick={resetExam}>New attempt</Button>
+              <Button as={Link} href="/review?mode=exam" variant="primary">Review</Button>
             </ButtonGroup>
           </Col>
         </Row>
@@ -107,7 +107,7 @@ const Exam = () => {
         <Row>
           <Col xl={5} lg={6} className="mb-6 mb-lg-0">
             <ScoreSummary
-              title="Puntaje del simulacro"
+              title="Mock exam score"
               score={examScore}
               answered={answered}
               total={examQuestions.length}
@@ -116,7 +116,7 @@ const Exam = () => {
           <Col xl={7} lg={6}>
             <Card className="h-100">
               <Card.Header className="bg-white py-4">
-                <h4 className="mb-0">Mapa de respuestas</h4>
+                <h4 className="mb-0">Answer map</h4>
               </Card.Header>
               <Card.Body>
                 <div className="prep-question-nav">
@@ -153,18 +153,18 @@ const Exam = () => {
     <Container fluid className="px-6 py-6">
       <Row className="mb-6 align-items-center">
         <Col xl={8} lg={7}>
-          <Badge bg="primary" className="mb-3 rounded-pill">Simulacro en curso</Badge>
-          <h1 className="mb-2">Examen final de preparacion</h1>
+          <Badge bg="primary" className="mb-3 rounded-pill">Mock exam in progress</Badge>
+          <h1 className="mb-2">Final preparation exam</h1>
           <div className="d-flex flex-wrap gap-3 text-muted">
             <span><i className="fe fe-clock me-1"></i>{formatTime(remainingSeconds)}</span>
             <span><i className="fe fe-check-circle me-1"></i>{answered}/{examQuestions.length}</span>
-            <span><i className="fe fe-target me-1"></i>meta base 72</span>
+            <span><i className="fe fe-target me-1"></i>baseline target 72</span>
           </div>
         </Col>
         <Col xl={4} lg={5} className="text-lg-end mt-4 mt-lg-0">
           <ButtonGroup>
-            <Button variant="light" onClick={resetExam}>Reiniciar</Button>
-            <Button variant="primary" onClick={finishExam}>Finalizar</Button>
+            <Button variant="light" onClick={resetExam}>Restart</Button>
+            <Button variant="primary" onClick={finishExam}>Finish</Button>
           </ButtonGroup>
         </Col>
       </Row>
@@ -179,13 +179,13 @@ const Exam = () => {
           <div className="d-flex justify-content-between align-items-center mt-4">
             <ButtonGroup>
               <Button variant="light" onClick={() => moveQuestion(-1)} disabled={currentIndex === 0}>
-                Anterior
+                Previous
               </Button>
               <Button variant="light" onClick={() => moveQuestion(1)} disabled={currentIndex === examQuestions.length - 1}>
-                Siguiente
+                Next
               </Button>
             </ButtonGroup>
-            <span className="text-muted small">Pregunta {currentIndex + 1} de {examQuestions.length}</span>
+            <span className="text-muted small">Question {currentIndex + 1} of {examQuestions.length}</span>
           </div>
         </Col>
 
@@ -193,7 +193,7 @@ const Exam = () => {
           <Card className="mb-4">
             <Card.Body>
               <div className="d-flex justify-content-between small mb-2">
-                <span>Avance</span>
+                <span>Progress</span>
                 <span>{answeredPercent}%</span>
               </div>
               <ProgressBar now={answeredPercent} />
@@ -202,13 +202,13 @@ const Exam = () => {
 
           {remainingSeconds < 900 ? (
             <Alert variant="warning">
-              Menos de 15 minutos restantes.
+              Less than 15 minutes remaining.
             </Alert>
           ) : null}
 
           <Card>
             <Card.Header className="bg-white py-4">
-              <h4 className="mb-0">Navegador</h4>
+              <h4 className="mb-0">Question navigator</h4>
             </Card.Header>
             <Card.Body>
               <div className="prep-question-nav">

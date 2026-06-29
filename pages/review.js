@@ -8,10 +8,10 @@ import useExamProgress, { calculateScore, countAnswered } from 'hooks/useExamPro
 import { examQuestions } from 'data/examQuestions';
 
 const filters = [
-  { id: 'all', label: 'Todas' },
-  { id: 'correct', label: 'Correctas' },
-  { id: 'wrong', label: 'Incorrectas' },
-  { id: 'unanswered', label: 'Pendientes' }
+  { id: 'all', label: 'All' },
+  { id: 'correct', label: 'Correct' },
+  { id: 'wrong', label: 'Incorrect' },
+  { id: 'unanswered', label: 'Unanswered' }
 ];
 
 const Review = () => {
@@ -54,14 +54,14 @@ const Review = () => {
     <Container fluid className="px-6 py-6">
       <Row className="mb-6 align-items-center">
         <Col lg={8}>
-          <Badge bg="primary" className="mb-3 rounded-pill">Revision</Badge>
-          <h1 className="mb-2">Mapa de respuestas</h1>
-          <p className="text-muted mb-0">Clave oficial cruzada con tus respuestas guardadas.</p>
+          <Badge bg="primary" className="mb-3 rounded-pill">Review</Badge>
+          <h1 className="mb-2">Answer map</h1>
+          <p className="text-muted mb-0">Compare your saved answers with the official answer key.</p>
         </Col>
         <Col lg={4} className="text-lg-end mt-4 mt-lg-0">
           <ButtonGroup>
-            <Button as={Link} href="/practice" variant="light">Modulos</Button>
-            <Button as={Link} href="/exam" variant="primary">Simulacro</Button>
+            <Button as={Link} href="/practice" variant="light">Modules</Button>
+            <Button as={Link} href="/exam" variant="primary">Mock exam</Button>
           </ButtonGroup>
         </Col>
       </Row>
@@ -69,7 +69,7 @@ const Review = () => {
       <Row>
         <Col xl={4} lg={5} className="mb-6 mb-lg-0">
           <ScoreSummary
-            title={mode === 'exam' ? 'Simulacro' : 'Modulos'}
+            title={mode === 'exam' ? 'Mock exam' : 'Modules'}
             score={score}
             answered={answered}
             total={examQuestions.length}
@@ -82,10 +82,10 @@ const Review = () => {
               <div className="d-flex flex-wrap justify-content-between align-items-center gap-3">
                 <ButtonGroup>
                   <Button variant={mode === 'practice' ? 'primary' : 'light'} onClick={() => switchMode('practice')}>
-                    Modulos
+                    Modules
                   </Button>
                   <Button variant={mode === 'exam' ? 'primary' : 'light'} onClick={() => switchMode('exam')}>
-                    Simulacro
+                    Mock exam
                   </Button>
                 </ButtonGroup>
                 <ButtonGroup>
@@ -108,13 +108,13 @@ const Review = () => {
               <Accordion.Item eventKey={String(question.id)} key={question.id}>
                 <Accordion.Header>
                   <div className="prep-review-header">
-                    <span className="fw-semibold">Pregunta {question.id}</span>
+                    <span className="fw-semibold">Question {question.id}</span>
                     <span className="text-muted prep-review-snippet">{question.prompt}</span>
                     <Badge
                       bg={status === 'correct' ? 'success' : status === 'wrong' ? 'danger' : 'light'}
                       text={status === 'unanswered' ? 'dark' : undefined}
                     >
-                      {status === 'correct' ? 'Correcta' : status === 'wrong' ? `Tu ${selectedAnswer} / Clave ${question.answer}` : `Clave ${question.answer}`}
+                      {status === 'correct' ? 'Correct' : status === 'wrong' ? `Your ${selectedAnswer} / Key ${question.answer}` : `Key ${question.answer}`}
                     </Badge>
                   </div>
                 </Accordion.Header>
@@ -133,8 +133,8 @@ const Review = () => {
           {filteredRows.length === 0 ? (
             <Card>
               <Card.Body className="text-center py-6">
-                <h4 className="mb-2">Sin preguntas en este filtro</h4>
-                <p className="text-muted mb-0">Cambia de filtro o vuelve a responder otro bloque.</p>
+                <h4 className="mb-2">No questions match this filter</h4>
+                <p className="text-muted mb-0">Change the filter or answer another question set.</p>
               </Card.Body>
             </Card>
           ) : null}

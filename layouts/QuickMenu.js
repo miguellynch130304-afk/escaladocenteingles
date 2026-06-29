@@ -2,9 +2,9 @@ import Link from 'next/link';
 import { ListGroup } from 'react-bootstrap';
 
 const quickLinks = [
-  { href: '/practice', icon: 'book-open', label: 'Practicas' },
-  { href: '/exam', icon: 'clock', label: 'Simulacro' },
-  { href: '/review', icon: 'check-square', label: 'Revision' }
+  { href: '/practice', icon: 'book-open', label: 'Practice' },
+  { href: '/exam', icon: 'clock', label: 'Mock exam' },
+  { href: '/review', icon: 'check-square', label: 'Review' }
 ];
 
 const QuickMenu = () => {

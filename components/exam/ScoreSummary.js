@@ -5,7 +5,7 @@ const ScoreSummary = ({
   score,
   answered,
   total,
-  title = 'Resultado'
+  title = 'Result'
 }) => {
   const percent = total ? Math.round((score / total) * 100) : 0;
   const answeredPercent = total ? Math.round((answered / total) * 100) : 0;
@@ -19,10 +19,10 @@ const ScoreSummary = ({
         <div className="d-flex justify-content-between align-items-start mb-4">
           <div>
             <h4 className="mb-1">{title}</h4>
-            <p className="text-muted mb-0">Basado en las claves del material oficial integrado.</p>
+            <p className="text-muted mb-0">Based on the integrated official answer keys.</p>
           </div>
           <Badge bg={bestScale ? 'success' : 'warning'} className="rounded-pill">
-            {bestScale ? bestScale.scale : 'En progreso'}
+            {bestScale ? bestScale.scale : 'In progress'}
           </Badge>
         </div>
 
@@ -33,7 +33,7 @@ const ScoreSummary = ({
 
         <div className="mb-3">
           <div className="d-flex justify-content-between small mb-1">
-            <span>Aciertos</span>
+            <span>Correct answers</span>
             <span>{percent}%</span>
           </div>
           <ProgressBar now={percent} variant={percent >= 60 ? 'success' : 'warning'} />
@@ -41,7 +41,7 @@ const ScoreSummary = ({
 
         <div className="mb-4">
           <div className="d-flex justify-content-between small mb-1">
-            <span>Respondidas</span>
+            <span>Answered</span>
             <span>{answered}/{total}</span>
           </div>
           <ProgressBar now={answeredPercent} variant="primary" />
@@ -50,9 +50,9 @@ const ScoreSummary = ({
         <Table responsive className="mb-0 text-nowrap prep-threshold-table">
           <thead className="table-light">
             <tr>
-              <th>Escala</th>
-              <th>Minimo</th>
-              <th>Estado</th>
+              <th>Scale</th>
+              <th>Minimum</th>
+              <th>Status</th>
             </tr>
           </thead>
           <tbody>
@@ -62,7 +62,7 @@ const ScoreSummary = ({
                 <td>{threshold.minimum}</td>
                 <td>
                   <Badge bg={score >= threshold.minimum ? 'success' : 'light'} text={score >= threshold.minimum ? undefined : 'dark'}>
-                    {score >= threshold.minimum ? 'Alcanzado' : 'Pendiente'}
+                    {score >= threshold.minimum ? 'Reached' : 'Pending'}
                   </Badge>
                 </td>
               </tr>

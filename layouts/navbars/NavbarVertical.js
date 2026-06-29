@@ -100,8 +100,8 @@ const NavbarVertical = (props) => {
               <i className="fe fe-book-open"></i>
             </span>
             <span>
-              Prep Ingles
-              <small>EBA Avanzado</small>
+              English Prep
+              <small>Advanced EBA</small>
             </span>
           </Link>
         </div>

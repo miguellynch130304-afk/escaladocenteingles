@@ -8,23 +8,32 @@ const finalQuestionPattern = /\s((?:Which|What|Why|How|Given|Based on|According 
 const listConfigs = [
   {
     pattern: /(?:following teaching sequence|following sequence|sequence he has designed|planned the following|following activities|process writing approach|carries out the following sequence)/i,
-    title: 'Proceso de clase',
+    title: 'Classroom process',
     ordered: true,
     breakPattern: processBreakPattern
   },
   {
     pattern: /following expressions/i,
-    title: 'Expresiones clave',
+    title: 'Key expressions',
     ordered: false,
     splitAll: true
   },
   {
     pattern: /following questions/i,
-    title: 'Preguntas guia',
+    title: 'Guide questions',
     ordered: false,
     splitAll: true
   }
 ];
+
+const topicTranslations = {
+  'Writing: producción escrita y proceso': 'Writing: written production and process',
+  'Speaking y funciones comunicativas': 'Speaking and communicative functions',
+  'Listening: comprensión oral y diseño de tareas': 'Listening: comprehension and task design',
+  'Reading: comprensión lectora y estrategias': 'Reading: comprehension and strategies',
+  'Evaluación, feedback y gestión del aula': 'Assessment, feedback and classroom management',
+  'Cloze y uso de lengua en contexto': 'Cloze and language use in context'
+};
 
 const normalizeText = (text) => text.replace(/\s+/g, ' ').trim();
 
@@ -36,7 +45,7 @@ const stripExamInstruction = (text) => {
   }
 
   return {
-    note: `Preguntas ${instruction[1].replace(/\band\b/i, 'y')}`,
+    note: `Questions ${instruction[1]}`,
     text: text.slice(instruction[0].length).trim()
   };
 };
@@ -102,7 +111,7 @@ const parseDialogue = (text) => {
 
   return {
     intro: splitIntoParagraphs(dialogueMatch[1]),
-    listTitle: 'Dialogo',
+    listTitle: 'Dialogue',
     listItems: turns,
     ordered: false,
     listStyle: 'dialogue'
@@ -176,7 +185,7 @@ const splitPrompt = (prompt) => {
   };
 };
 
-const LearningTextBlock = ({ text, label = 'Contexto del caso', compact = false }) => {
+const LearningTextBlock = ({ text, label = 'Case context', compact = false }) => {
   const parsedText = parseLearningText(text);
   const ListTag = parsedText.ordered ? 'ol' : 'ul';
 
@@ -224,8 +233,10 @@ const QuestionCard = ({
     <Card className="prep-question-card">
       <Card.Body>
         <div className="d-flex flex-wrap align-items-center gap-2 mb-3">
-          <Badge bg="primary" className="rounded-pill">Pregunta {question.id}</Badge>
-          <Badge bg="light" text="dark" className="rounded-pill">{question.topic}</Badge>
+          <Badge bg="primary" className="rounded-pill">Question {question.id}</Badge>
+          <Badge bg="light" text="dark" className="rounded-pill">
+            {topicTranslations[question.topic] || question.topic}
+          </Badge>
         </div>
 
         {question.stimulus ? (
@@ -233,11 +244,11 @@ const QuestionCard = ({
         ) : null}
 
         {promptParts.context ? (
-          <LearningTextBlock text={promptParts.context} label="Detalle del enunciado" compact />
+          <LearningTextBlock text={promptParts.context} label="Prompt details" compact />
         ) : null}
 
         <div className="prep-question-focus mb-4">
-          <div className="prep-question-focus-label">Pregunta</div>
+          <div className="prep-question-focus-label">Question</div>
           <h4 className="prep-question-title mb-0">{promptParts.questionText}</h4>
         </div>
 
@@ -271,18 +282,16 @@ const QuestionCard = ({
         {showExplanation ? (
           <Alert variant={feedbackVariant} className="mb-0 mt-4 prep-feedback">
             <div className="fw-semibold">
-              {!isAnswered ? `Sin respuesta. Clave correcta: ${question.answer}` : isCorrect ? 'Correcto' : `Clave correcta: ${question.answer}`}
+              {!isAnswered ? `No answer. Correct answer: ${question.answer}` : isCorrect ? 'Correct' : `Correct answer: ${question.answer}`}
             </div>
             <div className="small mb-0">
-              {isAnswered && isCorrect ? 'Tu eleccion coincide con la clave oficial.' : null}
-              {isAnswered && !isCorrect ? `Tu respuesta fue ${selectedAnswer}. Revisa por que la clave oficial apunta a otra alternativa.` : null}
-              {!isAnswered ? 'Esta pregunta quedo pendiente en tu intento.' : null}
+              {isAnswered && isCorrect ? 'Your choice matches the official answer key.' : null}
+              {isAnswered && !isCorrect ? `Your answer was ${selectedAnswer}. Compare it with the official answer and review the prompt.` : null}
+              {!isAnswered ? 'This question was left unanswered in your attempt.' : null}
             </div>
-            {question.explanation ? (
-              <div className="prep-explanation mt-3">
-                <span>Por que:</span> {question.explanation}
-              </div>
-            ) : null}
+            <div className="prep-explanation mt-3">
+              <span>Why:</span> The official answer is {question.answer}: {question.options[question.answer]}.
+            </div>
           </Alert>
         ) : null}
       </Card.Body>

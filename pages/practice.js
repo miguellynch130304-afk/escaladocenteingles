@@ -15,33 +15,27 @@ const normalizeAnswer = (value) => value.trim().toLowerCase();
 const defaultLessonSteps = [
   {
     id: 'examples',
-    title: 'Oraciones del examen',
-    shortTitle: 'Oraciones',
-    description: 'Ejemplos del banco integrado y la funcion que cumple cada estructura.'
+    title: 'Exam-related sentences',
+    shortTitle: 'Sentences',
+    description: 'Examples from the integrated exam bank and the function of each structure.'
   },
   {
     id: 'formulation',
-    title: 'Formulacion de preguntas',
-    shortTitle: 'Preguntas',
-    description: 'Como convertir oraciones base en preguntas gramaticalmente correctas.'
+    title: 'Question formation',
+    shortTitle: 'Questions',
+    description: 'Learn how to turn base sentences into grammatically correct questions.'
   },
   {
     id: 'cloze',
-    title: 'Cloze guiado',
+    title: 'Guided cloze',
     shortTitle: 'Cloze',
-    description: 'Completa espacios y recibe una explicacion inmediata.'
+    description: 'Complete the gaps and receive immediate feedback.'
   },
   {
     id: 'composition',
     title: 'Composition',
     shortTitle: 'Composition',
-    description: 'Usa la estructura para producir un texto breve propio.'
-  },
-  {
-    id: 'exam',
-    title: 'Examen breve',
-    shortTitle: 'Examen',
-    description: 'Cierra con preguntas oficiales relacionadas con el modulo.'
+    description: 'Use the structure to produce your own short text.'
   }
 ];
 
@@ -65,7 +59,12 @@ const lessonStepOverrides = {
   }
 };
 
-const courseModuleIds = ['present-simple', 'present-continuous', 'past-simple'];
+const baseClassModuleIds = ['present-simple', 'present-continuous', 'past-simple'];
+const getModulePhaseIds = (moduleId) => (
+  baseClassModuleIds.includes(moduleId)
+    ? ['base', 'specialized', 'exam']
+    : ['specialized', 'exam']
+);
 
 const Modules = () => {
   const router = useRouter();
@@ -100,18 +99,14 @@ const Modules = () => {
     }
 
     if (requestedModule && grammarModules.some((module) => module.id === requestedModule)) {
-      const hasCoursePhases = courseModuleIds.includes(requestedModule);
-      const stage = hasCoursePhases && ['specialized', 'exam'].includes(requestedStage)
+      const modulePhases = getModulePhaseIds(requestedModule);
+      const stage = modulePhases.includes(requestedStage)
         ? requestedStage
-        : hasCoursePhases
-          ? 'base'
-          : 'specialized';
+        : modulePhases[0];
       setActiveModuleId(requestedModule);
       setModulePhase(stage);
-      if (hasCoursePhases) {
-        const requestedPhaseIndex = { base: 0, specialized: 1, exam: 2 }[stage];
-        setUnlockedPhaseIndex((current) => Math.max(current, requestedPhaseIndex));
-      }
+      const requestedPhaseIndex = modulePhases.indexOf(stage);
+      setUnlockedPhaseIndex((current) => Math.max(current, requestedPhaseIndex));
       setStepIndex(0);
       setCurrentQuestionIndex(0);
       return;
@@ -130,7 +125,7 @@ const Modules = () => {
   const isPresentSimple = activeModule?.id === 'present-simple';
   const isPresentContinuous = activeModule?.id === 'present-continuous';
   const isPastSimple = activeModule?.id === 'past-simple';
-  const hasCoursePhases = isPresentSimple || isPresentContinuous || isPastSimple;
+  const hasBaseClass = isPresentSimple || isPresentContinuous || isPastSimple;
 
   const moduleStats = useMemo(() => {
     return grammarModules.map((module) => {
@@ -166,16 +161,14 @@ const Modules = () => {
   const compositionKey = activeModule?.id;
 
   const startModule = (moduleId) => {
-    const hasPhases = courseModuleIds.includes(moduleId);
+    const firstPhase = getModulePhaseIds(moduleId)[0];
     setActiveModuleId(moduleId);
-    setModulePhase(hasPhases ? 'base' : 'specialized');
+    setModulePhase(firstPhase);
     setUnlockedPhaseIndex(0);
     setStepIndex(0);
     setCurrentQuestionIndex(0);
     router.push(
-      hasPhases
-        ? `/practice?module=${moduleId}&stage=base`
-        : `/practice?module=${moduleId}`,
+      `/practice?module=${moduleId}&stage=${firstPhase}`,
       undefined,
       { shallow: true }
     );
@@ -191,7 +184,11 @@ const Modules = () => {
   };
 
   const openCoursePhase = (phase, unlock = false) => {
-    const phaseIndex = { base: 0, specialized: 1, exam: 2 }[phase];
+    const phaseIndex = getModulePhaseIds(activeModuleId).indexOf(phase);
+    if (phaseIndex < 0) {
+      return;
+    }
+
     if (!unlock && phaseIndex > unlockedPhaseIndex) {
       return;
     }
@@ -662,7 +659,6 @@ const Modules = () => {
           selectedAnswer={selectedAnswer}
           showFeedback={Boolean(selectedAnswer)}
           onSelect={(answer) => setPracticeAnswer(currentQuestion.id, answer)}
-          language={hasCoursePhases ? 'en' : 'es'}
         />
       ) : null}
 
@@ -723,7 +719,7 @@ const Modules = () => {
   };
 
   const renderCoursePhases = () => {
-    if (!hasCoursePhases) {
+    if (!activeModule) {
       return null;
     }
 
@@ -743,7 +739,7 @@ const Modules = () => {
         title: 'Practice Exam',
         description: 'Official-style questions'
       }
-    ];
+    ].filter((phase) => hasBaseClass || phase.id !== 'base');
 
     return (
       <div className="grammar-course-phases">
@@ -834,11 +830,11 @@ const Modules = () => {
         <Col xl={8} lg={8}>
           <Button variant="link" className="px-0 mb-3 grammar-back-link" onClick={backToCatalog}>
             <i className="fe fe-arrow-left me-1"></i>
-            {hasCoursePhases ? 'Back to modules' : 'Volver a modulos'}
+            Back to modules
           </Button>
           <div className="d-flex flex-wrap align-items-center gap-2 mb-2">
             <Badge bg="primary" className="rounded-pill">
-              {hasCoursePhases ? 'Module' : 'Modulo'} {activeModule.order}
+              Module {activeModule.order}
             </Badge>
             <Badge bg="light" text="dark" className="rounded-pill">{activeModule.level}</Badge>
           </div>
@@ -905,18 +901,18 @@ const Modules = () => {
 
           <div className="grammar-lesson-actions">
             <Button variant="light" onClick={() => moveStep(-1)} disabled={stepIndex === 0}>
-              {hasCoursePhases ? 'Previous' : 'Anterior'}
+              Previous
             </Button>
             {stepIndex < activeLessonSteps.length - 1 ? (
               <Button variant="primary" onClick={() => moveStep(1)}>
-                {hasCoursePhases ? 'Next' : 'Siguiente'}
+                Next
               </Button>
             ) : (
               <Button
                 variant="primary"
-                onClick={hasCoursePhases ? () => openCoursePhase('exam', true) : backToCatalog}
+                onClick={() => openCoursePhase('exam', true)}
               >
-                {hasCoursePhases ? 'Continue to Module Practice Exam' : 'Terminar modulo'}
+                Continue to Module Practice Exam
               </Button>
             )}
           </div>
@@ -926,11 +922,11 @@ const Modules = () => {
   );
 
   const renderModule = () => {
-    if (hasCoursePhases && modulePhase === 'base') {
+    if (hasBaseClass && modulePhase === 'base') {
       return renderBaseClass();
     }
 
-    if (hasCoursePhases && modulePhase === 'exam') {
+    if (modulePhase === 'exam') {
       return renderPracticeExamPhase();
     }
 

@@ -2,8 +2,8 @@
 import { supplementalExamQuestions } from 'data/supplementalExamQuestions';
 
 export const examMetadata = {
-  "title": "Simulacro integral de Ingles EBA Avanzado",
-  "examCode": "Banco oficial integrado",
+  "title": "Comprehensive Advanced EBA English Mock Exam",
+  "examCode": "Integrated official bank",
   "totalQuestions": 120,
   "durationMinutes": 360,
   "sourcePdf": "Official exam bank",
@@ -12,31 +12,31 @@ export const examMetadata = {
 
 export const passingThresholds = [
   {
-    "scale": "Segunda escala",
+    "scale": "Second scale",
     "minimum": 72
   },
   {
-    "scale": "Tercera escala",
+    "scale": "Third scale",
     "minimum": 76
   },
   {
-    "scale": "Cuarta escala",
+    "scale": "Fourth scale",
     "minimum": 80
   },
   {
-    "scale": "Quinta escala",
+    "scale": "Fifth scale",
     "minimum": 84
   },
   {
-    "scale": "Sexta escala",
+    "scale": "Sixth scale",
     "minimum": 88
   },
   {
-    "scale": "Septima escala",
+    "scale": "Seventh scale",
     "minimum": 92
   },
   {
-    "scale": "Octava escala",
+    "scale": "Eighth scale",
     "minimum": 92
   }
 ];

@@ -32,9 +32,9 @@ const DefaultDashboardLayout = (props) => {
 				<div className='px-6 border-top py-3'>
 					<Row>
 						<Col sm={6} className='text-center text-sm-start mb-2 mb-sm-0'>
-							<p className='m-0'>Preparacion local EBA Avanzado Ingles</p></Col>
+							<p className='m-0'>Local Advanced EBA English Preparation</p></Col>
 						<Col sm={6} className='text-center text-sm-end'>
-							<p className='m-0'>Fuente: cuadernillo y clave oficial proporcionados</p>
+							<p className='m-0'>Source: supplied official booklet and answer key</p>
 						</Col>
 					</Row>
 				</div>
