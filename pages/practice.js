@@ -10,6 +10,7 @@ import PresentContinuousBaseClass from 'components/grammar/PresentContinuousBase
 import PresentPerfectBaseClass from 'components/grammar/PresentPerfectBaseClass';
 import FutureFormsBaseClass from 'components/grammar/FutureFormsBaseClass';
 import ImperativesBaseClass from 'components/grammar/ImperativesBaseClass';
+import ModalsBaseClass from 'components/grammar/ModalsBaseClass';
 import useExamProgress from 'hooks/useExamProgress';
 import { examQuestions } from 'data/examQuestions';
 import { grammarModules } from 'data/grammarModules';
@@ -63,7 +64,7 @@ const lessonStepOverrides = {
   }
 };
 
-const baseClassModuleIds = ['present-simple', 'present-continuous', 'past-simple', 'past-continuous', 'present-perfect', 'future-forms', 'imperatives'];
+const baseClassModuleIds = ['present-simple', 'present-continuous', 'past-simple', 'past-continuous', 'present-perfect', 'future-forms', 'modals', 'imperatives'];
 const getModulePhaseIds = (moduleId) => (
   baseClassModuleIds.includes(moduleId)
     ? ['base', 'specialized', 'exam']
@@ -132,8 +133,9 @@ const Modules = () => {
   const isPastContinuous = activeModule?.id === 'past-continuous';
   const isPresentPerfect = activeModule?.id === 'present-perfect';
   const isFutureForms = activeModule?.id === 'future-forms';
+  const isModals = activeModule?.id === 'modals';
   const isImperatives = activeModule?.id === 'imperatives';
-  const hasBaseClass = isPresentSimple || isPresentContinuous || isPastSimple || isPastContinuous || isPresentPerfect || isFutureForms || isImperatives;
+  const hasBaseClass = isPresentSimple || isPresentContinuous || isPastSimple || isPastContinuous || isPresentPerfect || isFutureForms || isModals || isImperatives;
 
   const moduleStats = useMemo(() => {
     return grammarModules.map((module) => {
@@ -799,6 +801,11 @@ const Modules = () => {
         />
       ) : isFutureForms ? (
         <FutureFormsBaseClass
+          onBack={backToCatalog}
+          onComplete={() => openCoursePhase('specialized', true)}
+        />
+      ) : isModals ? (
+        <ModalsBaseClass
           onBack={backToCatalog}
           onComplete={() => openCoursePhase('specialized', true)}
         />
