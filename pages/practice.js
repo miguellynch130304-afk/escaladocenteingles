@@ -7,6 +7,7 @@ import PastSimpleBaseClass from 'components/grammar/PastSimpleBaseClass';
 import PastContinuousBaseClass from 'components/grammar/PastContinuousBaseClass';
 import PresentSimpleBaseClass from 'components/grammar/PresentSimpleBaseClass';
 import PresentContinuousBaseClass from 'components/grammar/PresentContinuousBaseClass';
+import PresentPerfectBaseClass from 'components/grammar/PresentPerfectBaseClass';
 import useExamProgress from 'hooks/useExamProgress';
 import { examQuestions } from 'data/examQuestions';
 import { grammarModules } from 'data/grammarModules';
@@ -60,7 +61,7 @@ const lessonStepOverrides = {
   }
 };
 
-const baseClassModuleIds = ['present-simple', 'present-continuous', 'past-simple', 'past-continuous'];
+const baseClassModuleIds = ['present-simple', 'present-continuous', 'past-simple', 'past-continuous', 'present-perfect'];
 const getModulePhaseIds = (moduleId) => (
   baseClassModuleIds.includes(moduleId)
     ? ['base', 'specialized', 'exam']
@@ -127,7 +128,8 @@ const Modules = () => {
   const isPresentContinuous = activeModule?.id === 'present-continuous';
   const isPastSimple = activeModule?.id === 'past-simple';
   const isPastContinuous = activeModule?.id === 'past-continuous';
-  const hasBaseClass = isPresentSimple || isPresentContinuous || isPastSimple || isPastContinuous;
+  const isPresentPerfect = activeModule?.id === 'present-perfect';
+  const hasBaseClass = isPresentSimple || isPresentContinuous || isPastSimple || isPastContinuous || isPresentPerfect;
 
   const moduleStats = useMemo(() => {
     return grammarModules.map((module) => {
@@ -783,6 +785,11 @@ const Modules = () => {
         />
       ) : isPastContinuous ? (
         <PastContinuousBaseClass
+          onBack={backToCatalog}
+          onComplete={() => openCoursePhase('specialized', true)}
+        />
+      ) : isPresentPerfect ? (
+        <PresentPerfectBaseClass
           onBack={backToCatalog}
           onComplete={() => openCoursePhase('specialized', true)}
         />
