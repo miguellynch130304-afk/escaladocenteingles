@@ -8,6 +8,7 @@ import PastContinuousBaseClass from 'components/grammar/PastContinuousBaseClass'
 import PresentSimpleBaseClass from 'components/grammar/PresentSimpleBaseClass';
 import PresentContinuousBaseClass from 'components/grammar/PresentContinuousBaseClass';
 import PresentPerfectBaseClass from 'components/grammar/PresentPerfectBaseClass';
+import FutureFormsBaseClass from 'components/grammar/FutureFormsBaseClass';
 import useExamProgress from 'hooks/useExamProgress';
 import { examQuestions } from 'data/examQuestions';
 import { grammarModules } from 'data/grammarModules';
@@ -61,7 +62,7 @@ const lessonStepOverrides = {
   }
 };
 
-const baseClassModuleIds = ['present-simple', 'present-continuous', 'past-simple', 'past-continuous', 'present-perfect'];
+const baseClassModuleIds = ['present-simple', 'present-continuous', 'past-simple', 'past-continuous', 'present-perfect', 'future-forms'];
 const getModulePhaseIds = (moduleId) => (
   baseClassModuleIds.includes(moduleId)
     ? ['base', 'specialized', 'exam']
@@ -129,7 +130,8 @@ const Modules = () => {
   const isPastSimple = activeModule?.id === 'past-simple';
   const isPastContinuous = activeModule?.id === 'past-continuous';
   const isPresentPerfect = activeModule?.id === 'present-perfect';
-  const hasBaseClass = isPresentSimple || isPresentContinuous || isPastSimple || isPastContinuous || isPresentPerfect;
+  const isFutureForms = activeModule?.id === 'future-forms';
+  const hasBaseClass = isPresentSimple || isPresentContinuous || isPastSimple || isPastContinuous || isPresentPerfect || isFutureForms;
 
   const moduleStats = useMemo(() => {
     return grammarModules.map((module) => {
@@ -790,6 +792,11 @@ const Modules = () => {
         />
       ) : isPresentPerfect ? (
         <PresentPerfectBaseClass
+          onBack={backToCatalog}
+          onComplete={() => openCoursePhase('specialized', true)}
+        />
+      ) : isFutureForms ? (
+        <FutureFormsBaseClass
           onBack={backToCatalog}
           onComplete={() => openCoursePhase('specialized', true)}
         />
