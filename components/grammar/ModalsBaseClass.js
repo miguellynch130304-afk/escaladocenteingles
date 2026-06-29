@@ -263,8 +263,84 @@ const readingBreakdown = [
   }
 ];
 
+const canCannotContexts = [
+  {
+    place: 'In the Church',
+    question: 'What can you do in the church?',
+    examples: [
+      {
+        sentence: 'You cannot smoke in the church.',
+        functionLabel: 'PROHIBITION',
+        tone: 'danger'
+      },
+      {
+        sentence: 'You can send messages.',
+        functionLabel: 'PERMISSION',
+        tone: 'warning'
+      },
+      {
+        sentence: 'You cannot talk on the phone.',
+        functionLabel: 'NO PERMISSION',
+        tone: 'cyan'
+      },
+      {
+        sentence: 'You cannot sleep during mass.',
+        functionLabel: 'IMPOSSIBILITY',
+        tone: 'pink'
+      },
+      {
+        sentence: 'You can watch TikTok.',
+        functionLabel: 'POSSIBILITY',
+        tone: 'blue'
+      },
+      {
+        sentence: 'You can work on your tablet.',
+        functionLabel: 'POSSIBILITY',
+        tone: 'green'
+      }
+    ]
+  },
+  {
+    place: 'In a Plane',
+    question: 'Check the function',
+    examples: [
+      {
+        sentence: 'You cannot smoke.',
+        functionLabel: 'PROHIBITION',
+        tone: 'danger'
+      },
+      {
+        sentence: 'You can watch movies.',
+        functionLabel: 'ABILITY',
+        tone: 'blue'
+      },
+      {
+        sentence: 'You can talk on the phone.',
+        functionLabel: 'NO PERMISSION',
+        tone: 'cyan'
+      },
+      {
+        sentence: 'You cannot sleep all trip.',
+        functionLabel: 'IMPOSSIBILITY',
+        tone: 'pink'
+      },
+      {
+        sentence: 'You can watch the clouds.',
+        functionLabel: 'POSSIBILITY',
+        tone: 'green'
+      },
+      {
+        sentence: 'You can work on your tablet.',
+        functionLabel: 'POSSIBILITY',
+        tone: 'green'
+      }
+    ]
+  }
+];
+
 const slides = [
   { id: 'overview', label: 'Map', title: 'Modals' },
+  { id: 'can-cannot', label: 'Can', title: 'Can / Cannot in Context' },
   { id: 'guided', label: 'Watch', title: 'Recognizing Modal Functions' },
   { id: 'match', label: 'Connect', title: 'Build the Connections' },
   { id: 'obligation', label: 'Obligation', title: 'Obligation and No Obligation' },
@@ -565,6 +641,52 @@ const ModalsBaseClass = ({ onComplete, onBack }) => {
                 <h3>{card.forms}</h3>
                 <blockquote>{card.example}</blockquote>
               </article>
+            ))}
+          </div>
+        </div>
+      );
+    }
+
+    if (slide.id === 'can-cannot') {
+      return (
+        <div className="pc-slide-content">
+          <div className="md-can-resource">
+            <a href="https://www.youtube.com/watch?v=RPDHqfX4PZQ" target="_blank" rel="noreferrer">
+              Video resource: Can / Cannot in context
+            </a>
+          </div>
+          <div className="md-can-layout">
+            {canCannotContexts.map((context) => (
+              <section key={context.place} className="md-can-context">
+                <header>
+                  <div>
+                    <span>{context.place}</span>
+                    <h3>{context.question}</h3>
+                  </div>
+                  <aside>
+                    <strong>MODAL VERBS</strong>
+                    <b>Can</b>
+                    <b>Cannot = Can&apos;t</b>
+                  </aside>
+                </header>
+                <div className="md-can-body">
+                  <ol>
+                    {context.examples.map((item) => (
+                      <li key={item.sentence}>
+                        <span>{item.sentence}</span>
+                        <em className={`is-${item.tone}`}>{item.functionLabel}</em>
+                      </li>
+                    ))}
+                  </ol>
+                  <aside>
+                    <strong>FUNCTIONS</strong>
+                    <span>Ability / Inability</span>
+                    <span>Prohibition</span>
+                    <span>Permission / No permission</span>
+                    <span>Possibility / Impossibility</span>
+                  </aside>
+                </div>
+              </section>
             ))}
           </div>
         </div>
