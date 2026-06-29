@@ -4222,3 +4222,82 @@
     padding: 0.4rem 0.75rem;
   }
 }
+
+// Past Continuous Base Class
+.past-continuous-base {
+  .past-continuous-arrow-board {
+    .ps-match-column,
+    .ps-function-panel {
+      grid-template-rows: auto repeat(4, minmax(58px, 1fr));
+    }
+  }
+
+  .past-continuous-explanation-grid .ps-explanation-card {
+    grid-column: span 3;
+  }
+
+  .past-continuous-reading {
+    p:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.past-continuous-chart {
+  background: #fbfdff;
+  border: 2px solid #8cafe9;
+  border-radius: 16px;
+  box-shadow: 0 12px 28px rgba(72, 104, 152, 0.1);
+  overflow: hidden;
+
+  > div {
+    align-items: center;
+    border-bottom: 1px solid #dbe5f2;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: minmax(140px, 0.65fr) minmax(260px, 1.4fr) minmax(220px, 1fr);
+    padding: 1.25rem 1.5rem;
+  }
+
+  > div:last-child {
+    border-bottom: 0;
+  }
+
+  .is-heading {
+    background: linear-gradient(135deg, #edf5ff, #f5f1ff);
+    color: #28549d;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+  }
+
+  strong {
+    color: #263b5a;
+  }
+
+  span {
+    color: #4b5d73;
+  }
+
+  em {
+    color: #263b5a;
+    font-family: Georgia, serif;
+  }
+}
+
+@media (max-width: 767px) {
+  .past-continuous-base {
+    .past-continuous-explanation-grid .ps-explanation-card {
+      grid-column: auto;
+    }
+  }
+
+  .past-continuous-chart > div {
+    gap: 0.45rem;
+    grid-template-columns: 1fr;
+    padding: 1rem;
+  }
+
+  .past-continuous-chart .is-heading {
+    display: none;
+  }
+}
