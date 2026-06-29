@@ -628,7 +628,7 @@ const grammarModuleLibrary = [
   {
     id: 'gerunds-infinitives',
     order: 10,
-    title: 'Gerunds and Infinitives',
+    title: 'Verbs + gerunds/infinitives',
     level: 'Development',
     focus: 'Verb patterns after prepositions, purpose and repeated exam collocations.',
     examQuestionIds: [48, 52, 57],

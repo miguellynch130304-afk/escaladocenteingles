@@ -6695,3 +6695,235 @@
     padding: 1rem;
   }
 }
+
+// Verbs + Gerunds / Infinitives Base Class
+.gi-base-class {
+  --gi-blue: #4f73c8;
+  --gi-ink: #263b5a;
+  --gi-yellow: #fff36b;
+  --gi-red: #ff2d2d;
+
+  .pc-slide-header {
+    background:
+      radial-gradient(circle at 88% 16%, rgba(79, 115, 200, 0.18), transparent 25%),
+      linear-gradient(120deg, #eef6ff, #fffdf0 58%, #fbfdff);
+  }
+
+  .pc-slide-number {
+    color: rgba(79, 115, 200, 0.15);
+  }
+}
+
+.gi-reading-paper {
+  background: #fff;
+  border: 4px solid var(--gi-blue);
+  border-radius: 10px;
+  box-shadow: 0 16px 34px rgba(64, 97, 165, 0.1);
+  padding: 1.2rem;
+
+  h3 {
+    background: #fff;
+    border: 4px solid var(--gi-blue);
+    color: #111;
+    font-size: clamp(1.4rem, 4vw, 2.2rem);
+    font-weight: 500;
+    margin: 0 0 1rem;
+    padding: 0.55rem;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  p {
+    color: #111;
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    font-weight: 700;
+    line-height: 1.35;
+    margin-bottom: 0.75rem;
+  }
+}
+
+.gi-breakdown-board {
+  background: #fff;
+  border: 4px solid var(--gi-blue);
+  border-radius: 10px;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 0.8fr);
+  padding: 1rem;
+
+  h3 {
+    color: #111;
+    font-size: 1rem;
+    font-weight: 900;
+    margin: 0 0 0.45rem;
+  }
+
+  h3 small,
+  h3 {
+    background: var(--gi-yellow);
+    padding: 0.08rem 0.25rem;
+  }
+
+  ul {
+    color: #111;
+    font-weight: 900;
+    margin: 0;
+    padding-left: 1.2rem;
+  }
+
+  aside {
+    align-items: center;
+    background: var(--gi-blue);
+    color: #fff;
+    display: grid;
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    justify-items: center;
+    padding: 1.2rem;
+    text-align: center;
+  }
+}
+
+.gi-use-board {
+  background: #fff;
+  border: 4px solid var(--gi-red);
+  border-radius: 10px;
+  display: grid;
+  gap: 1rem;
+  padding: 1.2rem;
+
+  article {
+    align-items: center;
+    animation: pc-item-rise 0.4s var(--item-delay) ease both;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: auto minmax(0, 1fr) minmax(230px, 0.5fr);
+    opacity: 0;
+  }
+
+  article > span {
+    color: #111;
+    font-size: 1.1rem;
+    font-weight: 900;
+  }
+
+  strong,
+  p {
+    color: #111;
+    font-size: clamp(1rem, 2vw, 1.15rem);
+    font-weight: 800;
+    margin: 0;
+  }
+
+  .is-wrong {
+    color: #111;
+    opacity: 0.72;
+    text-decoration: line-through;
+    text-decoration-color: var(--gi-red);
+  }
+
+  em {
+    background: #0b1729;
+    border-radius: 8px;
+    color: #fff;
+    font-style: normal;
+    font-weight: 900;
+    padding: 0.75rem;
+    text-align: center;
+    text-transform: uppercase;
+  }
+}
+
+.gi-infinitive-board {
+  article {
+    grid-template-columns: auto minmax(0, 1fr) minmax(260px, 0.58fr);
+  }
+
+  strong {
+    background: #fbfdff;
+    border: 1px solid #d8e4f3;
+    border-radius: 8px;
+    padding: 0.75rem;
+  }
+}
+
+.gi-section-title {
+  background: #fff;
+  border: 4px solid var(--gi-blue);
+  border-radius: 10px;
+  color: #111;
+  font-size: clamp(1.3rem, 4vw, 2rem);
+  font-weight: 500;
+  margin-bottom: 1rem;
+  padding: 0.55rem;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.gi-exercise-list {
+  background: #fff;
+  border: 4px solid var(--gi-blue);
+  border-radius: 10px;
+  display: grid;
+  gap: 0.65rem;
+  padding: 1rem;
+
+  article {
+    background: #fbfdff;
+    border: 1px solid #d8e4f3;
+    border-radius: 12px;
+    display: grid;
+    gap: 0.55rem;
+    padding: 0.8rem;
+  }
+
+  article.is-correct {
+    border-color: #8bd0ae;
+    box-shadow: 0 0 0 3px rgba(60, 175, 113, 0.12);
+  }
+
+  article.is-wrong {
+    border-color: #e89aa2;
+    box-shadow: 0 0 0 3px rgba(222, 70, 83, 0.1);
+  }
+
+  label {
+    color: #111;
+    font-weight: 800;
+  }
+
+  small {
+    color: #667990;
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+}
+
+.gi-result {
+  background: #fff7da;
+  border: 1px solid #f0d978;
+  border-radius: 12px;
+  color: #765d10;
+  padding: 0.8rem 1rem;
+
+  &.is-perfect {
+    background: #eaf8f1;
+    border-color: #93d4b1;
+    color: #1f7c55;
+  }
+}
+
+.gi-writing-model {
+  background: linear-gradient(135deg, #fffdf0, #eef6ff);
+}
+
+.gi-writing-guide {
+  background: linear-gradient(180deg, #f7fbff, #fffdf0);
+}
+
+@media (max-width: 991px) {
+  .gi-breakdown-board,
+  .gi-use-board article,
+  .gi-infinitive-board article {
+    grid-template-columns: 1fr;
+  }
+}
