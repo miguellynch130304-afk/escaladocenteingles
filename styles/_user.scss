@@ -4499,23 +4499,24 @@
 }
 
 .pp-function-panel {
-  background: #0b1729;
-  border: 2px solid #213c68;
+  background: #fff7cf;
+  border: 2px solid #4f73c8;
   border-radius: 12px;
-  box-shadow: 0 12px 24px rgba(18, 31, 55, 0.16);
+  box-shadow: 0 12px 24px rgba(79, 115, 200, 0.12);
   padding: 0.85rem;
 
   .pp-column-label {
-    color: #cfe0ff;
+    color: #4169b5;
   }
 }
 
 .pp-function-item {
   background: #fff;
-  border: 1px solid #dce7f6;
+  border: 1px solid #eadb82;
   color: #e52d35;
   font-style: italic;
   gap: 0.65rem;
+  opacity: 1;
   padding: 0.55rem 0.65rem 0.55rem 1.35rem;
   text-transform: uppercase;
   width: 100%;

@@ -339,7 +339,7 @@ const PresentPerfectMatchingBoard = ({ mode = 'automatic', examples, markerId })
 
         <div className="pp-function-panel">
           <span className="pp-column-label">FUNCTIONS</span>
-          {functionOrder.map((id) => {
+          {functionOrder.map((id, index) => {
             const isUsed = Object.values(connections).includes(id);
             return (
               <button
@@ -350,6 +350,7 @@ const PresentPerfectMatchingBoard = ({ mode = 'automatic', examples, markerId })
                   mode === 'interactive' && selectedSource ? 'is-available' : '',
                   isUsed ? 'is-used' : ''
                 ].filter(Boolean).join(' ')}
+                style={{ '--item-delay': `${0.12 + index * 0.08}s` }}
                 disabled={mode !== 'interactive'}
                 onClick={() => connectTarget(id)}
               >
