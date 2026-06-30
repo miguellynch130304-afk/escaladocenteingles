@@ -110,32 +110,32 @@ const completionItems = [
   {
     prompt: "Ann's hair was dirty. Now it's clean. (wash)",
     answer: 'Ann has washed her hair',
-    functionLabel: 'recent result'
+    functionLabel: 'recently finished action'
   },
   {
     prompt: 'Tom was 80 kg. Now he is 70 kg. (lose weight)',
     answer: 'Tom has lost weight',
-    functionLabel: 'present result'
+    functionLabel: 'past to present'
   },
   {
     prompt: "Bill played football yesterday. Now he can't walk. (break)",
     answer: 'Bill has broken his leg',
-    functionLabel: 'present consequence'
+    functionLabel: 'relevant event'
   },
   {
     prompt: 'My sister is looking for her pen. (lose)',
     answer: 'My sister has lost her pen',
-    functionLabel: 'unfinished result'
+    functionLabel: 'past to present'
   },
   {
     prompt: 'Mary is on holiday in France. (go)',
     answer: 'Mary has gone to France',
-    functionLabel: 'current location/result'
+    functionLabel: 'past to present'
   },
   {
     prompt: "Mr. Hill was in Canada last week. He's back in London now. (be)",
     answer: 'Mr. Hill has been to Canada',
-    functionLabel: 'life experience'
+    functionLabel: 'recently finished event'
   }
 ];
 
@@ -535,7 +535,7 @@ const PresentPerfectBaseClass = ({ onComplete, onBack }) => {
               <span>SPECIFIC</span>
               <h3>When did you ride a bicycle?</h3>
               <p>I rode a bicycle last summer.</p>
-              <strong>Past Simple is required with a finished time.</strong>
+              <strong>Past Simple requires an adverb of time.</strong>
             </div>
           </div>
           <div className="pp-rule-strip">

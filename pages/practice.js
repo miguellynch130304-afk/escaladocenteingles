@@ -13,6 +13,7 @@ import ImperativesBaseClass from 'components/grammar/ImperativesBaseClass';
 import ModalsBaseClass from 'components/grammar/ModalsBaseClass';
 import GerundsInfinitivesBaseClass from 'components/grammar/GerundsInfinitivesBaseClass';
 import HowsQuantifiersBaseClass from 'components/grammar/HowsQuantifiersBaseClass';
+import PerfectTensesBaseClass from 'components/grammar/PerfectTensesBaseClass';
 import useExamProgress from 'hooks/useExamProgress';
 import { examQuestions } from 'data/examQuestions';
 import { grammarModules } from 'data/grammarModules';
@@ -66,7 +67,7 @@ const lessonStepOverrides = {
   }
 };
 
-const baseClassModuleIds = ['present-simple', 'present-continuous', 'past-simple', 'past-continuous', 'present-perfect', 'future-forms', 'modals', 'imperatives', 'gerunds-infinitives', 'determiners'];
+const baseClassModuleIds = ['present-simple', 'present-continuous', 'past-simple', 'past-continuous', 'present-perfect', 'perfect-sequencing', 'future-forms', 'modals', 'imperatives', 'gerunds-infinitives', 'determiners'];
 const getModulePhaseIds = (moduleId) => (
   baseClassModuleIds.includes(moduleId)
     ? ['base', 'specialized', 'exam']
@@ -139,7 +140,8 @@ const Modules = () => {
   const isImperatives = activeModule?.id === 'imperatives';
   const isGerundsInfinitives = activeModule?.id === 'gerunds-infinitives';
   const isHowsQuantifiers = activeModule?.id === 'determiners';
-  const hasBaseClass = isPresentSimple || isPresentContinuous || isPastSimple || isPastContinuous || isPresentPerfect || isFutureForms || isModals || isImperatives || isGerundsInfinitives || isHowsQuantifiers;
+  const isPerfectTenses = activeModule?.id === 'perfect-sequencing';
+  const hasBaseClass = isPresentSimple || isPresentContinuous || isPastSimple || isPastContinuous || isPresentPerfect || isPerfectTenses || isFutureForms || isModals || isImperatives || isGerundsInfinitives || isHowsQuantifiers;
 
   const moduleStats = useMemo(() => {
     return grammarModules.map((module) => {
@@ -825,6 +827,11 @@ const Modules = () => {
         />
       ) : isHowsQuantifiers ? (
         <HowsQuantifiersBaseClass
+          onBack={backToCatalog}
+          onComplete={() => openCoursePhase('specialized', true)}
+        />
+      ) : isPerfectTenses ? (
+        <PerfectTensesBaseClass
           onBack={backToCatalog}
           onComplete={() => openCoursePhase('specialized', true)}
         />

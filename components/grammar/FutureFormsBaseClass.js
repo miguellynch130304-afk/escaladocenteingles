@@ -35,7 +35,7 @@ const formCards = [
     label: 'WILL',
     use: 'Decision at the moment, prediction, or promise',
     structure: 'will + base verb',
-    example: 'I will give you some.'
+    example: 'I will give you some money.'
   },
   {
     label: 'BE GOING TO',

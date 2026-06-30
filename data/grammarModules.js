@@ -352,9 +352,9 @@ const grammarModuleLibrary = [
   {
     id: 'perfect-sequencing',
     order: 6,
-    title: 'Perfect Tenses and Sequencing',
+    title: 'Perfect Tenses',
     level: 'Bridge',
-    focus: 'Present perfect continuous, past perfect and sequence markers.',
+    focus: 'Present, past, and future perfect forms and their functions.',
     examQuestionIds: [31, 40, 58],
     examSentences: [
       {
