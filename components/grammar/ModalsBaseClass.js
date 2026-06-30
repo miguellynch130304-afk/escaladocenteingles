@@ -338,6 +338,102 @@ const canCannotContexts = [
   }
 ];
 
+const pastModalCards = [
+  {
+    form: 'could have + past participle',
+    meaning: 'A past possibility or available option that did not happen.',
+    example: 'Al could have scored one more goal.'
+  },
+  {
+    form: "couldn't have + past participle",
+    meaning: 'Something was impossible in the past, even if someone wanted to do it.',
+    example: "He couldn't have passed because he did not study."
+  },
+  {
+    form: 'should have + past participle',
+    meaning: 'A good past action or decision was not completed: regret or criticism.',
+    example: 'I should have studied harder.'
+  },
+  {
+    form: "shouldn't have + past participle",
+    meaning: 'A past action was a bad idea, but it happened anyway.',
+    example: "I shouldn't have eaten so much cake."
+  },
+  {
+    form: 'would have + past participle',
+    meaning: 'An unreal or unfulfilled past result, intention, or consequence.',
+    example: 'I would have bought the shoes if they had been cheaper.'
+  },
+  {
+    form: "wouldn't have + past participle",
+    meaning: 'An unreal negative past result or a past action someone would have avoided.',
+    example: "I wouldn't have gone if I had known the food was bad."
+  }
+];
+
+const pastModalExercise = [
+  {
+    prompt: "I didn't know you were in the hospital! I ________ visited you if I had known.",
+    options: ['should have', 'would have', 'could have'],
+    answer: 'would have',
+    explanation: 'An imaginary past result caused by the condition “if I had known”.'
+  },
+  {
+    prompt: "The roads were frozen and slippery. You ________ driven so fast; you almost caused an accident.",
+    options: ["shouldn't have", "wouldn't have", "couldn't have"],
+    answer: "shouldn't have",
+    explanation: 'Criticism of a bad past choice. Driving fast was a bad idea.'
+  },
+  {
+    prompt: 'I had enough money for the expensive shoes, so I ________ bought them, but I decided to save instead.',
+    options: ['could have', 'should have', 'would have'],
+    answer: 'could have',
+    explanation: 'A past possibility or available option that was not taken.'
+  },
+  {
+    prompt: 'If you had checked the weather forecast, you ________ brought an umbrella.',
+    options: ['could have', 'should have', 'would have'],
+    answer: 'would have',
+    explanation: 'The imagined result of an unreal past condition.'
+  },
+  {
+    prompt: 'My stomach hurts. I ________ eaten that extra slice of greasy pizza last night.',
+    options: ["shouldn't have", "wouldn't have", "couldn't have"],
+    answer: "shouldn't have",
+    explanation: 'A clear regret about a bad past decision.'
+  },
+  {
+    prompt: "We ________ won the football match if our star player hadn't been injured.",
+    options: ['could have', 'should have', 'would have'],
+    answer: 'would have',
+    explanation: 'An imaginary past result blocked by another event.'
+  },
+  {
+    prompt: 'I am sorry I yelled at you yesterday. I ________ reacted so angrily.',
+    options: ["shouldn't have", "couldn't have", "wouldn't have"],
+    answer: "shouldn't have",
+    explanation: 'An apology and regret about a bad past action.'
+  },
+  {
+    prompt: 'Why did you walk home alone? I ________ called a taxi, but I did not think about it.',
+    options: ['should have', 'would have', 'could have'],
+    answer: 'could have',
+    explanation: 'A missed opportunity or available option.'
+  },
+  {
+    prompt: 'If I had known the movie was three hours long, I ________ gone to the cinema.',
+    options: ["shouldn't have", "wouldn't have", "couldn't have"],
+    answer: "wouldn't have",
+    explanation: 'An imagined negative past result: the speaker would have avoided going.'
+  },
+  {
+    prompt: 'You ________ texted me to say you were late! I waited outside for an hour.',
+    options: ['could have', 'should have', 'would have'],
+    answer: 'should have',
+    explanation: 'Strong criticism because someone failed to do the considerate thing.'
+  }
+];
+
 const slides = [
   { id: 'overview', label: 'Map', title: 'Modals' },
   { id: 'can-cannot', label: 'Can', title: 'Can / Cannot in Context' },
@@ -349,7 +445,12 @@ const slides = [
   { id: 'advice', label: 'Advice', title: 'Recommendations' },
   { id: 'reading', label: 'Read', title: 'Finding Balance in a Modern Workday' },
   { id: 'identify', label: 'Identify', title: 'Identify the Modals from the Reading' },
-  { id: 'writing', label: 'Write', title: 'Writing Task' }
+  { id: 'writing', label: 'Write', title: 'Writing Task' },
+  { id: 'past-overview', label: 'Past', title: 'Past Modals' },
+  { id: 'past-could', label: 'Could', title: 'Could Have / Couldn’t Have' },
+  { id: 'past-should', label: 'Should', title: 'Should Have / Shouldn’t Have' },
+  { id: 'past-would', label: 'Would', title: 'Would Have / Wouldn’t Have' },
+  { id: 'past-practice', label: 'Past Quiz', title: 'Past Modals Exercise' }
 ];
 
 const normalize = (value) => value.trim().toLowerCase().replace(/[.?!]/g, '').replace(/\s+/g, ' ');
@@ -566,10 +667,13 @@ const ModalsBaseClass = ({ onComplete, onBack }) => {
   const [answers, setAnswers] = useState({});
   const [checkedSections, setCheckedSections] = useState({});
   const [writingDraft, setWritingDraft] = useState('');
+  const [pastAnswers, setPastAnswers] = useState({});
+  const [pastChecked, setPastChecked] = useState(false);
 
   const slide = slides[activeSlide];
   const slideProgress = Math.round(((activeSlide + 1) / slides.length) * 100);
   const wordCount = writingDraft.trim() ? writingDraft.trim().split(/\s+/).length : 0;
+  const pastScore = pastModalExercise.filter((item, index) => pastAnswers[index] === item.answer).length;
 
   const getSectionScore = (sectionId) => {
     const section = sectionItems.find((item) => item.id === sectionId);
@@ -625,6 +729,19 @@ const ModalsBaseClass = ({ onComplete, onBack }) => {
       </div>
     );
   };
+
+  const renderPastModalPair = (positiveIndex, negativeIndex) => (
+    <div className="md-past-pair">
+      {[pastModalCards[positiveIndex], pastModalCards[negativeIndex]].map((item, index) => (
+        <article key={item.form} className={index === 0 ? 'is-positive' : 'is-negative'}>
+          <span>{index === 0 ? 'PAST POSSIBILITY / RESULT' : 'NEGATIVE PAST MEANING'}</span>
+          <h3>{item.form}</h3>
+          <p>{item.meaning}</p>
+          <blockquote>{item.example}</blockquote>
+        </article>
+      ))}
+    </div>
+  );
 
   const renderSlide = () => {
     if (slide.id === 'overview') {
@@ -801,6 +918,98 @@ const ModalsBaseClass = ({ onComplete, onBack }) => {
                 </ul>
               </article>
             ))}
+          </div>
+        </div>
+      );
+    }
+
+    if (slide.id === 'past-overview') {
+      return (
+        <div className="pc-slide-content">
+          <div className="md-past-title">
+            <span>COULD HAVE · SHOULD HAVE · WOULD HAVE</span>
+            <h3>modal + have + past participle</h3>
+            <p>Past modals describe missed possibilities, regrets, criticism, and unreal past results.</p>
+          </div>
+          <div className="md-past-overview-grid">
+            {pastModalCards.map((item, index) => (
+              <article key={item.form} style={{ '--item-delay': `${index * 0.08}s` }}>
+                <span>{String(index + 1).padStart(2, '0')}</span>
+                <h4>{item.form}</h4>
+                <p>{item.meaning}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      );
+    }
+
+    if (slide.id === 'past-could') {
+      return (
+        <div className="pc-slide-content">
+          <div className="md-past-formula"><strong>COULD / COULDN’T</strong><span>+</span><strong>HAVE</strong><span>+</span><strong>PAST PARTICIPLE</strong></div>
+          {renderPastModalPair(0, 1)}
+        </div>
+      );
+    }
+
+    if (slide.id === 'past-should') {
+      return (
+        <div className="pc-slide-content">
+          <div className="md-past-formula"><strong>SHOULD / SHOULDN’T</strong><span>+</span><strong>HAVE</strong><span>+</span><strong>PAST PARTICIPLE</strong></div>
+          {renderPastModalPair(2, 3)}
+        </div>
+      );
+    }
+
+    if (slide.id === 'past-would') {
+      return (
+        <div className="pc-slide-content">
+          <div className="md-past-formula"><strong>WOULD / WOULDN’T</strong><span>+</span><strong>HAVE</strong><span>+</span><strong>PAST PARTICIPLE</strong></div>
+          {renderPastModalPair(4, 5)}
+        </div>
+      );
+    }
+
+    if (slide.id === 'past-practice') {
+      return (
+        <div className="pc-slide-content">
+          <div className="md-past-instruction">Choose the past modal that best completes each situation.</div>
+          <div className="md-past-quiz">
+            {pastModalExercise.map((item, index) => {
+              const isCorrect = pastAnswers[index] === item.answer;
+              return (
+                <article key={item.prompt} className={pastChecked ? (isCorrect ? 'is-correct' : 'is-wrong') : ''}>
+                  <span>{index + 1}</span>
+                  <div>
+                    <label>{item.prompt}</label>
+                    <div className="md-past-options">
+                      {item.options.map((option) => (
+                        <Form.Check
+                          type="radio"
+                          key={option}
+                          id={`past-modal-${index}-${option}`}
+                          name={`past-modal-${index}`}
+                          label={option}
+                          checked={pastAnswers[index] === option}
+                          onChange={() => {
+                            setPastAnswers((current) => ({ ...current, [index]: option }));
+                            setPastChecked(false);
+                          }}
+                        />
+                      ))}
+                    </div>
+                    {pastChecked ? (
+                      <small><strong>{isCorrect ? 'Correct.' : `Answer: ${item.answer}.`}</strong> {item.explanation}</small>
+                    ) : null}
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+          <div className="pc-exercise-actions">
+            <Button variant="primary" onClick={() => setPastChecked(true)}>Check answers</Button>
+            {pastChecked ? <div className={`md-result ${pastScore === pastModalExercise.length ? 'is-perfect' : ''}`}><strong>{pastScore}/{pastModalExercise.length} correct.</strong></div> : null}
           </div>
         </div>
       );
