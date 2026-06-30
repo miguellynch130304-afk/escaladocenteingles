@@ -765,10 +765,10 @@ const grammarModuleLibrary = [
   },
   {
     id: 'intensifiers',
-    order: 13,
-    title: 'Intensifiers',
+    order: 16,
+    title: 'Comparatives, Superlatives and Intensifiers',
     level: 'Development',
-    focus: 'So, such, enough, as much as possible and emphasis.',
+    focus: 'Adjective comparison, syllable patterns, maximizers and minimizers.',
     examQuestionIds: [7, 23, 47],
     examSentences: [
       {
@@ -1185,7 +1185,7 @@ const baseGrammarModules = [
   ...grammarModuleLibrary.filter((module) => module.order <= 11),
   questionFormsModule,
   teachingSkillsModule,
-  ...grammarModuleLibrary.filter((module) => ['passive-voice', 'conditionals'].includes(module.id))
+  ...grammarModuleLibrary.filter((module) => ['passive-voice', 'conditionals', 'intensifiers'].includes(module.id))
 ];
 
 export const grammarModules = baseGrammarModules.map((module) => {

@@ -17,6 +17,7 @@ import PerfectTensesBaseClass from 'components/grammar/PerfectTensesBaseClass';
 import PassiveVoiceBaseClass from 'components/grammar/PassiveVoiceBaseClass';
 import TeachingSkillsGlossaryBaseClass from 'components/grammar/TeachingSkillsGlossaryBaseClass';
 import ConditionalsBaseClass from 'components/grammar/ConditionalsBaseClass';
+import ComparativesSuperlativesBaseClass from 'components/grammar/ComparativesSuperlativesBaseClass';
 import useExamProgress from 'hooks/useExamProgress';
 import { examQuestions } from 'data/examQuestions';
 import { grammarModules } from 'data/grammarModules';
@@ -70,7 +71,7 @@ const lessonStepOverrides = {
   }
 };
 
-const baseClassModuleIds = ['present-simple', 'present-continuous', 'past-simple', 'past-continuous', 'present-perfect', 'perfect-sequencing', 'future-forms', 'modals', 'imperatives', 'gerunds-infinitives', 'determiners', 'passive-voice', 'teaching-skills', 'conditionals'];
+const baseClassModuleIds = ['present-simple', 'present-continuous', 'past-simple', 'past-continuous', 'present-perfect', 'perfect-sequencing', 'future-forms', 'modals', 'imperatives', 'gerunds-infinitives', 'determiners', 'passive-voice', 'teaching-skills', 'conditionals', 'intensifiers'];
 const getModulePhaseIds = (moduleId) => (
   baseClassModuleIds.includes(moduleId)
     ? ['base', 'specialized', 'exam']
@@ -147,7 +148,8 @@ const Modules = () => {
   const isPassiveVoice = activeModule?.id === 'passive-voice';
   const isTeachingSkills = activeModule?.id === 'teaching-skills';
   const isConditionals = activeModule?.id === 'conditionals';
-  const hasBaseClass = isPresentSimple || isPresentContinuous || isPastSimple || isPastContinuous || isPresentPerfect || isPerfectTenses || isFutureForms || isModals || isImperatives || isGerundsInfinitives || isHowsQuantifiers || isPassiveVoice || isTeachingSkills || isConditionals;
+  const isComparativesSuperlatives = activeModule?.id === 'intensifiers';
+  const hasBaseClass = isPresentSimple || isPresentContinuous || isPastSimple || isPastContinuous || isPresentPerfect || isPerfectTenses || isFutureForms || isModals || isImperatives || isGerundsInfinitives || isHowsQuantifiers || isPassiveVoice || isTeachingSkills || isConditionals || isComparativesSuperlatives;
 
   const moduleStats = useMemo(() => {
     return grammarModules.map((module) => {
@@ -853,6 +855,11 @@ const Modules = () => {
         />
       ) : isConditionals ? (
         <ConditionalsBaseClass
+          onBack={backToCatalog}
+          onComplete={() => openCoursePhase('specialized', true)}
+        />
+      ) : isComparativesSuperlatives ? (
+        <ComparativesSuperlativesBaseClass
           onBack={backToCatalog}
           onComplete={() => openCoursePhase('specialized', true)}
         />
