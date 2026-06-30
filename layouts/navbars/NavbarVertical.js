@@ -96,12 +96,19 @@ const NavbarVertical = (props) => {
       <SimpleBar style={{ maxHeight: "100vh" }}>
         <div className="nav-scroller">
           <Link href="/" className="navbar-brand prep-sidebar-brand">
-            <span className="prep-sidebar-logo">
+            <span className="prep-sidebar-logo" aria-hidden="true">
               <i className="fe fe-book-open"></i>
+              <span>EP</span>
             </span>
-            <span>
-              English Prep
-              <small>Advanced EBR</small>
+            <span className="prep-sidebar-brand-copy">
+              <small className="prep-sidebar-eyebrow">Teacher preparation</small>
+              <strong>
+                English <em>Prep</em>
+              </strong>
+              <span className="prep-sidebar-level">
+                <i></i>
+                Advanced EBR
+              </span>
             </span>
           </Link>
         </div>
