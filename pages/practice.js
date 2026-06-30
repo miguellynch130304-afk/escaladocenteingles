@@ -14,6 +14,7 @@ import ModalsBaseClass from 'components/grammar/ModalsBaseClass';
 import GerundsInfinitivesBaseClass from 'components/grammar/GerundsInfinitivesBaseClass';
 import HowsQuantifiersBaseClass from 'components/grammar/HowsQuantifiersBaseClass';
 import PerfectTensesBaseClass from 'components/grammar/PerfectTensesBaseClass';
+import PassiveVoiceBaseClass from 'components/grammar/PassiveVoiceBaseClass';
 import useExamProgress from 'hooks/useExamProgress';
 import { examQuestions } from 'data/examQuestions';
 import { grammarModules } from 'data/grammarModules';
@@ -67,7 +68,7 @@ const lessonStepOverrides = {
   }
 };
 
-const baseClassModuleIds = ['present-simple', 'present-continuous', 'past-simple', 'past-continuous', 'present-perfect', 'perfect-sequencing', 'future-forms', 'modals', 'imperatives', 'gerunds-infinitives', 'determiners'];
+const baseClassModuleIds = ['present-simple', 'present-continuous', 'past-simple', 'past-continuous', 'present-perfect', 'perfect-sequencing', 'future-forms', 'modals', 'imperatives', 'gerunds-infinitives', 'determiners', 'passive-voice'];
 const getModulePhaseIds = (moduleId) => (
   baseClassModuleIds.includes(moduleId)
     ? ['base', 'specialized', 'exam']
@@ -141,7 +142,8 @@ const Modules = () => {
   const isGerundsInfinitives = activeModule?.id === 'gerunds-infinitives';
   const isHowsQuantifiers = activeModule?.id === 'determiners';
   const isPerfectTenses = activeModule?.id === 'perfect-sequencing';
-  const hasBaseClass = isPresentSimple || isPresentContinuous || isPastSimple || isPastContinuous || isPresentPerfect || isPerfectTenses || isFutureForms || isModals || isImperatives || isGerundsInfinitives || isHowsQuantifiers;
+  const isPassiveVoice = activeModule?.id === 'passive-voice';
+  const hasBaseClass = isPresentSimple || isPresentContinuous || isPastSimple || isPastContinuous || isPresentPerfect || isPerfectTenses || isFutureForms || isModals || isImperatives || isGerundsInfinitives || isHowsQuantifiers || isPassiveVoice;
 
   const moduleStats = useMemo(() => {
     return grammarModules.map((module) => {
@@ -832,6 +834,11 @@ const Modules = () => {
         />
       ) : isPerfectTenses ? (
         <PerfectTensesBaseClass
+          onBack={backToCatalog}
+          onComplete={() => openCoursePhase('specialized', true)}
+        />
+      ) : isPassiveVoice ? (
+        <PassiveVoiceBaseClass
           onBack={backToCatalog}
           onComplete={() => openCoursePhase('specialized', true)}
         />
