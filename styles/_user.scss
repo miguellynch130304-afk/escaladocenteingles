@@ -8059,3 +8059,211 @@
     grid-column: auto;
   }
 }
+
+// Teaching Skills Glossary Base Class
+.tsg-base-class {
+  --tsg-blue: #4a72c4;
+  --tsg-ink: #203653;
+  --tsg-mint: #e7f8ef;
+
+  .pc-slide-header {
+    background:
+      radial-gradient(circle at 88% 15%, rgba(57, 184, 131, 0.18), transparent 25%),
+      linear-gradient(120deg, #edf5ff, #fffef2 58%, #effbf5);
+  }
+
+  .pc-slide-number {
+    color: rgba(74, 114, 196, 0.14);
+  }
+}
+
+.tsg-controls {
+  align-items: center;
+  background: linear-gradient(100deg, #eaf4ff, #effbf5);
+  border: 1px solid #c9daed;
+  border-radius: 13px;
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  padding: 0.9rem 1rem;
+
+  strong,
+  span {
+    display: block;
+  }
+
+  strong {
+    color: var(--tsg-ink);
+  }
+
+  span {
+    color: #62778e;
+    font-size: 0.85rem;
+  }
+
+  .form-check-label {
+    color: var(--tsg-ink);
+    font-weight: 800;
+    white-space: nowrap;
+  }
+}
+
+.tsg-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  article {
+    animation: pc-item-rise 0.4s var(--item-delay) ease both;
+    background: #fff;
+    border: 1px solid #d1ddeb;
+    border-top: 4px solid var(--tsg-blue);
+    border-radius: 15px;
+    box-shadow: 0 10px 22px rgba(45, 78, 125, 0.07);
+    opacity: 0;
+    padding: 1rem;
+  }
+
+  article:nth-child(even) {
+    border-top-color: #42b989;
+  }
+
+  article > div {
+    align-items: center;
+    display: flex;
+    gap: 0.5rem;
+    justify-content: space-between;
+  }
+
+  article > div span,
+  article > div em {
+    border-radius: 999px;
+    font-size: 0.67rem;
+    font-style: normal;
+    font-weight: 900;
+    padding: 0.3rem 0.55rem;
+    text-transform: uppercase;
+  }
+
+  article > div span {
+    background: #eaf3ff;
+    color: #42638d;
+  }
+
+  article > div em {
+    background: var(--tsg-mint);
+    color: #247454;
+  }
+
+  h3 {
+    color: var(--tsg-ink);
+    font-size: 1.15rem;
+    margin: 0.7rem 0 0.5rem;
+  }
+
+  p {
+    color: #4d657e;
+    line-height: 1.48;
+    margin: 0;
+  }
+
+  small {
+    background: #fff9df;
+    border-left: 3px solid #e7c957;
+    border-radius: 7px;
+    color: #655b38;
+    display: block;
+    line-height: 1.45;
+    margin-top: 0.8rem;
+    padding: 0.65rem;
+  }
+}
+
+.tsg-instruction {
+  background: linear-gradient(100deg, #eaf4ff, #fff8db);
+  border: 1px solid #cadbed;
+  border-radius: 12px;
+  color: var(--tsg-ink);
+  font-weight: 800;
+  margin-bottom: 1rem;
+  padding: 0.85rem 1rem;
+}
+
+.tsg-quiz {
+  display: grid;
+  gap: 0.8rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  article {
+    background: #fff;
+    border: 1px solid #d3dfed;
+    border-radius: 13px;
+    display: grid;
+    gap: 0.65rem;
+    grid-template-columns: 32px minmax(0, 1fr);
+    padding: 0.9rem;
+  }
+
+  article > span {
+    align-items: center;
+    background: var(--tsg-blue);
+    border-radius: 50%;
+    color: #fff;
+    display: flex;
+    font-weight: 900;
+    grid-row: span 3;
+    height: 30px;
+    justify-content: center;
+    width: 30px;
+  }
+
+  label {
+    color: #17263a;
+    font-weight: 800;
+  }
+
+  small {
+    color: #62778e;
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+
+  article.is-correct {
+    background: #f1fff7;
+    border-color: #75c999;
+  }
+
+  article.is-wrong {
+    background: #fff7f7;
+    border-color: #e29ca4;
+  }
+}
+
+.tsg-result {
+  background: #fff8dc;
+  border: 1px solid #e8d376;
+  border-radius: 10px;
+  color: #715b13;
+  padding: 0.7rem 1rem;
+
+  &.is-perfect {
+    background: #eaf9f1;
+    border-color: #8dd0ab;
+    color: #277953;
+  }
+}
+
+@media (max-width: 991px) {
+  .tsg-grid,
+  .tsg-quiz {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 575px) {
+  .tsg-controls {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}

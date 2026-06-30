@@ -1116,7 +1116,7 @@ const teachingSkillsModule = {
   order: 13,
   title: 'Teaching Skills',
   level: 'Teacher Development',
-  focus: 'Instructions, monitoring, feedback and reflective classroom practice.',
+  focus: 'Teaching methodology, classroom terminology, feedback and reflective practice.',
   examQuestionIds: [40, 41, 44],
   examSentences: [
     {
