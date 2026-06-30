@@ -1186,7 +1186,7 @@ const baseGrammarModules = [
   questionFormsModule,
   teachingSkillsModule,
   ...grammarModuleLibrary.filter((module) => ['passive-voice', 'conditionals', 'intensifiers'].includes(module.id))
-];
+].sort((firstModule, secondModule) => firstModule.order - secondModule.order);
 
 export const grammarModules = baseGrammarModules.map((module) => {
   const supplement = moduleExamSupplements[module.id];
