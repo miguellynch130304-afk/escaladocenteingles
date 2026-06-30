@@ -16,6 +16,7 @@ import HowsQuantifiersBaseClass from 'components/grammar/HowsQuantifiersBaseClas
 import PerfectTensesBaseClass from 'components/grammar/PerfectTensesBaseClass';
 import PassiveVoiceBaseClass from 'components/grammar/PassiveVoiceBaseClass';
 import TeachingSkillsGlossaryBaseClass from 'components/grammar/TeachingSkillsGlossaryBaseClass';
+import ConditionalsBaseClass from 'components/grammar/ConditionalsBaseClass';
 import useExamProgress from 'hooks/useExamProgress';
 import { examQuestions } from 'data/examQuestions';
 import { grammarModules } from 'data/grammarModules';
@@ -69,7 +70,7 @@ const lessonStepOverrides = {
   }
 };
 
-const baseClassModuleIds = ['present-simple', 'present-continuous', 'past-simple', 'past-continuous', 'present-perfect', 'perfect-sequencing', 'future-forms', 'modals', 'imperatives', 'gerunds-infinitives', 'determiners', 'passive-voice', 'teaching-skills'];
+const baseClassModuleIds = ['present-simple', 'present-continuous', 'past-simple', 'past-continuous', 'present-perfect', 'perfect-sequencing', 'future-forms', 'modals', 'imperatives', 'gerunds-infinitives', 'determiners', 'passive-voice', 'teaching-skills', 'conditionals'];
 const getModulePhaseIds = (moduleId) => (
   baseClassModuleIds.includes(moduleId)
     ? ['base', 'specialized', 'exam']
@@ -145,7 +146,8 @@ const Modules = () => {
   const isPerfectTenses = activeModule?.id === 'perfect-sequencing';
   const isPassiveVoice = activeModule?.id === 'passive-voice';
   const isTeachingSkills = activeModule?.id === 'teaching-skills';
-  const hasBaseClass = isPresentSimple || isPresentContinuous || isPastSimple || isPastContinuous || isPresentPerfect || isPerfectTenses || isFutureForms || isModals || isImperatives || isGerundsInfinitives || isHowsQuantifiers || isPassiveVoice || isTeachingSkills;
+  const isConditionals = activeModule?.id === 'conditionals';
+  const hasBaseClass = isPresentSimple || isPresentContinuous || isPastSimple || isPastContinuous || isPresentPerfect || isPerfectTenses || isFutureForms || isModals || isImperatives || isGerundsInfinitives || isHowsQuantifiers || isPassiveVoice || isTeachingSkills || isConditionals;
 
   const moduleStats = useMemo(() => {
     return grammarModules.map((module) => {
@@ -846,6 +848,11 @@ const Modules = () => {
         />
       ) : isTeachingSkills ? (
         <TeachingSkillsGlossaryBaseClass
+          onBack={backToCatalog}
+          onComplete={() => openCoursePhase('specialized', true)}
+        />
+      ) : isConditionals ? (
+        <ConditionalsBaseClass
           onBack={backToCatalog}
           onComplete={() => openCoursePhase('specialized', true)}
         />

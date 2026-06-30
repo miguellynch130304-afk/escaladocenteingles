@@ -904,9 +904,9 @@ const grammarModuleLibrary = [
   {
     id: 'conditionals',
     order: 15,
-    title: 'Conditionals and Cause',
+    title: 'Conditionals',
     level: 'Complex',
-    focus: 'If, even if, since and hypothetical results.',
+    focus: 'Zero, first, second, and third conditional forms and meanings.',
     examQuestionIds: [50, 51, 59],
     examSentences: [
       {
@@ -1184,7 +1184,8 @@ const teachingSkillsModule = {
 const baseGrammarModules = [
   ...grammarModuleLibrary.filter((module) => module.order <= 11),
   questionFormsModule,
-  teachingSkillsModule
+  teachingSkillsModule,
+  ...grammarModuleLibrary.filter((module) => ['passive-voice', 'conditionals'].includes(module.id))
 ];
 
 export const grammarModules = baseGrammarModules.map((module) => {
