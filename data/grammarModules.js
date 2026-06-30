@@ -697,9 +697,9 @@ const grammarModuleLibrary = [
   {
     id: 'determiners',
     order: 11,
-    title: 'Determiners and Quantifiers',
+    title: 'The hows and quantifiers',
     level: 'Development',
-    focus: 'Articles, demonstratives, all/some/more and noun groups.',
+    focus: 'How questions, measurements, and quantifiers for count and non-count nouns.',
     examQuestionIds: [47, 48, 51],
     examSentences: [
       {
