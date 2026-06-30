@@ -1,4 +1,5 @@
 import { historicalModuleExamSupplements } from 'data/historicalModuleExamSupplements';
+import { legacyModuleExamSupplements } from 'data/legacyModuleExamSupplements';
 
 const baseModuleExamSupplements = {
   'present-simple': {
@@ -200,19 +201,21 @@ const baseModuleExamSupplements = {
 
 const moduleIds = [...new Set([
   ...Object.keys(baseModuleExamSupplements),
-  ...Object.keys(historicalModuleExamSupplements)
+  ...Object.keys(historicalModuleExamSupplements),
+  ...Object.keys(legacyModuleExamSupplements)
 ])];
 
 export const moduleExamSupplements = Object.fromEntries(
   moduleIds.map((moduleId) => {
     const base = baseModuleExamSupplements[moduleId] || { questionIds: [], examSentences: [] };
     const historical = historicalModuleExamSupplements[moduleId] || { questionIds: [], examSentences: [] };
+    const legacy = legacyModuleExamSupplements[moduleId] || { questionIds: [], examSentences: [] };
 
     return [
       moduleId,
       {
-        questionIds: [...new Set([...base.questionIds, ...historical.questionIds])],
-        examSentences: [...base.examSentences, ...historical.examSentences]
+        questionIds: [...new Set([...base.questionIds, ...historical.questionIds, ...legacy.questionIds])],
+        examSentences: [...base.examSentences, ...historical.examSentences, ...legacy.examSentences]
       }
     ];
   })

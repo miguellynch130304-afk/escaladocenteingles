@@ -1,12 +1,13 @@
 // Generated from the provided exam PDFs. Keep this file ASCII-only for portability.
 import { supplementalExamQuestions } from 'data/supplementalExamQuestions';
 import { historicalExamQuestions } from 'data/historicalExamQuestions';
+import { legacyExamQuestions } from 'data/legacyExamQuestions';
 
 export const examMetadata = {
   "title": "Comprehensive Advanced EBA English Mock Exam",
   "examCode": "Integrated official bank",
-  "totalQuestions": 180,
-  "durationMinutes": 540,
+  "totalQuestions": 240,
+  "durationMinutes": 720,
   "sourcePdf": "Official exam bank",
   "answerKeyPdf": "Official answer key"
 };
@@ -1064,7 +1065,8 @@ const normalizeQuestionSource = (question) => ({
 export const examQuestions = [
   ...primaryExamQuestions.map(normalizeQuestionSource),
   ...supplementalExamQuestions.map(normalizeQuestionSource),
-  ...historicalExamQuestions.map(normalizeQuestionSource)
+  ...historicalExamQuestions.map(normalizeQuestionSource),
+  ...legacyExamQuestions.map(normalizeQuestionSource)
 ];
 
 export const answerKey = examQuestions.reduce((acc, question) => {
