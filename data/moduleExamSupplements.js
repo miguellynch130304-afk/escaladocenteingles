@@ -1,4 +1,6 @@
-export const moduleExamSupplements = {
+import { historicalModuleExamSupplements } from 'data/historicalModuleExamSupplements';
+
+const baseModuleExamSupplements = {
   'present-simple': {
     questionIds: [80, 109],
     examSentences: [
@@ -195,3 +197,23 @@ export const moduleExamSupplements = {
     ]
   }
 };
+
+const moduleIds = [...new Set([
+  ...Object.keys(baseModuleExamSupplements),
+  ...Object.keys(historicalModuleExamSupplements)
+])];
+
+export const moduleExamSupplements = Object.fromEntries(
+  moduleIds.map((moduleId) => {
+    const base = baseModuleExamSupplements[moduleId] || { questionIds: [], examSentences: [] };
+    const historical = historicalModuleExamSupplements[moduleId] || { questionIds: [], examSentences: [] };
+
+    return [
+      moduleId,
+      {
+        questionIds: [...new Set([...base.questionIds, ...historical.questionIds])],
+        examSentences: [...base.examSentences, ...historical.examSentences]
+      }
+    ];
+  })
+);
