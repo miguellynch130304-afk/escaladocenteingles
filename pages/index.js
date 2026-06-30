@@ -92,7 +92,7 @@ const Home = () => {
           <Row className="align-items-center">
             <Col xl={7} lg={8}>
               <Badge bg="light" text="dark" className="mb-3 rounded-pill">{examMetadata.examCode}</Badge>
-              <h1 className="text-white mb-3">Advanced EBA English Preparation</h1>
+              <h1 className="text-white mb-3">Advanced EBR English Preparation</h1>
               <p className="text-white-75 mb-4 prep-hero-copy">
                 Grammar modules, guided cloze practice, composition, and a {examMetadata.totalQuestions}-question full mock exam with an official answer key.
               </p>

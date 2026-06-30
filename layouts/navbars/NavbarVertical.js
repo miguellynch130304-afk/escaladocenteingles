@@ -101,7 +101,7 @@ const NavbarVertical = (props) => {
             </span>
             <span>
               English Prep
-              <small>Advanced EBA</small>
+              <small>Advanced EBR</small>
             </span>
           </Link>
         </div>

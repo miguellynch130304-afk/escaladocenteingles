@@ -4,7 +4,7 @@ import { historicalExamQuestions } from 'data/historicalExamQuestions';
 import { legacyExamQuestions } from 'data/legacyExamQuestions';
 
 export const examMetadata = {
-  "title": "Comprehensive Advanced EBA English Mock Exam",
+  "title": "Comprehensive Advanced EBR English Mock Exam",
   "examCode": "Integrated official bank",
   "totalQuestions": 240,
   "durationMinutes": 720,

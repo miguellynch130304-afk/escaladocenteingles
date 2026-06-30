@@ -13,9 +13,9 @@ import DefaultDashboardLayout from 'layouts/DefaultDashboardLayout';
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
   const pageURL = `${process.env.baseURL || 'http://localhost:3000'}${router.pathname}`;
-  const title = "Advanced EBA English Preparation";
-  const description = "Grammar modules and an integrated full mock exam for Advanced EBA English preparation.";
-  const keywords = "Advanced EBA English, promotion exam, grammar modules, mock exam, teacher preparation"
+  const title = "Advanced EBR English Preparation";
+  const description = "Grammar modules and an integrated full mock exam for Advanced EBR English preparation.";
+  const keywords = "Advanced EBR English, promotion exam, grammar modules, mock exam, teacher preparation"
 
   // Identify the layout, which will be applied conditionally
   const Layout = Component.Layout || (router.pathname.includes('dashboard') ? 
