@@ -3,8 +3,10 @@ import Link from 'next/link';
 import { Alert, Badge, Button, ButtonGroup, Card, Col, Container, ProgressBar, Row } from 'react-bootstrap';
 import QuestionCard from 'components/exam/QuestionCard';
 import ScoreSummary from 'components/exam/ScoreSummary';
-import useExamProgress, { calculateScore, countAnswered } from 'hooks/useExamProgress';
+import { useAuth } from 'components/auth/AuthProvider';
+import useExamProgress from 'hooks/useExamProgress';
 import { examMetadata, examQuestions } from 'data/examQuestions';
+import { FREE_MOCK_QUESTION_COUNT, getAccessibleMockQuestions } from 'data/accessPlans';
 
 const formatTime = (seconds) => {
   const safeSeconds = Math.max(0, seconds);
@@ -15,6 +17,7 @@ const formatTime = (seconds) => {
 };
 
 const Exam = () => {
+  const { isPremium } = useAuth();
   const {
     progress,
     resetExam,
@@ -25,17 +28,36 @@ const Exam = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [now, setNow] = useState(Date.now());
 
-  const totalSeconds = examMetadata.durationMinutes * 60;
+  const availableQuestions = useMemo(
+    () => getAccessibleMockQuestions(examQuestions, isPremium),
+    [isPremium]
+  );
+  const availableMinutes = isPremium
+    ? examMetadata.durationMinutes
+    : Math.ceil((examMetadata.durationMinutes / examQuestions.length) * FREE_MOCK_QUESTION_COUNT);
+  const totalSeconds = availableMinutes * 60;
   const isStarted = Boolean(progress.examStartedAt) && !progress.examFinishedAt;
   const isFinished = Boolean(progress.examFinishedAt);
   const elapsedSeconds = progress.examStartedAt ? Math.floor((now - progress.examStartedAt) / 1000) : 0;
   const remainingSeconds = isStarted ? Math.max(0, totalSeconds - elapsedSeconds) : totalSeconds;
-  const currentQuestion = examQuestions[currentIndex];
-  const selectedAnswer = progress.exam[currentQuestion.id];
+  const currentQuestion = availableQuestions[currentIndex];
+  const selectedAnswer = currentQuestion ? progress.exam[currentQuestion.id] : undefined;
 
-  const examScore = useMemo(() => calculateScore(progress.exam), [progress.exam]);
-  const answered = useMemo(() => countAnswered(progress.exam), [progress.exam]);
-  const answeredPercent = Math.round((answered / examQuestions.length) * 100);
+  const examScore = useMemo(
+    () => availableQuestions.filter((question) => progress.exam[question.id] === question.answer).length,
+    [availableQuestions, progress.exam]
+  );
+  const answered = useMemo(
+    () => availableQuestions.filter((question) => Boolean(progress.exam[question.id])).length,
+    [availableQuestions, progress.exam]
+  );
+  const answeredPercent = Math.round((answered / availableQuestions.length) * 100);
+
+  useEffect(() => {
+    if (currentIndex >= availableQuestions.length) {
+      setCurrentIndex(0);
+    }
+  }, [availableQuestions.length, currentIndex]);
 
   useEffect(() => {
     if (!isStarted) {
@@ -55,7 +77,7 @@ const Exam = () => {
   const moveQuestion = (direction) => {
     setCurrentIndex((current) => {
       const next = current + direction;
-      return Math.min(Math.max(next, 0), examQuestions.length - 1);
+      return Math.min(Math.max(next, 0), availableQuestions.length - 1);
     });
   };
 
@@ -66,11 +88,19 @@ const Exam = () => {
           <Col xl={8} lg={10}>
             <Card className="prep-start-card">
               <Card.Body className="p-6">
-                <Badge bg="primary" className="mb-3 rounded-pill">Full mock exam</Badge>
+                <Badge bg="primary" className="mb-3 rounded-pill">
+                  {isPremium ? 'Full mock exam' : 'Free mock exam'}
+                </Badge>
                 <h1 className="mb-3">{examMetadata.title}</h1>
                 <p className="text-muted mb-4">
-                  {examMetadata.totalQuestions} questions, {examMetadata.durationMinutes} minutes, and scoring with the official answer key.
+                  {availableQuestions.length} questions, {availableMinutes} minutes, and scoring with the official answer key.
                 </p>
+                {!isPremium ? (
+                  <Alert variant="info">
+                    The Free plan includes {FREE_MOCK_QUESTION_COUNT} questions.
+                    Premium unlocks all {examMetadata.totalQuestions} questions and the complete answer review.
+                  </Alert>
+                ) : null}
                 <div className="d-flex flex-wrap gap-2">
                   <Button variant="primary" onClick={startExam}>
                     Start mock exam
@@ -78,6 +108,11 @@ const Exam = () => {
                   <Button as={Link} href="/practice" variant="light">
                     Modules
                   </Button>
+                  {!isPremium ? (
+                    <Button as={Link} href="/upgrade?source=exam" variant="outline-primary">
+                      Unlock full exam
+                    </Button>
+                  ) : null}
                 </div>
               </Card.Body>
             </Card>
@@ -110,7 +145,7 @@ const Exam = () => {
               title="Mock exam score"
               score={examScore}
               answered={answered}
-              total={examQuestions.length}
+              total={availableQuestions.length}
             />
           </Col>
           <Col xl={7} lg={6}>
@@ -120,7 +155,7 @@ const Exam = () => {
               </Card.Header>
               <Card.Body>
                 <div className="prep-question-nav">
-                  {examQuestions.map((question, index) => {
+                  {availableQuestions.map((question, index) => {
                     const answer = progress.exam[question.id];
                     const isCorrect = answer === question.answer;
                     return (
@@ -157,7 +192,7 @@ const Exam = () => {
           <h1 className="mb-2">Final preparation exam</h1>
           <div className="d-flex flex-wrap gap-3 text-muted">
             <span><i className="fe fe-clock me-1"></i>{formatTime(remainingSeconds)}</span>
-            <span><i className="fe fe-check-circle me-1"></i>{answered}/{examQuestions.length}</span>
+            <span><i className="fe fe-check-circle me-1"></i>{answered}/{availableQuestions.length}</span>
             <span><i className="fe fe-target me-1"></i>baseline target 72</span>
           </div>
         </Col>
@@ -181,11 +216,11 @@ const Exam = () => {
               <Button variant="light" onClick={() => moveQuestion(-1)} disabled={currentIndex === 0}>
                 Previous
               </Button>
-              <Button variant="light" onClick={() => moveQuestion(1)} disabled={currentIndex === examQuestions.length - 1}>
+              <Button variant="light" onClick={() => moveQuestion(1)} disabled={currentIndex === availableQuestions.length - 1}>
                 Next
               </Button>
             </ButtonGroup>
-            <span className="text-muted small">Question {currentIndex + 1} of {examQuestions.length}</span>
+            <span className="text-muted small">Question {currentIndex + 1} of {availableQuestions.length}</span>
           </div>
         </Col>
 
@@ -212,7 +247,7 @@ const Exam = () => {
             </Card.Header>
             <Card.Body>
               <div className="prep-question-nav">
-                {examQuestions.map((question, index) => (
+                {availableQuestions.map((question, index) => (
                   <button
                     type="button"
                     key={question.id}

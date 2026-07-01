@@ -4,8 +4,11 @@ import Link from 'next/link';
 import { Accordion, Badge, Button, ButtonGroup, Card, Col, Container, Row } from 'react-bootstrap';
 import QuestionCard from 'components/exam/QuestionCard';
 import ScoreSummary from 'components/exam/ScoreSummary';
-import useExamProgress, { calculateScore, countAnswered } from 'hooks/useExamProgress';
+import { useAuth } from 'components/auth/AuthProvider';
+import useExamProgress from 'hooks/useExamProgress';
 import { examQuestions } from 'data/examQuestions';
+import { grammarModules } from 'data/grammarModules';
+import { FREE_MODULE_IDS, getAccessibleMockQuestions } from 'data/accessPlans';
 
 const filters = [
   { id: 'all', label: 'All' },
@@ -16,6 +19,7 @@ const filters = [
 
 const Review = () => {
   const router = useRouter();
+  const { isPremium } = useAuth();
   const { progress } = useExamProgress();
   const [mode, setMode] = useState('practice');
   const [filter, setFilter] = useState('wrong');
@@ -27,16 +31,38 @@ const Review = () => {
   }, [router.query.mode]);
 
   const answers = mode === 'exam' ? progress.exam : progress.practice;
-  const score = useMemo(() => calculateScore(answers), [answers]);
-  const answered = useMemo(() => countAnswered(answers), [answers]);
+  const freePracticeQuestionIds = useMemo(() => new Set(
+    grammarModules
+      .filter((module) => FREE_MODULE_IDS.includes(module.id))
+      .flatMap((module) => module.examQuestionIds)
+  ), []);
+  const visibleQuestions = useMemo(() => {
+    if (isPremium) {
+      return examQuestions;
+    }
+
+    if (mode === 'exam') {
+      return getAccessibleMockQuestions(examQuestions, false);
+    }
+
+    return examQuestions.filter((question) => freePracticeQuestionIds.has(question.id));
+  }, [freePracticeQuestionIds, isPremium, mode]);
+  const score = useMemo(
+    () => visibleQuestions.filter((question) => answers[question.id] === question.answer).length,
+    [answers, visibleQuestions]
+  );
+  const answered = useMemo(
+    () => visibleQuestions.filter((question) => Boolean(answers[question.id])).length,
+    [answers, visibleQuestions]
+  );
 
   const rows = useMemo(() => {
-    return examQuestions.map((question) => {
+    return visibleQuestions.map((question) => {
       const selectedAnswer = answers[question.id];
       const status = !selectedAnswer ? 'unanswered' : selectedAnswer === question.answer ? 'correct' : 'wrong';
       return { question, selectedAnswer, status };
     });
-  }, [answers]);
+  }, [answers, visibleQuestions]);
 
   const filteredRows = rows.filter((row) => {
     if (filter === 'all') {
@@ -57,6 +83,12 @@ const Review = () => {
           <Badge bg="primary" className="mb-3 rounded-pill">Review</Badge>
           <h1 className="mb-2">Answer map</h1>
           <p className="text-muted mb-0">Compare your saved answers with the official answer key.</p>
+          {!isPremium ? (
+            <div className="free-access-summary mt-3">
+              <i className="fe fe-lock"></i>
+              <span>Your review is limited to the questions included in the Free plan.</span>
+            </div>
+          ) : null}
         </Col>
         <Col lg={4} className="text-lg-end mt-4 mt-lg-0">
           <ButtonGroup>
@@ -72,7 +104,7 @@ const Review = () => {
             title={mode === 'exam' ? 'Mock exam' : 'Modules'}
             score={score}
             answered={answered}
-            total={examQuestions.length}
+            total={visibleQuestions.length}
           />
         </Col>
 

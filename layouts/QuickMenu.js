@@ -6,7 +6,8 @@ import { useAuth } from 'components/auth/AuthProvider';
 const quickLinks = [
   { href: '/practice', icon: 'book-open', label: 'Practice' },
   { href: '/exam', icon: 'clock', label: 'Mock exam' },
-  { href: '/review', icon: 'check-square', label: 'Review' }
+  { href: '/review', icon: 'check-square', label: 'Review' },
+  { href: '/upgrade', icon: 'star', label: 'Premium access' }
 ];
 
 const QuickMenu = () => {

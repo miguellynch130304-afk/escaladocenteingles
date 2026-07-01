@@ -22,9 +22,13 @@ export const DashboardMenu = [
     id: uuid(),
     title: 'Full mock exam',
     icon: 'clock',
-    badge: '360m',
-    badgecolor: 'primary',
     link: '/exam'
+  },
+  {
+    id: uuid(),
+    title: 'Premium access',
+    icon: 'star',
+    link: '/upgrade'
   },
   {
     id: uuid(),

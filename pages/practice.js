@@ -18,9 +18,11 @@ import PassiveVoiceBaseClass from 'components/grammar/PassiveVoiceBaseClass';
 import ModuleGlossary from 'components/grammar/ModuleGlossary';
 import ConditionalsBaseClass from 'components/grammar/ConditionalsBaseClass';
 import ComparativesSuperlativesBaseClass from 'components/grammar/ComparativesSuperlativesBaseClass';
+import { useAuth } from 'components/auth/AuthProvider';
 import useExamProgress from 'hooks/useExamProgress';
 import { examQuestions } from 'data/examQuestions';
 import { grammarModules } from 'data/grammarModules';
+import { canAccessModule, FREE_MODULE_IDS } from 'data/accessPlans';
 
 const normalizeAnswer = (value) => value.trim().toLowerCase();
 
@@ -80,6 +82,7 @@ const getModulePhaseIds = (moduleId) => (
 
 const Modules = () => {
   const router = useRouter();
+  const { isPremium } = useAuth();
   const { progress, resetPractice, setPracticeAnswer } = useExamProgress();
   const [activeModuleId, setActiveModuleId] = useState(null);
   const [stepIndex, setStepIndex] = useState(0);
@@ -111,6 +114,11 @@ const Modules = () => {
     }
 
     if (requestedModule && grammarModules.some((module) => module.id === requestedModule)) {
+      if (!canAccessModule(requestedModule, isPremium)) {
+        router.replace(`/upgrade?source=module&module=${encodeURIComponent(requestedModule)}`);
+        return;
+      }
+
       const modulePhases = getModulePhaseIds(requestedModule);
       const stage = modulePhases.includes(requestedStage)
         ? requestedStage
@@ -131,7 +139,7 @@ const Modules = () => {
       setStepIndex(0);
       setCurrentQuestionIndex(0);
     }
-  }, [router.asPath, router.isReady, router.query.module, router.query.stage]);
+  }, [isPremium, router, router.asPath, router.isReady, router.query.module, router.query.stage]);
 
   const activeModule = grammarModules.find((module) => module.id === activeModuleId);
   const isPresentSimple = activeModule?.id === 'present-simple';
@@ -157,9 +165,16 @@ const Modules = () => {
       const correct = moduleQuestions.filter((question) => progress.practice[question.id] === question.answer).length;
       const percent = moduleQuestions.length ? Math.round((answered / moduleQuestions.length) * 100) : 0;
 
-      return { ...module, answered, correct, total: moduleQuestions.length, percent };
+      return {
+        ...module,
+        answered,
+        correct,
+        total: moduleQuestions.length,
+        percent,
+        locked: !canAccessModule(module.id, isPremium)
+      };
     });
-  }, [progress.practice]);
+  }, [isPremium, progress.practice]);
 
   const activeStats = activeModule ? moduleStats.find((module) => module.id === activeModule.id) : null;
 
@@ -184,6 +199,11 @@ const Modules = () => {
   const compositionKey = activeModule?.id;
 
   const startModule = (moduleId) => {
+    if (!canAccessModule(moduleId, isPremium)) {
+      router.push(`/upgrade?source=module&module=${encodeURIComponent(moduleId)}`);
+      return;
+    }
+
     const firstPhase = getModulePhaseIds(moduleId)[0];
     setActiveModuleId(moduleId);
     setModulePhase(firstPhase);
@@ -271,6 +291,14 @@ const Modules = () => {
           <p className="text-muted mb-0">
             Each module combines a guided class, exam-focused practice, writing, and a short module test.
           </p>
+          {!isPremium ? (
+            <div className="free-access-summary mt-3">
+              <i className="fe fe-unlock"></i>
+              <span>
+                Your Free plan includes modules 1–{FREE_MODULE_IDS.length}. Upgrade once to unlock the complete course.
+              </span>
+            </div>
+          ) : null}
         </Col>
         <Col xl={4} lg={3} className="text-lg-end mt-4 mt-lg-0">
           <Button as={Link} href="/exam" variant="outline-primary">
@@ -282,11 +310,18 @@ const Modules = () => {
       <Row className="g-4">
         {moduleStats.map((module) => (
           <Col xxl={3} xl={4} md={6} key={module.id}>
-            <Card className="grammar-catalog-card h-100">
+            <Card className={`grammar-catalog-card h-100 ${module.locked ? 'is-premium-locked' : ''}`}>
               <Card.Body>
                 <div className="d-flex justify-content-between align-items-start gap-3 mb-4">
                   <span className="grammar-catalog-order">{module.order}</span>
-                  <Badge bg="light" text="dark" className="rounded-pill">{module.level}</Badge>
+                  {module.locked ? (
+                    <Badge bg="warning" text="dark" className="rounded-pill">
+                      <i className="fe fe-lock me-1"></i>
+                      Premium
+                    </Badge>
+                  ) : (
+                    <Badge bg="light" text="dark" className="rounded-pill">{module.level}</Badge>
+                  )}
                 </div>
                 <h3>{module.title}</h3>
                 <p>{module.focus}</p>
@@ -295,8 +330,12 @@ const Modules = () => {
                   <span>{module.percent}%</span>
                 </div>
                 <ProgressBar now={module.percent} className="mb-4" />
-                <Button variant="primary" className="w-100" onClick={() => startModule(module.id)}>
-                  Start module
+                <Button
+                  variant={module.locked ? 'outline-primary' : 'primary'}
+                  className="w-100"
+                  onClick={() => startModule(module.id)}
+                >
+                  {module.locked ? 'Unlock full access' : 'Start module'}
                 </Button>
               </Card.Body>
             </Card>

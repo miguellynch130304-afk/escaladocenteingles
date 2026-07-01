@@ -8,8 +8,13 @@ import {
 
 // import sub components
 import QuickMenu from 'layouts/QuickMenu';
+import { useAuth } from 'components/auth/AuthProvider';
+import { FREE_MOCK_QUESTION_COUNT, FULL_MOCK_QUESTION_COUNT } from 'data/accessPlans';
 
 const NavbarTop = (props) => {
+	const { isPremium } = useAuth();
+	const questionCount = isPremium ? FULL_MOCK_QUESTION_COUNT : FREE_MOCK_QUESTION_COUNT;
+
 	return (
 		<Navbar expanded="lg" className="navbar-classic navbar navbar-expand-lg">
 			<div className='d-flex justify-content-between w-100'>
@@ -22,8 +27,14 @@ const NavbarTop = (props) => {
 						<Menu size="18px" />
 					</button>
 					<div className="ms-lg-3 d-none d-md-none d-lg-block">
-						<Badge bg="light" text="dark" className="rounded-pill">Integrated bank</Badge>
-						<span className="text-muted ms-2 small">120 official questions</span>
+						<Badge
+							bg={isPremium ? 'warning' : 'light'}
+							text="dark"
+							className="rounded-pill"
+						>
+							{isPremium ? 'Premium' : 'Free plan'}
+						</Badge>
+						<span className="text-muted ms-2 small">{questionCount} Mock Exam questions</span>
 					</div>
 				</div>
 				{/* Quick Menu */}
