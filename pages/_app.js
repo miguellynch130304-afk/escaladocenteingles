@@ -9,6 +9,7 @@ import 'styles/theme.scss';
 
 // import default layouts
 import DefaultDashboardLayout from 'layouts/DefaultDashboardLayout';
+import AuthProvider from 'components/auth/AuthProvider';
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
@@ -40,9 +41,11 @@ function MyApp({ Component, pageProps }) {
           site_name: process.env.siteName
         }}
       />
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
+        <AuthProvider>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </AuthProvider>
     </SSRProvider>
   )
 }
