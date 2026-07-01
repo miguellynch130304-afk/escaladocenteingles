@@ -12,11 +12,11 @@ const quickLinks = [
 
 const QuickMenu = () => {
   const router = useRouter();
-  const { signOut } = useAuth();
+  const { signOut, user } = useAuth();
 
   const handleSignOut = async () => {
     await signOut();
-    router.replace('/authentication/sign-in');
+    router.replace('/');
   };
 
   return (
@@ -28,17 +28,30 @@ const QuickMenu = () => {
           </Link>
         </li>
       ))}
-      <li className="ms-2">
-        <button
-          type="button"
-          className="btn btn-light btn-icon rounded-circle text-muted"
-          title="Sign out"
-          aria-label="Sign out"
-          onClick={handleSignOut}
-        >
-          <i className="fe fe-log-out"></i>
-        </button>
-      </li>
+      {user ? (
+        <li className="ms-2">
+          <button
+            type="button"
+            className="btn btn-light btn-icon rounded-circle text-muted"
+            title="Sign out"
+            aria-label="Sign out"
+            onClick={handleSignOut}
+          >
+            <i className="fe fe-log-out"></i>
+          </button>
+        </li>
+      ) : (
+        <li className="ms-2">
+          <Link
+            href="/authentication/sign-in"
+            className="btn btn-light btn-icon rounded-circle text-muted"
+            title="Premium sign in"
+            aria-label="Premium sign in"
+          >
+            <i className="fe fe-log-in"></i>
+          </Link>
+        </li>
+      )}
     </ListGroup>
   );
 };

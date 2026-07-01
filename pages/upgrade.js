@@ -65,7 +65,7 @@ const Upgrade = () => {
 
   const requestMessage = [
     'Hello, I want Premium access to English Prep.',
-    `Account: ${user?.email || ''}`,
+    `Account: ${user?.email || 'I need a Premium account'}`,
     `Plan: S/ ${PREMIUM_PRICE_PEN} for ${PREMIUM_DURATION_MONTHS} months.`
   ].join('\n');
 
@@ -85,7 +85,11 @@ const Upgrade = () => {
       await navigator.clipboard.writeText(requestMessage);
       setNotice('Request copied. Send it to the administrator together with your payment receipt.');
     } catch (_error) {
-      setNotice(`Contact the administrator and provide this account: ${user?.email || ''}`);
+      setNotice(
+        user
+          ? `Contact the administrator and provide this account: ${user.email}`
+          : 'Contact the administrator to request your Premium account.'
+      );
     }
   };
 
@@ -156,20 +160,35 @@ const Upgrade = () => {
               <small>per year</small>
             </div>
             <p className="premium-account">
-              Premium will be linked to <strong>{user?.email}</strong>
+              {user ? (
+                <>Premium will be linked to <strong>{user.email}</strong></>
+              ) : (
+                <>No account is required for the demo. Sign in only after your Premium account is activated.</>
+              )}
             </p>
             <div className="d-flex flex-wrap gap-2">
               <Button variant="warning" size="lg" onClick={handleRequest}>
                 Request full access
               </Button>
-              <Button variant="outline-light" size="lg" onClick={handlePaymentCheck} disabled={checking}>
-                {checking ? (
-                  <>
-                    <Spinner size="sm" animation="border" className="me-2" />
-                    Checking...
-                  </>
-                ) : 'I already paid'}
-              </Button>
+              {user ? (
+                <Button variant="outline-light" size="lg" onClick={handlePaymentCheck} disabled={checking}>
+                  {checking ? (
+                    <>
+                      <Spinner size="sm" animation="border" className="me-2" />
+                      Checking...
+                    </>
+                  ) : 'I already paid'}
+                </Button>
+              ) : (
+                <Button
+                  as={Link}
+                  href="/authentication/sign-in?next=/upgrade"
+                  variant="outline-light"
+                  size="lg"
+                >
+                  Premium sign in
+                </Button>
+              )}
             </div>
           </Col>
           <Col xl={5} lg={5}>

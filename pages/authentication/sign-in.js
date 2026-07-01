@@ -1,5 +1,6 @@
 // import node module libraries
 import { useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { Alert, Row, Col, Card, Form, Button, Spinner } from "react-bootstrap";
 
@@ -24,6 +25,12 @@ const SignIn = () => {
     event.preventDefault();
     setError("");
     setSubmitting(true);
+
+    if (!supabase) {
+      setError("Premium sign in is temporarily unavailable.");
+      setSubmitting(false);
+      return;
+    }
 
     const { error: signInError } = await supabase.auth.signInWithPassword({
       email: email.trim(),
@@ -57,8 +64,10 @@ const SignIn = () => {
             </div>
 
             <div className="mb-4">
-              <h2 className="mb-2">Welcome back</h2>
-              <p className="text-muted mb-0">Sign in with the demo account assigned to you.</p>
+              <h2 className="mb-2">Premium sign in</h2>
+              <p className="text-muted mb-0">
+                The free demo does not require an account. Sign in only if your Premium access was activated.
+              </p>
             </div>
 
             {error ? <Alert variant="danger">{error}</Alert> : null}
@@ -92,7 +101,7 @@ const SignIn = () => {
 
               <div className="auth-login-notice mb-4">
                 <i className="fe fe-lock"></i>
-                <span>Access is limited to accounts created by the administrator.</span>
+                <span>Premium access is limited to accounts activated by the administrator.</span>
               </div>
 
               <div>
@@ -105,6 +114,11 @@ const SignIn = () => {
                       </>
                     ) : 'Sign In'}
                   </Button>
+                </div>
+                <div className="text-center mt-3">
+                  <Link href="/" className="text-muted">
+                    Continue with the free demo
+                  </Link>
                 </div>
               </div>
             </Form>
