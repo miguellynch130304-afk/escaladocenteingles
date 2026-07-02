@@ -7,7 +7,7 @@ export const FREE_MODULE_IDS = [
 
 export const FREE_MOCK_QUESTION_COUNT = 10;
 export const FULL_MOCK_QUESTION_COUNT = 240;
-export const PREMIUM_PRICE_PEN = 20;
+export const PREMIUM_PRICE_PEN = 50;
 export const PREMIUM_DURATION_MONTHS = 12;
 
 export const canAccessModule = (moduleId, isPremium) => (
