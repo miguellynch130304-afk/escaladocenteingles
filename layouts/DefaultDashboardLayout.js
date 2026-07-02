@@ -29,7 +29,7 @@ const DefaultDashboardLayout = (props) => {
 				</div>
 				{props.children}
 				<footer className="platform-credits px-4 py-3 text-center text-muted small">
-					Developed by teachers Enrique Manuel Ruiz Alba and Miguel Angel Caballero Lynch.
+					Developed by teachers Enrique Ruiz and Miguel Caballero.
 				</footer>
 			</div>
 		</div>
