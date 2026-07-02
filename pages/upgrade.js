@@ -1,6 +1,16 @@
 import { useState } from 'react';
 import Link from 'next/link';
-import { Alert, Badge, Button, Card, Col, Container, Row, Spinner } from 'react-bootstrap';
+import {
+  Alert,
+  Badge,
+  Button,
+  Card,
+  Col,
+  Container,
+  Modal,
+  Row,
+  Spinner
+} from 'react-bootstrap';
 import { useAuth } from 'components/auth/AuthProvider';
 import {
   PREMIUM_DURATION_MONTHS,
@@ -8,6 +18,14 @@ import {
 } from 'data/accessPlans';
 import { examMetadata } from 'data/examQuestions';
 import { grammarModules } from 'data/grammarModules';
+
+const paymentDetails = {
+  holder: 'Miguel Angel Caballero Lynch',
+  bcpAccount: '19171114628056',
+  cci: '00219117111462805656',
+  yape: '903 541 244',
+  whatsapp: '51903541244'
+};
 
 const benefits = [
   {
@@ -61,37 +79,18 @@ const Upgrade = () => {
   } = useAuth();
   const [notice, setNotice] = useState('');
   const [checking, setChecking] = useState(false);
-  const salesWhatsapp = process.env.NEXT_PUBLIC_SALES_WHATSAPP?.replace(/\D/g, '');
+  const [showPaymentDetails, setShowPaymentDetails] = useState(false);
 
   const requestMessage = [
-    'Hello, I want Premium access to English Prep.',
-    `Account: ${user?.email || 'I need a Premium account'}`,
-    `Plan: S/ ${PREMIUM_PRICE_PEN} for ${PREMIUM_DURATION_MONTHS} months.`
+    'Hola, realicé el pago por el acceso Premium anual de English Prep.',
+    `Cuenta: ${user?.email || 'Necesito que me asignen una cuenta Premium'}.`,
+    `Plan: S/ ${PREMIUM_PRICE_PEN} por ${PREMIUM_DURATION_MONTHS} meses.`,
+    'Adjunto mi comprobante de pago.'
   ].join('\n');
 
-  const handleRequest = async () => {
-    setNotice('');
-
-    if (salesWhatsapp) {
-      window.open(
-        `https://wa.me/${salesWhatsapp}?text=${encodeURIComponent(requestMessage)}`,
-        '_blank',
-        'noopener,noreferrer'
-      );
-      return;
-    }
-
-    try {
-      await navigator.clipboard.writeText(requestMessage);
-      setNotice('Request copied. Send it to the administrator together with your payment receipt.');
-    } catch (_error) {
-      setNotice(
-        user
-          ? `Contact the administrator and provide this account: ${user.email}`
-          : 'Contact the administrator to request your Premium account.'
-      );
-    }
-  };
+  const whatsappReceiptUrl = (
+    `https://wa.me/${paymentDetails.whatsapp}?text=${encodeURIComponent(requestMessage)}`
+  );
 
   const handlePaymentCheck = async () => {
     setChecking(true);
@@ -167,8 +166,8 @@ const Upgrade = () => {
               )}
             </p>
             <div className="d-flex flex-wrap gap-2">
-              <Button variant="warning" size="lg" onClick={handleRequest}>
-                Request full access
+              <Button variant="warning" size="lg" onClick={() => setShowPaymentDetails(true)}>
+                View payment details
               </Button>
               {user ? (
                 <Button variant="outline-light" size="lg" onClick={handlePaymentCheck} disabled={checking}>
@@ -227,6 +226,68 @@ const Upgrade = () => {
         <span>You can continue using the Free plan at any time.</span>
         <Button as={Link} href="/practice" variant="light">Continue with free access</Button>
       </div>
+
+      <Modal
+        show={showPaymentDetails}
+        onHide={() => setShowPaymentDetails(false)}
+        centered
+        size="lg"
+        contentClassName="premium-payment-modal"
+      >
+        <Modal.Header closeButton>
+          <div>
+            <Badge bg="warning" text="dark" className="rounded-pill mb-2">
+              S/ {PREMIUM_PRICE_PEN} · {PREMIUM_DURATION_MONTHS} months
+            </Badge>
+            <Modal.Title>Payment details</Modal.Title>
+          </div>
+        </Modal.Header>
+        <Modal.Body>
+          <p className="text-muted">
+            Pay by BCP transfer or Yape. Your Premium access will be activated after
+            the payment receipt is verified.
+          </p>
+
+          <div className="premium-payment-details">
+            <div>
+              <small>Account holder</small>
+              <strong>{paymentDetails.holder}</strong>
+            </div>
+            <div>
+              <small>BCP Soles account</small>
+              <strong>{paymentDetails.bcpAccount}</strong>
+            </div>
+            <div>
+              <small>Interbank account (CCI)</small>
+              <strong>{paymentDetails.cci}</strong>
+            </div>
+            <div>
+              <small>Yape</small>
+              <strong>{paymentDetails.yape}</strong>
+            </div>
+          </div>
+
+          <Alert variant="info" className="mb-0 mt-4">
+            After paying, send your screenshot to <strong>903 541 244</strong>.
+            If you are using the free demo, we will also provide your Premium account.
+          </Alert>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="light" onClick={() => setShowPaymentDetails(false)}>
+            Close
+          </Button>
+          <Button
+            as="a"
+            href={whatsappReceiptUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            variant="success"
+          >
+            <i className="fe fe-message-circle me-2"></i>
+            Send receipt by WhatsApp
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </Container>
   );
 };
