@@ -7,6 +7,7 @@ const quickLinks = [
   { href: '/practice', icon: 'book-open', label: 'Practice' },
   { href: '/exam', icon: 'clock', label: 'Mock exam' },
   { href: '/review', icon: 'check-square', label: 'Review' },
+  { href: '/practice?module=teaching-skills', icon: 'users', label: 'Teaching Skills' },
   { href: '/upgrade', icon: 'star', label: 'Premium access' }
 ];
 

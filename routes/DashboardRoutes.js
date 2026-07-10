@@ -38,6 +38,12 @@ export const DashboardMenu = [
   },
   {
     id: uuid(),
+    title: 'Teaching Skills',
+    icon: 'users',
+    link: '/practice?module=teaching-skills'
+  },
+  {
+    id: uuid(),
     title: 'REFERENCE',
     grouptitle: true
   },

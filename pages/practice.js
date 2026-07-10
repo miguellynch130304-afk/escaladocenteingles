@@ -21,7 +21,7 @@ import ComparativesSuperlativesBaseClass from 'components/grammar/ComparativesSu
 import { useAuth } from 'components/auth/AuthProvider';
 import useExamProgress from 'hooks/useExamProgress';
 import { examQuestions } from 'data/examQuestions';
-import { grammarModules } from 'data/grammarModules';
+import { grammarModules, practiceModules } from 'data/grammarModules';
 import { canAccessModule, FREE_MODULE_IDS } from 'data/accessPlans';
 
 const normalizeAnswer = (value) => value.trim().toLowerCase();
@@ -113,7 +113,7 @@ const Modules = () => {
       requestedStage = requestedStage[0];
     }
 
-    if (requestedModule && grammarModules.some((module) => module.id === requestedModule)) {
+    if (requestedModule && practiceModules.some((module) => module.id === requestedModule)) {
       if (!canAccessModule(requestedModule, isPremium)) {
         router.replace(`/upgrade?source=module&module=${encodeURIComponent(requestedModule)}`);
         return;
@@ -141,7 +141,7 @@ const Modules = () => {
     }
   }, [isPremium, router, router.asPath, router.isReady, router.query.module, router.query.stage]);
 
-  const activeModule = grammarModules.find((module) => module.id === activeModuleId);
+  const activeModule = practiceModules.find((module) => module.id === activeModuleId);
   const isPresentSimple = activeModule?.id === 'present-simple';
   const isPresentContinuous = activeModule?.id === 'present-continuous';
   const isPastSimple = activeModule?.id === 'past-simple';

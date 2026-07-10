@@ -765,7 +765,7 @@ const grammarModuleLibrary = [
   },
   {
     id: 'intensifiers',
-    order: 16,
+    order: 15,
     title: 'Comparatives, Superlatives and Intensifiers',
     level: 'Development',
     focus: 'Adjective comparison, syllable patterns, maximizers and minimizers.',
@@ -834,7 +834,7 @@ const grammarModuleLibrary = [
   },
   {
     id: 'passive-voice',
-    order: 14,
+    order: 13,
     title: 'Passive Voice',
     level: 'Complex',
     focus: 'Be + past participle for processes, results and formal statements.',
@@ -903,7 +903,7 @@ const grammarModuleLibrary = [
   },
   {
     id: 'conditionals',
-    order: 15,
+    order: 14,
     title: 'Conditionals',
     level: 'Complex',
     focus: 'Zero, first, second, and third conditional forms and meanings.',
@@ -1181,14 +1181,7 @@ const teachingSkillsModule = {
   }
 };
 
-const baseGrammarModules = [
-  ...grammarModuleLibrary.filter((module) => module.order <= 11),
-  questionFormsModule,
-  teachingSkillsModule,
-  ...grammarModuleLibrary.filter((module) => ['passive-voice', 'conditionals', 'intensifiers'].includes(module.id))
-].sort((firstModule, secondModule) => firstModule.order - secondModule.order);
-
-export const grammarModules = baseGrammarModules.map((module) => {
+const applyModuleSupplements = (module) => {
   const supplement = moduleExamSupplements[module.id];
 
   if (!supplement) {
@@ -1200,8 +1193,20 @@ export const grammarModules = baseGrammarModules.map((module) => {
     examQuestionIds: [...new Set([...module.examQuestionIds, ...supplement.questionIds])],
     examSentences: [...module.examSentences, ...supplement.examSentences]
   };
-});
+};
+
+const baseGrammarModules = [
+  ...grammarModuleLibrary.filter((module) => module.order <= 11),
+  questionFormsModule,
+  ...grammarModuleLibrary.filter((module) => ['passive-voice', 'conditionals', 'intensifiers'].includes(module.id))
+].sort((firstModule, secondModule) => firstModule.order - secondModule.order);
+
+export const grammarModules = baseGrammarModules.map(applyModuleSupplements);
+
+export const standaloneModules = [teachingSkillsModule].map(applyModuleSupplements);
+
+export const practiceModules = [...grammarModules, ...standaloneModules];
 
 export const getGrammarModule = (moduleId) => {
-  return grammarModules.find((module) => module.id === moduleId) || grammarModules[0];
+  return practiceModules.find((module) => module.id === moduleId) || grammarModules[0];
 };
