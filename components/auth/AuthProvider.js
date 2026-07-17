@@ -17,10 +17,15 @@ export const useAuth = () => useContext(AuthContext);
 const AuthProvider = ({ children }) => {
   const [session, setSession] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [authReady, setAuthReady] = useState(false);
   const [entitlement, setEntitlement] = useState(null);
   const [accessLoading, setAccessLoading] = useState(true);
 
   const loadEntitlement = useCallback(async () => {
+    if (!authReady) {
+      return null;
+    }
+
     if (!supabase || !session?.user?.id) {
       setEntitlement(null);
       setAccessLoading(false);
@@ -47,11 +52,13 @@ const AuthProvider = ({ children }) => {
     setEntitlement(nextEntitlement);
     setAccessLoading(false);
     return nextEntitlement;
-  }, [session?.user?.id]);
+  }, [authReady, session?.user?.id]);
 
   useEffect(() => {
     if (!supabase) {
       setLoading(false);
+      setAuthReady(true);
+      setAccessLoading(false);
       return undefined;
     }
 
@@ -59,17 +66,20 @@ const AuthProvider = ({ children }) => {
 
     supabase.auth.getSession().then(({ data }) => {
       if (active) {
+        setAccessLoading(Boolean(data.session));
         setSession(data.session);
         setLoading(false);
+        setAuthReady(true);
       }
     });
 
     const { data: authListener } = supabase.auth.onAuthStateChange((_event, nextSession) => {
       if (active) {
-        setSession(nextSession);
         setEntitlement(null);
         setAccessLoading(Boolean(nextSession));
+        setSession(nextSession);
         setLoading(false);
+        setAuthReady(true);
       }
     });
 

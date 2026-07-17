@@ -12,8 +12,8 @@ import { useAuth } from 'components/auth/AuthProvider';
 import { FREE_MOCK_QUESTION_COUNT, FULL_MOCK_QUESTION_COUNT } from 'data/accessPlans';
 
 const NavbarTop = (props) => {
-	const { accessLoading, isPremium, user } = useAuth();
-	const isCheckingAccess = Boolean(user && accessLoading);
+	const { accessLoading, isPremium, loading, user } = useAuth();
+	const isCheckingAccess = Boolean(loading || (user && accessLoading));
 	const questionCount = isPremium ? FULL_MOCK_QUESTION_COUNT : FREE_MOCK_QUESTION_COUNT;
 
 	return (

@@ -82,7 +82,7 @@ const getModulePhaseIds = (moduleId) => (
 
 const Modules = () => {
   const router = useRouter();
-  const { accessLoading, isPremium, user } = useAuth();
+  const { accessLoading, isPremium, loading, user } = useAuth();
   const { progress, resetPractice, setPracticeAnswer } = useExamProgress();
   const [activeModuleId, setActiveModuleId] = useState(null);
   const [stepIndex, setStepIndex] = useState(0);
@@ -113,7 +113,7 @@ const Modules = () => {
       requestedStage = requestedStage[0];
     }
 
-    if (user && accessLoading) {
+    if (loading || (user && accessLoading)) {
       return;
     }
 
@@ -143,7 +143,7 @@ const Modules = () => {
       setStepIndex(0);
       setCurrentQuestionIndex(0);
     }
-  }, [accessLoading, isPremium, router, router.asPath, router.isReady, router.query.module, router.query.stage, user]);
+  }, [accessLoading, isPremium, loading, router, router.asPath, router.isReady, router.query.module, router.query.stage, user]);
 
   const activeModule = practiceModules.find((module) => module.id === activeModuleId);
   const isPresentSimple = activeModule?.id === 'present-simple';
@@ -1091,7 +1091,7 @@ const Modules = () => {
   };
 
   return (
-    user && accessLoading
+    loading || (user && accessLoading)
       ? renderAccessCheck()
       : (
         <Container fluid className="px-6 py-6">
