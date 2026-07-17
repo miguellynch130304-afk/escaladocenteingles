@@ -82,7 +82,7 @@ const getModulePhaseIds = (moduleId) => (
 
 const Modules = () => {
   const router = useRouter();
-  const { isPremium } = useAuth();
+  const { accessLoading, isPremium, user } = useAuth();
   const { progress, resetPractice, setPracticeAnswer } = useExamProgress();
   const [activeModuleId, setActiveModuleId] = useState(null);
   const [stepIndex, setStepIndex] = useState(0);
@@ -113,6 +113,10 @@ const Modules = () => {
       requestedStage = requestedStage[0];
     }
 
+    if (user && accessLoading) {
+      return;
+    }
+
     if (requestedModule && practiceModules.some((module) => module.id === requestedModule)) {
       if (!canAccessModule(requestedModule, isPremium)) {
         router.replace(`/upgrade?source=module&module=${encodeURIComponent(requestedModule)}`);
@@ -139,7 +143,7 @@ const Modules = () => {
       setStepIndex(0);
       setCurrentQuestionIndex(0);
     }
-  }, [isPremium, router, router.asPath, router.isReady, router.query.module, router.query.stage]);
+  }, [accessLoading, isPremium, router, router.asPath, router.isReady, router.query.module, router.query.stage, user]);
 
   const activeModule = practiceModules.find((module) => module.id === activeModuleId);
   const isPresentSimple = activeModule?.id === 'present-simple';
@@ -343,6 +347,24 @@ const Modules = () => {
         ))}
       </Row>
     </>
+  );
+
+  const renderAccessCheck = () => (
+    <Container fluid className="px-6 py-6">
+      <Row className="justify-content-center">
+        <Col xl={6} lg={8}>
+          <Card className="grammar-panel text-center">
+            <Card.Body className="p-5">
+              <Badge bg="light" text="dark" className="rounded-pill mb-3">Checking access</Badge>
+              <h2 className="mb-2">Validating your Premium plan</h2>
+              <p className="text-muted mb-0">
+                Please wait a moment while Supabase confirms your account access.
+              </p>
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
+    </Container>
   );
 
   const renderFunctionsStep = () => (
@@ -1069,9 +1091,13 @@ const Modules = () => {
   };
 
   return (
-    <Container fluid className="px-6 py-6">
-      {activeModule ? renderModule() : renderCatalog()}
-    </Container>
+    user && accessLoading
+      ? renderAccessCheck()
+      : (
+        <Container fluid className="px-6 py-6">
+          {activeModule ? renderModule() : renderCatalog()}
+        </Container>
+      )
   );
 };
 

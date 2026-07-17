@@ -12,7 +12,8 @@ import { useAuth } from 'components/auth/AuthProvider';
 import { FREE_MOCK_QUESTION_COUNT, FULL_MOCK_QUESTION_COUNT } from 'data/accessPlans';
 
 const NavbarTop = (props) => {
-	const { isPremium, user } = useAuth();
+	const { accessLoading, isPremium, user } = useAuth();
+	const isCheckingAccess = Boolean(user && accessLoading);
 	const questionCount = isPremium ? FULL_MOCK_QUESTION_COUNT : FREE_MOCK_QUESTION_COUNT;
 
 	return (
@@ -32,9 +33,11 @@ const NavbarTop = (props) => {
 							text="dark"
 							className="rounded-pill"
 						>
-							{isPremium ? 'Premium' : (user ? 'Free account' : 'Free demo')}
+							{isCheckingAccess ? 'Checking access...' : isPremium ? 'Premium' : (user ? 'Free account' : 'Free demo')}
 						</Badge>
-						<span className="text-muted ms-2 small">{questionCount} Mock Exam questions</span>
+						<span className="text-muted ms-2 small">
+							{isCheckingAccess ? 'Validating your plan' : `${questionCount} Mock Exam questions`}
+						</span>
 					</div>
 				</div>
 				{/* Quick Menu */}
