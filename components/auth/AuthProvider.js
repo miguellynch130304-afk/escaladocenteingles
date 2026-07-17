@@ -18,8 +18,16 @@ const AuthProvider = ({ children }) => {
   const [session, setSession] = useState(null);
   const [loading, setLoading] = useState(true);
   const [authReady, setAuthReady] = useState(false);
+  const [authRevision, setAuthRevision] = useState(0);
   const [entitlement, setEntitlement] = useState(null);
   const [accessLoading, setAccessLoading] = useState(true);
+
+  const buildFreeEntitlement = useCallback((userId) => ({
+    user_id: userId,
+    plan: 'free',
+    premium_started_at: null,
+    premium_expires_at: null
+  }), []);
 
   const loadEntitlement = useCallback(async () => {
     if (!authReady) {
@@ -34,25 +42,35 @@ const AuthProvider = ({ children }) => {
 
     setAccessLoading(true);
 
-    const { data, error } = await supabase
-      .from('user_entitlements')
-      .select('user_id, plan, premium_started_at, premium_expires_at')
-      .eq('user_id', session.user.id)
-      .maybeSingle();
+    const userId = session.user.id;
+    let nextEntitlement = buildFreeEntitlement(userId);
 
-    const nextEntitlement = error || !data
-      ? {
-          user_id: session.user.id,
-          plan: 'free',
-          premium_started_at: null,
-          premium_expires_at: null
-        }
-      : data;
+    try {
+      const entitlementRequest = supabase
+        .from('user_entitlements')
+        .select('user_id, plan, premium_started_at, premium_expires_at')
+        .eq('user_id', userId)
+        .maybeSingle();
+
+      const timeoutFallback = new Promise((resolve) => {
+        globalThis.setTimeout(() => {
+          resolve({ data: null, error: new Error('Entitlement request timed out') });
+        }, 8000);
+      });
+
+      const { data, error } = await Promise.race([entitlementRequest, timeoutFallback]);
+
+      if (!error && data) {
+        nextEntitlement = data;
+      }
+    } catch (_error) {
+      nextEntitlement = buildFreeEntitlement(userId);
+    }
 
     setEntitlement(nextEntitlement);
     setAccessLoading(false);
     return nextEntitlement;
-  }, [authReady, session?.user?.id]);
+  }, [authReady, buildFreeEntitlement, session?.user?.id]);
 
   useEffect(() => {
     if (!supabase) {
@@ -64,14 +82,36 @@ const AuthProvider = ({ children }) => {
 
     let active = true;
 
-    supabase.auth.getSession().then(({ data }) => {
+    const bootstrapTimeout = globalThis.setTimeout(() => {
       if (active) {
-        setAccessLoading(Boolean(data.session));
-        setSession(data.session);
         setLoading(false);
         setAuthReady(true);
+        setAccessLoading(false);
+        setAuthRevision((current) => current + 1);
       }
-    });
+    }, 5000);
+
+    supabase.auth.getSession()
+      .then(({ data }) => {
+        if (active) {
+          globalThis.clearTimeout(bootstrapTimeout);
+          setAccessLoading(Boolean(data.session));
+          setSession(data.session);
+          setLoading(false);
+          setAuthReady(true);
+          setAuthRevision((current) => current + 1);
+        }
+      })
+      .catch(() => {
+        if (active) {
+          globalThis.clearTimeout(bootstrapTimeout);
+          setSession(null);
+          setLoading(false);
+          setAuthReady(true);
+          setAccessLoading(false);
+          setAuthRevision((current) => current + 1);
+        }
+      });
 
     const { data: authListener } = supabase.auth.onAuthStateChange((_event, nextSession) => {
       if (active) {
@@ -80,18 +120,21 @@ const AuthProvider = ({ children }) => {
         setSession(nextSession);
         setLoading(false);
         setAuthReady(true);
+        globalThis.clearTimeout(bootstrapTimeout);
+        setAuthRevision((current) => current + 1);
       }
     });
 
     return () => {
       active = false;
+      globalThis.clearTimeout(bootstrapTimeout);
       authListener.subscription.unsubscribe();
     };
   }, []);
 
   useEffect(() => {
     loadEntitlement();
-  }, [loadEntitlement]);
+  }, [authRevision, loadEntitlement]);
 
   const premiumExpiry = entitlement?.premium_expires_at
     ? new Date(entitlement.premium_expires_at).getTime()
